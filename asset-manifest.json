@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Adaptify/static/css/main.0eb6255e.css",
+    "main.js": "/Adaptify/static/js/main.18105e6a.js",
+    "static/media/logo.png": "/Adaptify/static/media/logo.8049782ff3e2e84db23a.png",
+    "index.html": "/Adaptify/index.html",
+    "main.0eb6255e.css.map": "/Adaptify/static/css/main.0eb6255e.css.map",
+    "main.18105e6a.js.map": "/Adaptify/static/js/main.18105e6a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0eb6255e.css",
+    "static/js/main.18105e6a.js"
+  ]
+}
