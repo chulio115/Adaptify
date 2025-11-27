@@ -1,26 +1,26 @@
 import { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 
 /**
- * ThemeContext v3 - THE SIGNATURE TOGGLE
+ * ThemeContext v4 - VIEW TRANSITIONS API
  * 
- * "Entwickler schließen die Seite und öffnen sie wieder – nur um den Toggle noch einmal zu klicken."
+ * THE REAL MAGIC: Browser's native View Transitions API
  * 
- * Architecture:
- * - clip-path: circle() expandiert und "frisst" den alten Modus
- * - Ein einziges Overlay mit dem ALTEN Theme
- * - Darunter ist bereits das NEUE Theme sichtbar
- * - 980ms, butter-smooth, 60fps
+ * How it works:
+ * 1. Browser takes a "screenshot" of current state
+ * 2. We change the theme (DOM update)
+ * 3. Browser takes a "screenshot" of new state
+ * 4. Browser animates between them with clip-path!
  * 
- * Easter Eggs:
- * - 3x = Lighthouse Mode
- * - 7x = Katamaran (nur Animation, kein Text)
+ * This is how the Reddit/Twitter dark mode toggles work.
+ * The circle LITERALLY reveals the new theme underneath.
+ * 
+ * Easter Eggs: 3x = Lighthouse, 7x = Katamaran
  */
 
 const ThemeContext = createContext(null);
 
-// THE magic numbers
-const WAVE_DURATION = 980;
-const EASING = 'cubic-bezier(0.4, 0.0, 0.2, 1)';
+// Animation duration
+const WAVE_DURATION = 1200; // Slower for more drama
 
 export function ThemeProvider({ children }) {
   // Theme state - true = dark
@@ -75,16 +75,16 @@ export function ThemeProvider({ children }) {
     }
   }, [clickCount]);
 
-  // THE toggle function
-  const toggleTheme = useCallback((event) => {
+  // THE toggle function - uses View Transitions API for magic!
+  const toggleTheme = useCallback(async (event) => {
     // Get click origin for wave
     const rect = event?.currentTarget?.getBoundingClientRect();
-    let originX = 92; // default: top right
-    let originY = 40;
+    let x = window.innerWidth - 80;
+    let y = 40;
     
     if (rect) {
-      originX = ((rect.left + rect.width / 2) / window.innerWidth) * 100;
-      originY = rect.top + rect.height / 2;
+      x = rect.left + rect.width / 2;
+      y = rect.top + rect.height / 2;
     }
 
     // Click counting for Easter eggs
@@ -95,25 +95,39 @@ export function ThemeProvider({ children }) {
     // Don't toggle during animation
     if (waveState.isAnimating) return;
 
-    // Remember current theme BEFORE switching
     const previousTheme = isDark ? 'dark' : 'light';
+    const newIsDark = !isDark;
     
-    // Start animation
-    setWaveState({
-      isAnimating: true,
-      originX,
-      originY,
-      previousTheme,
-    });
+    // Set CSS custom properties for the animation origin
+    document.documentElement.style.setProperty('--wave-x', `${x}px`);
+    document.documentElement.style.setProperty('--wave-y', `${y}px`);
 
-    // Switch theme IMMEDIATELY - the new theme is now visible
-    // The overlay will show the OLD theme and shrink away
-    setIsDark(!isDark);
+    // Check if View Transitions API is supported
+    if (document.startViewTransition) {
+      // THE MAGIC: View Transitions API
+      setWaveState({ isAnimating: true, originX: x, originY: y, previousTheme });
+      
+      const transition = document.startViewTransition(() => {
+        // This runs during the transition - update the DOM
+        const root = document.documentElement;
+        root.classList.remove('light', 'dark');
+        root.classList.add(newIsDark ? 'dark' : 'light');
+        setIsDark(newIsDark);
+      });
 
-    // End animation after duration
-    setTimeout(() => {
+      // Wait for transition to finish
+      await transition.finished;
       setWaveState(prev => ({ ...prev, isAnimating: false }));
-    }, WAVE_DURATION + 50);
+      
+    } else {
+      // Fallback for browsers without View Transitions
+      setWaveState({ isAnimating: true, originX: x, originY: y, previousTheme });
+      setIsDark(newIsDark);
+      
+      setTimeout(() => {
+        setWaveState(prev => ({ ...prev, isAnimating: false }));
+      }, WAVE_DURATION);
+    }
     
   }, [isDark, waveState.isAnimating]);
 
@@ -131,7 +145,6 @@ export function ThemeProvider({ children }) {
       waveState,
       easterEgg,
       WAVE_DURATION,
-      EASING,
     }}>
       {children}
     </ThemeContext.Provider>
