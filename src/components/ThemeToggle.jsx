@@ -41,36 +41,85 @@ const LighthouseBeam = ({ isActive }) => (
   <AnimatePresence>
     {isActive && (
       <motion.div
-        className="absolute inset-0 pointer-events-none overflow-visible"
+        className="fixed inset-0 pointer-events-none z-[9999]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
+        transition={{ duration: 0.2 }}
       >
-        {/* Rotating light beam */}
+        {/* Dark overlay to make the beam pop */}
         <motion.div
-          className="absolute top-1/2 left-1/2 origin-left"
-          style={{
-            width: '150px',
-            height: '2px',
-            background: 'linear-gradient(90deg, rgba(251,191,36,1) 0%, rgba(251,191,36,0.5) 30%, transparent 100%)',
-            boxShadow: '0 0 20px rgba(251,191,36,0.8), 0 0 40px rgba(251,191,36,0.4)',
-            marginLeft: '-50%',
-            marginTop: '-1px',
-          }}
-          initial={{ rotate: 0 }}
-          animate={{ rotate: 360 }}
-          transition={{ duration: 1.5, ease: 'linear' }}
+          className="absolute inset-0 bg-black/40"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
         />
-        {/* Lighthouse glow */}
-        <motion.div
-          className="absolute inset-0 rounded-full"
+        
+        {/* The lighthouse tower base (centered on toggle position) */}
+        <div 
+          className="absolute"
           style={{
-            background: 'radial-gradient(circle, rgba(251,191,36,0.6) 0%, transparent 70%)',
+            top: '50%',
+            right: '80px',
+            transform: 'translateY(-50%)',
           }}
-          initial={{ scale: 1, opacity: 0.8 }}
-          animate={{ scale: [1, 1.5, 1], opacity: [0.8, 0.4, 0.8] }}
-          transition={{ duration: 1.5, repeat: 0 }}
-        />
+        >
+          {/* Main rotating beam - HUGE and visible */}
+          <motion.div
+            className="absolute origin-left"
+            style={{
+              width: '100vw',
+              height: '8px',
+              left: '20px',
+              top: '-4px',
+              background: 'linear-gradient(90deg, rgba(251,191,36,1) 0%, rgba(251,191,36,0.8) 20%, rgba(251,191,36,0.3) 50%, transparent 100%)',
+              boxShadow: '0 0 40px rgba(251,191,36,0.9), 0 0 80px rgba(251,191,36,0.6), 0 0 120px rgba(251,191,36,0.3)',
+              borderRadius: '4px',
+            }}
+            initial={{ rotate: -45 }}
+            animate={{ rotate: 315 }}
+            transition={{ duration: 1.2, ease: 'linear' }}
+          />
+          
+          {/* Secondary beam for depth (opposite direction) */}
+          <motion.div
+            className="absolute origin-left"
+            style={{
+              width: '100vw',
+              height: '4px',
+              left: '20px',
+              top: '-2px',
+              background: 'linear-gradient(90deg, rgba(251,191,36,0.8) 0%, rgba(251,191,36,0.4) 30%, transparent 70%)',
+              boxShadow: '0 0 20px rgba(251,191,36,0.5)',
+              borderRadius: '2px',
+            }}
+            initial={{ rotate: 135 }}
+            animate={{ rotate: 495 }}
+            transition={{ duration: 1.2, ease: 'linear' }}
+          />
+          
+          {/* Pulsing core glow */}
+          <motion.div
+            className="absolute rounded-full"
+            style={{
+              width: '60px',
+              height: '60px',
+              left: '-10px',
+              top: '-30px',
+              background: 'radial-gradient(circle, rgba(251,191,36,0.9) 0%, rgba(251,191,36,0.4) 40%, transparent 70%)',
+              boxShadow: '0 0 60px rgba(251,191,36,0.8), 0 0 100px rgba(251,191,36,0.5)',
+            }}
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.8, 1, 0.8],
+            }}
+            transition={{
+              duration: 0.6,
+              repeat: 2,
+              ease: 'easeInOut',
+            }}
+          />
+        </div>
       </motion.div>
     )}
   </AnimatePresence>
