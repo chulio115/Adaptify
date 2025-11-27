@@ -1,15 +1,14 @@
 # Netlify Configuration for Adaptify Landing Page
 
 [build]
-  # Build command
-  command = "npm run build"
+  # Build command - CI=false prevents warnings from being treated as errors
+  command = "CI=false npm run build"
   # Directory to publish
   publish = "build"
 
 # Node.js version
 [build.environment]
   NODE_VERSION = "18"
-  CI = "false"
 
 # Redirect all routes to index.html for React Router (SPA)
 [[redirects]]
