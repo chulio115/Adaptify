@@ -69,6 +69,9 @@ export function ThemeProvider({ children }) {
     if (clickCount === 3) {
       setEasterEgg('lighthouse');
       setTimeout(() => setEasterEgg(null), 1500);
+    } else if (clickCount === 5) {
+      setEasterEgg('matrix');
+      setTimeout(() => setEasterEgg(null), 4000);
     } else if (clickCount === 7) {
       setEasterEgg('katamaran');
       setTimeout(() => setEasterEgg(null), 5000);

@@ -175,6 +175,52 @@ export default function ThemeWave() {
         )}
       </AnimatePresence>
 
+      {/* 5x Click: Matrix Rain */}
+      <AnimatePresence>
+        {easterEgg === 'matrix' && (
+          <motion.div
+            className="fixed inset-0 z-[10000] pointer-events-none overflow-hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            style={{ background: 'rgba(0, 0, 0, 0.9)' }}
+          >
+            {/* Matrix rain columns */}
+            {[...Array(30)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute top-0 text-green-500 font-mono text-sm whitespace-pre leading-tight"
+                style={{
+                  left: `${(i / 30) * 100}%`,
+                  textShadow: '0 0 8px #00ff00, 0 0 16px #00ff00',
+                  writingMode: 'vertical-rl',
+                }}
+                initial={{ y: '-100%' }}
+                animate={{ y: '100vh' }}
+                transition={{
+                  duration: 2 + Math.random() * 2,
+                  delay: Math.random() * 1,
+                  repeat: 2,
+                  ease: 'linear',
+                }}
+              >
+                {[...Array(20)].map(() => 
+                  String.fromCharCode(0x30A0 + Math.random() * 96)
+                ).join('')}
+              </motion.div>
+            ))}
+            
+            {/* Center glow */}
+            <div 
+              className="absolute inset-0 flex items-center justify-center"
+              style={{
+                background: 'radial-gradient(circle, rgba(0,255,0,0.1) 0%, transparent 50%)',
+              }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* 7x Click: Katamaran - NUR Animation, KEIN Text */}
       <AnimatePresence>
         {easterEgg === 'katamaran' && (

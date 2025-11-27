@@ -28,6 +28,10 @@ export default function ThemeToggle() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className="relative w-11 h-11 rounded-full flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 touch-manipulation"
+      style={{ 
+        zIndex: 99999, // ALWAYS on top, even during View Transition
+        position: 'relative',
+      }}
       aria-label={isDark ? 'Light Mode aktivieren' : 'Dark Mode aktivieren'}
       role="switch"
       aria-checked={!isDark}
