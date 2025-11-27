@@ -796,7 +796,7 @@ export default function LandingPage() {
           
           <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-gray-600">© 2025 Adaptify. Alle Rechte vorbehalten.</p>
-            <p className="text-sm text-gray-600">Made with ❤️ & KI in Deutschland</p>
+            <p className="text-sm text-gray-600">Made with ❤️ & AI in Germany</p>
           </div>
         </div>
       </footer>
