@@ -3,23 +3,28 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
 /**
- * ThemeWave v8 - THE REDDIT KARMA ANIMATION
+ * ThemeWave v9 - MOBILE OPTIMIZED
  * 
  * KEY INSIGHT: No solid overlay! Just the GLOWING RING.
  * 
- * The magic:
- * 1. Theme switches IMMEDIATELY (CSS class change)
- * 2. All elements have CSS transitions on their colors (in index.css)
- * 3. The glowing ring EXPANDS from the toggle - pure visual candy
- * 4. Ring = the "wavefront" of the color change
- * 
- * Content stays 100% visible. Colors transition smoothly via CSS.
- * The ring is just the cherry on top - the "wow" factor.
+ * Mobile optimizations:
+ * - Fewer Matrix columns on mobile (25 vs 50)
+ * - Smaller lighthouse core
+ * - Performance-conscious animations
  */
 
 export default function ThemeWave() {
   const { waveState, easterEgg, WAVE_DURATION } = useTheme();
   const [ringProgress, setRingProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Animate the ring expanding outward
   useEffect(() => {
@@ -125,7 +130,7 @@ export default function ThemeWave() {
           EASTER EGGS
           ════════════════════════════════════════════════════════════════ */}
       
-      {/* 3x Click: Lighthouse Mode */}
+      {/* 3x Click: Lighthouse Mode - MOBILE OPTIMIZED */}
       <AnimatePresence>
         {easterEgg === 'lighthouse' && (
           <motion.div
@@ -144,29 +149,29 @@ export default function ThemeWave() {
                 left: `${waveState.originX}%`,
                 top: waveState.originY,
                 width: '200vmax',
-                height: '6px',
+                height: isMobile ? '4px' : '6px',
                 marginLeft: '-100vmax',
-                marginTop: '-3px',
+                marginTop: isMobile ? '-2px' : '-3px',
                 background: 'linear-gradient(90deg, transparent 0%, rgba(251,191,36,0.3) 20%, rgba(251,191,36,1) 48%, white 50%, rgba(251,191,36,1) 52%, rgba(251,191,36,0.3) 80%, transparent 100%)',
-                boxShadow: '0 0 30px rgba(251,191,36,0.6)',
+                boxShadow: isMobile ? '0 0 20px rgba(251,191,36,0.5)' : '0 0 30px rgba(251,191,36,0.6)',
                 borderRadius: '3px',
               }}
               animate={{ rotate: 360 }}
               transition={{ duration: 1.5, ease: 'linear' }}
             />
             
-            {/* Pulsing core */}
+            {/* Pulsing core - smaller on mobile */}
             <motion.div
               className="absolute rounded-full"
               style={{
                 left: `${waveState.originX}%`,
                 top: waveState.originY,
-                width: 60,
-                height: 60,
-                marginLeft: -30,
-                marginTop: -30,
+                width: isMobile ? 40 : 60,
+                height: isMobile ? 40 : 60,
+                marginLeft: isMobile ? -20 : -30,
+                marginTop: isMobile ? -20 : -30,
                 background: 'radial-gradient(circle, #FBBF24, #F59E0B)',
-                boxShadow: '0 0 40px rgba(251,191,36,0.8)',
+                boxShadow: isMobile ? '0 0 25px rgba(251,191,36,0.7)' : '0 0 40px rgba(251,191,36,0.8)',
               }}
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ duration: 0.4, repeat: 3 }}
@@ -175,7 +180,7 @@ export default function ThemeWave() {
         )}
       </AnimatePresence>
 
-      {/* 5x Click: Matrix Rain - POLISHED */}
+      {/* 5x Click: Matrix Rain - MOBILE OPTIMIZED */}
       <AnimatePresence>
         {easterEgg === 'matrix' && (
           <motion.div
@@ -186,22 +191,25 @@ export default function ThemeWave() {
             transition={{ duration: 0.5 }}
             style={{ background: '#000000' }}
           >
-            {/* Matrix rain columns - more dense */}
-            {[...Array(50)].map((_, i) => {
+            {/* Matrix rain columns - fewer on mobile for performance */}
+            {[...Array(isMobile ? 20 : 50)].map((_, i) => {
+              const columnCount = isMobile ? 20 : 50;
               const speed = 1.5 + Math.random() * 2;
               const delay = Math.random() * 2;
-              const chars = [...Array(30)].map(() => 
+              const chars = [...Array(isMobile ? 20 : 30)].map(() => 
                 String.fromCharCode(0x30A0 + Math.random() * 96)
               ).join('');
               
               return (
                 <motion.div
                   key={i}
-                  className="absolute font-mono text-xs sm:text-sm whitespace-pre leading-none"
+                  className="absolute font-mono text-[10px] sm:text-sm whitespace-pre leading-none"
                   style={{
-                    left: `${(i / 50) * 100}%`,
+                    left: `${(i / columnCount) * 100}%`,
                     color: '#00ff00',
-                    textShadow: '0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #008800',
+                    textShadow: isMobile 
+                      ? '0 0 8px #00ff00, 0 0 15px #008800'
+                      : '0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #008800',
                     writingMode: 'vertical-rl',
                     opacity: 0.6 + Math.random() * 0.4,
                   }}
@@ -219,28 +227,33 @@ export default function ThemeWave() {
               );
             })}
             
-            {/* Brighter "lead" characters */}
-            {[...Array(20)].map((_, i) => (
-              <motion.div
-                key={`lead-${i}`}
-                className="absolute font-mono text-lg font-bold"
-                style={{
-                  left: `${(i / 20) * 100 + Math.random() * 2}%`,
-                  color: '#ffffff',
-                  textShadow: '0 0 20px #00ff00, 0 0 40px #00ff00',
-                }}
-                initial={{ y: -50 }}
-                animate={{ y: '120vh' }}
-                transition={{
-                  duration: 2 + Math.random(),
-                  delay: Math.random() * 3,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }}
-              >
-                {String.fromCharCode(0x30A0 + Math.random() * 96)}
-              </motion.div>
-            ))}
+            {/* Brighter "lead" characters - fewer on mobile */}
+            {[...Array(isMobile ? 10 : 20)].map((_, i) => {
+              const leadCount = isMobile ? 10 : 20;
+              return (
+                <motion.div
+                  key={`lead-${i}`}
+                  className="absolute font-mono text-base sm:text-lg font-bold"
+                  style={{
+                    left: `${(i / leadCount) * 100 + Math.random() * 2}%`,
+                    color: '#ffffff',
+                    textShadow: isMobile 
+                      ? '0 0 15px #00ff00, 0 0 25px #00ff00'
+                      : '0 0 20px #00ff00, 0 0 40px #00ff00',
+                  }}
+                  initial={{ y: -50 }}
+                  animate={{ y: '120vh' }}
+                  transition={{
+                    duration: 2 + Math.random(),
+                    delay: Math.random() * 3,
+                    repeat: Infinity,
+                    ease: 'linear',
+                  }}
+                >
+                  {String.fromCharCode(0x30A0 + Math.random() * 96)}
+                </motion.div>
+              );
+            })}
             
             {/* Center glow pulse */}
             <motion.div 
@@ -252,11 +265,13 @@ export default function ThemeWave() {
               transition={{ duration: 2, repeat: Infinity }}
             />
             
-            {/* Scanline effect */}
+            {/* Scanline effect - subtle on mobile */}
             <div 
               className="absolute inset-0 pointer-events-none"
               style={{
-                background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px)',
+                background: isMobile 
+                  ? 'repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.05) 3px, rgba(0,0,0,0.05) 6px)'
+                  : 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px)',
               }}
             />
             
