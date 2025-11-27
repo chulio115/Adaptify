@@ -10,6 +10,19 @@
 [build.environment]
   NODE_VERSION = "18"
 
+# Force HTTPS redirect
+[[redirects]]
+  from = "http://adaptify-labs.de/*"
+  to = "https://adaptify-labs.de/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.adaptify-labs.de/*"
+  to = "https://adaptify-labs.de/:splat"
+  status = 301
+  force = true
+
 # Redirect all routes to index.html for React Router (SPA)
 [[redirects]]
   from = "/*"
