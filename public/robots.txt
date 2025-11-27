@@ -1,3 +1,13 @@
-# https://www.robotstxt.org/robotstxt.html
+# robots.txt for Adaptify
+# https://adaptify-labs.de
+
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /api/
+Disallow: /*.json$
+
+# Sitemap Location
+Sitemap: https://adaptify-labs.de/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1

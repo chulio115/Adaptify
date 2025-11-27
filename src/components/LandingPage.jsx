@@ -178,6 +178,10 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#030303] via-[#0a0a0a] to-[#030303] text-white overflow-x-hidden">
+      {/* Skip to main content - Accessibility */}
+      <a href="#main-content" className="skip-link">
+        Zum Hauptinhalt springen
+      </a>
       
       {/* ═══════════════════════════════════════════════════════════════
           HEADER - Sticky with blur
@@ -281,6 +285,9 @@ export default function LandingPage() {
           </nav>
         </div>
       </header>
+
+      {/* Main Content Area */}
+      <main id="main-content">
 
       {/* ═══════════════════════════════════════════════════════════════
           HERO - Full screen with gradient
@@ -717,6 +724,8 @@ export default function LandingPage() {
           </p>
         </div>
       </section>
+
+      </main>
 
       {/* ═══════════════════════════════════════════════════════════════
           FOOTER - Extended with social links
