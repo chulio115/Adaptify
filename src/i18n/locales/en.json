@@ -70,29 +70,39 @@
       },
       "design": {
         "title": "Design & Branding",
-        "desc": "Identity, UI/UX, graphics – a look that means business."
+        "desc": "Logo, CI, design system – everything to look professional."
       },
-      "analytics": {
-        "title": "Data & Insights",
-        "desc": "Dashboards that tell you what's actually going on – not just pretty charts."
+      "process": {
+        "title": "Processes & Collaboration",
+        "desc": "Jira, Confluence & co. – structured workflows for your team."
       },
       "support": {
         "title": "Ongoing Support",
-        "desc": "We're not a hit-and-run vendor. We stick around when you need us."
+        "desc": "We stick around. Updates, optimization, always someone to call."
       }
     }
   },
   "tech": {
-    "badge": "Tech Stack",
+    "badge": "Technology",
     "title": "Our 2025 Tech Stack",
     "subtitle": "Best-in-class tools, seamlessly integrated, AI-accelerated. Your unfair advantage.",
-    "categories": {
-      "frontend": "Frontend",
-      "backend": "Backend",
-      "automation": "Automation",
-      "ai": "AI & ML",
-      "analytics": "Analytics",
-      "cloud": "Cloud"
+    "items": {
+      "atlassian": {
+        "tagline": "Processes & Collaboration",
+        "desc": "Jira, Confluence, Bitbucket – we digitize your processes and work transparently with you."
+      },
+      "ai": {
+        "tagline": "AI-Powered Development",
+        "desc": "Cutting-edge AI tools accelerate our development. What takes months elsewhere, we deliver in weeks."
+      },
+      "automation": {
+        "tagline": "Intelligent Workflows",
+        "desc": "Make, Zapier, n8n + custom AI agents. All processes automated – so you can focus on what matters."
+      },
+      "web": {
+        "tagline": "Rapid Delivery",
+        "desc": "Webflow, Shopify, React, Next.js – high-performance websites, apps, and shops, tailored to your brand."
+      }
     }
   },
   "cta": {
@@ -124,12 +134,23 @@
     }
   },
   "footer": {
-    "tagline": "Digital transformation for real businesses – that actually works.",
-    "legal": {
-      "imprint": "Imprint",
-      "privacy": "Privacy"
+    "tagline": "The modern digital agency for SMBs. Websites, apps, automation & AI – all from one source.",
+    "services": "Services",
+    "servicesItems": {
+      "web": "Websites & Shops",
+      "apps": "Apps & Software",
+      "automation": "Automation",
+      "design": "Design & Branding"
     },
-    "copyright": "Adaptify Labs. All rights reserved."
+    "company": "Company",
+    "legal": {
+      "title": "Legal",
+      "imprint": "Imprint",
+      "privacy": "Privacy",
+      "terms": "Terms"
+    },
+    "copyright": "© 2025 Adaptify. All rights reserved.",
+    "madeWith": "Made with ❤️ & AI in Germany"
   },
   "about": {
     "badge": "Our Story",

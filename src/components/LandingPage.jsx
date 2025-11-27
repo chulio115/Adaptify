@@ -444,17 +444,17 @@ export default function LandingPage() {
         <div className="text-center mb-10">
           {/* Badge */}
           <span className="text-xs uppercase tracking-[0.3em] text-cyan-400 mb-4 block">
-            Unsere Lösung
+            {t('tools.badge')}
           </span>
           
           {/* Main Heading */}
           <h2 className="text-2xl md:text-3xl font-bold mb-4">
-            Wir lösen das – mit den besten Tools
+            {t('tools.title')}
           </h2>
           
           {/* Subheading */}
           <p className="text-gray-400 max-w-2xl mx-auto px-6">
-            Wir setzen die Tools ein, mit denen Tech-Startups und Konzerne arbeiten – für euer KMU.
+            {t('tools.subtitle')}
           </p>
         </div>
         
@@ -522,12 +522,12 @@ export default function LandingPage() {
       >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-20">
-            <span className="text-xs uppercase tracking-[0.3em] text-cyan-400 mb-4 block">Unsere Leistungen</span>
+            <span className="text-xs uppercase tracking-[0.3em] text-cyan-400 mb-4 block">{t('services.badge')}</span>
             <h2 className="text-3xl md:text-5xl font-bold mb-6">
-              Wir digitalisieren euer komplettes Business
+              {t('services.title')}
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Alles aus einer Hand – von der Webseite über Automatisierung bis zur KI. Kein Flickwerk, sondern ein System.
+              {t('services.subtitle')}
             </p>
           </div>
           
@@ -535,38 +535,38 @@ export default function LandingPage() {
             {[
               { 
                 icon: Globe2, 
-                title: 'Moderne Webseiten & Shops', 
-                desc: 'Webflow, Shopify oder Custom – schnell, schön und konvertierend.',
+                titleKey: 'services.items.web.title', 
+                descKey: 'services.items.web.desc',
                 color: 'cyan'
               },
               { 
                 icon: Bot, 
-                title: 'KI-gestützte Automatisierung', 
-                desc: 'Workflows, die von selbst laufen – mehr Zeit fürs Kerngeschäft, weniger Routinearbeit.',
+                titleKey: 'services.items.automation.title', 
+                descKey: 'services.items.automation.desc',
                 color: 'violet'
               },
               { 
                 icon: Code2, 
-                title: 'Apps & Custom Software', 
-                desc: 'Interne Tools, Kundenportale, individuelle Lösungen – professionell entwickelt, schnell geliefert.',
+                titleKey: 'services.items.apps.title', 
+                descKey: 'services.items.apps.desc',
                 color: 'fuchsia'
               },
               { 
                 icon: Palette, 
-                title: 'Design & Branding', 
-                desc: 'Logo, CI, Design-System – alles damit ihr professionell ausseht.',
+                titleKey: 'services.items.design.title', 
+                descKey: 'services.items.design.desc',
                 color: 'pink'
               },
               { 
                 icon: Layers, 
-                title: 'Prozesse & Kollaboration', 
-                desc: 'Jira, Confluence & Co. – strukturierte Abläufe für euer Team.',
+                titleKey: 'services.items.process.title', 
+                descKey: 'services.items.process.desc',
                 color: 'indigo'
               },
               { 
                 icon: Headphones, 
-                title: 'Laufender Support', 
-                desc: 'Wir bleiben dran. Updates, Optimierung, Ansprechpartner – immer.',
+                titleKey: 'services.items.support.title', 
+                descKey: 'services.items.support.desc',
                 color: 'emerald'
               }
             ].map((item, i) => (
@@ -577,8 +577,8 @@ export default function LandingPage() {
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 bg-${item.color}-500/10 border border-${item.color}-500/20 group-hover:scale-110 transition-transform`}>
                   <item.icon className={`w-6 h-6 text-${item.color}-400`} />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                <h3 className="text-lg font-semibold mb-2">{t(item.titleKey)}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{t(item.descKey)}</p>
               </div>
             ))}
           </div>
@@ -632,12 +632,12 @@ export default function LandingPage() {
       >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <span className="text-xs uppercase tracking-[0.3em] text-violet-400 mb-4 block">Technologie</span>
+            <span className="text-xs uppercase tracking-[0.3em] text-violet-400 mb-4 block">{t('tech.badge')}</span>
             <h2 className="text-3xl md:text-5xl font-bold mb-6">
-              Unser moderner Tech-Stack 2025
+              {t('tech.title')}
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Die besten Tools – perfekt kombiniert und KI-beschleunigt. Das macht uns zu eurem technologischen Vorsprung.
+              {t('tech.subtitle')}
             </p>
           </div>
           
@@ -646,32 +646,32 @@ export default function LandingPage() {
               { 
                 icon: Layers, 
                 name: 'Atlassian Suite', 
-                tagline: 'Prozesse & Kollaboration',
-                desc: 'Jira, Confluence, Bitbucket – wir digitalisieren eure Prozesse damit und arbeiten transparent mit euch zusammen.',
+                taglineKey: 'tech.items.atlassian.tagline',
+                descKey: 'tech.items.atlassian.desc',
                 gradient: 'from-blue-500 to-blue-600',
                 bgGradient: 'from-blue-500/10 to-blue-600/5'
               },
               { 
                 icon: Sparkles, 
                 name: 'Codium AI / Windsurf', 
-                tagline: 'Entwicklung mit KI-Turbo',
-                desc: 'Modernste KI-Tools beschleunigen unsere Entwicklung. Was sonst Monate braucht, liefern wir in Wochen.',
+                taglineKey: 'tech.items.ai.tagline',
+                descKey: 'tech.items.ai.desc',
                 gradient: 'from-cyan-400 to-teal-500',
                 bgGradient: 'from-cyan-500/10 to-teal-500/5'
               },
               { 
                 icon: Cpu, 
                 name: 'Automation & AI Hub', 
-                tagline: 'Intelligente Workflows',
-                desc: 'Make, Zapier, n8n + eigene KI-Agents. Alle Prozesse automatisiert – damit Sie sich aufs Wesentliche konzentrieren können.',
+                taglineKey: 'tech.items.automation.tagline',
+                descKey: 'tech.items.automation.desc',
                 gradient: 'from-violet-500 to-purple-600',
                 bgGradient: 'from-violet-500/10 to-purple-600/5'
               },
               { 
                 icon: Globe2, 
                 name: 'Web & App Builder', 
-                tagline: 'Schnelle Umsetzung',
-                desc: 'Webflow, Shopify, React, Next.js – performante Webseiten, Apps und Shops, maßgeschneidert für eure Marke.',
+                taglineKey: 'tech.items.web.tagline',
+                descKey: 'tech.items.web.desc',
                 gradient: 'from-fuchsia-500 to-pink-600',
                 bgGradient: 'from-fuchsia-500/10 to-pink-600/5'
               }
@@ -693,10 +693,10 @@ export default function LandingPage() {
                   </div>
                   
                   <p className={`text-sm font-medium mb-4 bg-gradient-to-r ${tech.gradient} bg-clip-text text-transparent`}>
-                    {tech.tagline}
+                    {t(tech.taglineKey)}
                   </p>
                   
-                  <p className="text-gray-400 leading-relaxed">{tech.desc}</p>
+                  <p className="text-gray-400 leading-relaxed">{t(tech.descKey)}</p>
                 </div>
               </div>
             ))}
@@ -766,7 +766,7 @@ export default function LandingPage() {
                 <span className="text-xl font-bold">Adaptify</span>
               </div>
               <p className="text-gray-500 mb-6 max-w-md">
-                Die moderne Digitalisierungsagentur für KMUs. Webseiten, Apps, Automatisierung & KI – alles aus einer Hand.
+                {t('footer.tagline')}
               </p>
               <div className="flex gap-4">
                 <a 
@@ -799,33 +799,33 @@ export default function LandingPage() {
             
             {/* Links */}
             <div>
-              <h4 className="font-semibold mb-4">Leistungen</h4>
+              <h4 className="font-semibold mb-4">{t('footer.services')}</h4>
               <ul className="space-y-3 text-gray-500">
-                <li><a href="#leistungen" className="hover:text-white transition-colors">Webseiten & Shops</a></li>
-                <li><a href="#leistungen" className="hover:text-white transition-colors">Apps & Software</a></li>
-                <li><a href="#leistungen" className="hover:text-white transition-colors">Automatisierung</a></li>
-                <li><a href="#leistungen" className="hover:text-white transition-colors">Design & Branding</a></li>
+                <li><a href="#leistungen" className="hover:text-white transition-colors">{t('footer.servicesItems.web')}</a></li>
+                <li><a href="#leistungen" className="hover:text-white transition-colors">{t('footer.servicesItems.apps')}</a></li>
+                <li><a href="#leistungen" className="hover:text-white transition-colors">{t('footer.servicesItems.automation')}</a></li>
+                <li><a href="#leistungen" className="hover:text-white transition-colors">{t('footer.servicesItems.design')}</a></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Unternehmen</h4>
+              <h4 className="font-semibold mb-4">{t('footer.company')}</h4>
               <ul className="space-y-3 text-gray-500">
-                <li><Link to="/ueber-uns" className="hover:text-white transition-colors">Über uns</Link></li>
+                <li><Link to="/ueber-uns" className="hover:text-white transition-colors">{t('nav.about')}</Link></li>
               </ul>
               
-              <h4 className="font-semibold mb-4 mt-6">Rechtliches</h4>
+              <h4 className="font-semibold mb-4 mt-6">{t('footer.legal.title')}</h4>
               <ul className="space-y-3 text-gray-500">
-                <li><Link to="/impressum" className="hover:text-white transition-colors">Impressum</Link></li>
-                <li><Link to="/datenschutz" className="hover:text-white transition-colors">Datenschutz</Link></li>
-                <li><Link to="/agb" className="hover:text-white transition-colors">AGB</Link></li>
+                <li><Link to="/impressum" className="hover:text-white transition-colors">{t('footer.legal.imprint')}</Link></li>
+                <li><Link to="/datenschutz" className="hover:text-white transition-colors">{t('footer.legal.privacy')}</Link></li>
+                <li><Link to="/agb" className="hover:text-white transition-colors">{t('footer.legal.terms')}</Link></li>
               </ul>
             </div>
           </div>
           
           <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-gray-600">© 2025 Adaptify. Alle Rechte vorbehalten.</p>
-            <p className="text-sm text-gray-600">Made with ❤️ & AI in Germany</p>
+            <p className="text-sm text-gray-600">{t('footer.copyright')}</p>
+            <p className="text-sm text-gray-600">{t('footer.madeWith')}</p>
           </div>
         </div>
       </footer>

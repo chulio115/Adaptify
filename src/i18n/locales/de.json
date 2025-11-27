@@ -70,29 +70,39 @@
       },
       "design": {
         "title": "Design & Branding",
-        "desc": "Corporate Identity, UI/UX Design, Grafikdesign – ein Auftritt, der überzeugt."
+        "desc": "Logo, CI, Design-System – alles damit ihr professionell ausseht."
       },
-      "analytics": {
-        "title": "Daten & Analytics",
-        "desc": "Dashboards und Reports, die euch echte Insights liefern – keine Zahlenfriedhöfe."
+      "process": {
+        "title": "Prozesse & Kollaboration",
+        "desc": "Jira, Confluence & Co. – strukturierte Abläufe für euer Team."
       },
       "support": {
-        "title": "Betreuung & Support",
-        "desc": "Langfristiger Partner statt einmaliger Dienstleister – wir sind da, wenn ihr uns braucht."
+        "title": "Laufender Support",
+        "desc": "Wir bleiben dran. Updates, Optimierung, Ansprechpartner – immer."
       }
     }
   },
   "tech": {
-    "badge": "Tech Stack",
+    "badge": "Technologie",
     "title": "Unser moderner Tech-Stack 2025",
     "subtitle": "Die besten Tools – perfekt kombiniert und KI-beschleunigt. Das macht uns zu eurem technologischen Vorsprung.",
-    "categories": {
-      "frontend": "Frontend",
-      "backend": "Backend",
-      "automation": "Automation",
-      "ai": "KI & ML",
-      "analytics": "Analytics",
-      "cloud": "Cloud"
+    "items": {
+      "atlassian": {
+        "tagline": "Prozesse & Kollaboration",
+        "desc": "Jira, Confluence, Bitbucket – wir digitalisieren eure Prozesse damit und arbeiten transparent mit euch zusammen."
+      },
+      "ai": {
+        "tagline": "Entwicklung mit KI-Turbo",
+        "desc": "Modernste KI-Tools beschleunigen unsere Entwicklung. Was sonst Monate braucht, liefern wir in Wochen."
+      },
+      "automation": {
+        "tagline": "Intelligente Workflows",
+        "desc": "Make, Zapier, n8n + eigene KI-Agents. Alle Prozesse automatisiert – damit ihr euch aufs Wesentliche konzentrieren könnt."
+      },
+      "web": {
+        "tagline": "Schnelle Umsetzung",
+        "desc": "Webflow, Shopify, React, Next.js – performante Webseiten, Apps und Shops, maßgeschneidert für eure Marke."
+      }
     }
   },
   "cta": {
@@ -124,12 +134,23 @@
     }
   },
   "footer": {
-    "tagline": "Digitalisierung für den Mittelstand – die wirklich funktioniert.",
-    "legal": {
-      "imprint": "Impressum",
-      "privacy": "Datenschutz"
+    "tagline": "Die moderne Digitalisierungsagentur für KMUs. Webseiten, Apps, Automatisierung & KI – alles aus einer Hand.",
+    "services": "Leistungen",
+    "servicesItems": {
+      "web": "Webseiten & Shops",
+      "apps": "Apps & Software",
+      "automation": "Automatisierung",
+      "design": "Design & Branding"
     },
-    "copyright": "Adaptify Labs. Alle Rechte vorbehalten."
+    "company": "Unternehmen",
+    "legal": {
+      "title": "Rechtliches",
+      "imprint": "Impressum",
+      "privacy": "Datenschutz",
+      "terms": "AGB"
+    },
+    "copyright": "© 2025 Adaptify. Alle Rechte vorbehalten.",
+    "madeWith": "Made with ❤️ & AI in Germany"
   },
   "about": {
     "badge": "Unsere Geschichte",
