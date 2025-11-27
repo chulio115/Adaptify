@@ -124,25 +124,23 @@ html {
   --wave-y: 40px;
 }
 
-/* Enable View Transitions on the root */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
+/* ═══════════════════════════════════════════════════════════════
+   VIEW TRANSITIONS - Works BOTH directions!
+═══════════════════════════════════════════════════════════════ */
 
-/* The OLD view (current theme) stays in place */
+/* The OLD view stays static underneath */
 ::view-transition-old(root) {
+  animation: none;
   z-index: 1;
 }
 
-/* The NEW view (target theme) is revealed by expanding circle */
+/* The NEW view is revealed by expanding circle */
 ::view-transition-new(root) {
-  z-index: 9999;
   animation: reveal-theme 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  z-index: 9999;
 }
 
-/* THE MAGIC ANIMATION - circle expands from click position */
+/* THE MAGIC - circle expands from click position */
 @keyframes reveal-theme {
   from {
     clip-path: circle(0% at var(--wave-x) var(--wave-y));
@@ -150,38 +148,6 @@ html {
   to {
     clip-path: circle(150% at var(--wave-x) var(--wave-y));
   }
-}
-
-/* Reverse animation when going back */
-.dark::view-transition-old(root) {
-  z-index: 9999;
-  animation: none;
-}
-
-.dark::view-transition-new(root) {
-  z-index: 1;
-  animation: reveal-theme 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-/* Add a subtle glow at the edge of the circle */
-::view-transition-new(root)::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(
-    circle at var(--wave-x) var(--wave-y),
-    transparent 0%,
-    transparent calc(var(--progress, 0%) - 2%),
-    rgba(6, 182, 212, 0.3) var(--progress, 0%),
-    transparent calc(var(--progress, 0%) + 2%)
-  );
-  pointer-events: none;
-  animation: glow-progress 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-@keyframes glow-progress {
-  from { --progress: 0%; }
-  to { --progress: 150%; }
 }
 
 /* Reduce motion for accessibility */
