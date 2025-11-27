@@ -24,6 +24,7 @@ import {
   Calendar
 } from 'lucide-react';
 import logo from '../assets/logo.png';
+import ThemeToggle from './ThemeToggle';
 
 // Counter Animation Hook
 function useCountUp(end, duration = 2000, start = 0) {
@@ -227,6 +228,9 @@ export default function LandingPage() {
                 Über uns
               </Link>
             </nav>
+            
+            {/* Theme Toggle - the magic happens here */}
+            <ThemeToggle />
             
             {/* Desktop CTA */}
             <button 

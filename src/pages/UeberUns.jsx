@@ -18,6 +18,7 @@ import {
   Hammer
 } from 'lucide-react';
 import logo from '../assets/logo.png';
+import ThemeToggle from '../components/ThemeToggle';
 
 /**
  * Fade In Animation Hook
@@ -95,11 +96,14 @@ export default function UeberUns() {
             </div>
             <span className="text-xl font-bold tracking-tight">Adaptify</span>
           </Link>
-          <Link to="/" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
-            <ArrowLeft className="w-4 h-4" />
-            <span className="hidden sm:inline">Zurück zur Startseite</span>
-            <span className="sm:hidden">Zurück</span>
-          </Link>
+          <div className="flex items-center gap-4">
+            <ThemeToggle />
+            <Link to="/" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+              <ArrowLeft className="w-4 h-4" />
+              <span className="hidden sm:inline">Zurück zur Startseite</span>
+              <span className="sm:hidden">Zurück</span>
+            </Link>
+          </div>
         </div>
       </header>
 

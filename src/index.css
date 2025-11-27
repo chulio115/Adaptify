@@ -4,6 +4,111 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+/* ═══════════════════════════════════════════════════════════════
+   THEME SYSTEM - CSS Custom Properties with oklch() for smooth transitions
+═══════════════════════════════════════════════════════════════ */
+
+/* Register custom properties for smooth color transitions */
+@property --theme-bg-l {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 2%;
+}
+
+@property --theme-surface-l {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 4%;
+}
+
+@property --theme-text-l {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 100%;
+}
+
+@property --theme-accent-h {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 195;
+}
+
+:root {
+  /* Dark Mode (Default) */
+  --bg-primary: oklch(8% 0.01 250);
+  --bg-secondary: oklch(12% 0.01 250);
+  --bg-surface: oklch(6% 0.01 250);
+  --bg-elevated: oklch(15% 0.015 250);
+  
+  --text-primary: oklch(98% 0 0);
+  --text-secondary: oklch(65% 0.01 250);
+  --text-muted: oklch(45% 0.01 250);
+  
+  --border-subtle: oklch(25% 0.01 250);
+  --border-default: oklch(30% 0.01 250);
+  
+  /* Gradients */
+  --gradient-cyan: oklch(70% 0.15 195);
+  --gradient-violet: oklch(60% 0.2 300);
+  --gradient-start: var(--gradient-cyan);
+  --gradient-end: var(--gradient-violet);
+  
+  /* Accents */
+  --accent-cyan: oklch(70% 0.15 195);
+  --accent-violet: oklch(55% 0.25 300);
+  --accent-emerald: oklch(65% 0.2 160);
+  
+  /* Scrollbar */
+  --scrollbar-track: #030303;
+  --scrollbar-thumb: #333;
+  --scrollbar-hover: #555;
+  
+  /* Transition timing */
+  --theme-transition: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Light Mode - Premium Cyan → Coral Theme */
+.light {
+  /* Backgrounds - warm cream undertone */
+  --bg-primary: oklch(98.5% 0.003 80);
+  --bg-secondary: oklch(96% 0.005 80);
+  --bg-surface: oklch(100% 0 0);
+  --bg-elevated: oklch(97.5% 0.008 80);
+  
+  /* Text - crisp, high contrast */
+  --text-primary: oklch(13% 0.02 250);  /* #171717 equivalent */
+  --text-secondary: oklch(35% 0.015 250);  /* #52525B equivalent */
+  --text-muted: oklch(50% 0.01 250);
+  
+  /* Borders - subtle warmth */
+  --border-subtle: oklch(92% 0.008 80);
+  --border-default: oklch(88% 0.01 80);
+  
+  /* Primary gradient: Cyan (#06B6D4) → Coral (#FF6B6B) */
+  --gradient-cyan: oklch(65% 0.14 195);   /* Rich cyan */
+  --gradient-coral: oklch(68% 0.18 25);   /* Warm coral */
+  --gradient-start: var(--gradient-cyan);
+  --gradient-end: var(--gradient-coral);
+  
+  /* Legacy violet mapping to coral */
+  --gradient-violet: var(--gradient-coral);
+  
+  /* Accents - vibrant but accessible */
+  --accent-cyan: oklch(55% 0.14 195);     /* Deeper cyan for text */
+  --accent-coral: oklch(60% 0.16 25);     /* Deeper coral for text */
+  --accent-violet: var(--accent-coral);
+  --accent-emerald: oklch(50% 0.15 160);
+  
+  /* Glow colors for special effects */
+  --glow-cyan: oklch(70% 0.12 195 / 0.3);
+  --glow-coral: oklch(75% 0.15 25 / 0.25);
+  
+  /* Scrollbar */
+  --scrollbar-track: #fafafa;
+  --scrollbar-thumb: #d4d4d4;
+  --scrollbar-hover: #a3a3a3;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -13,6 +118,22 @@ body {
   -webkit-font-smoothing: antialiased;
   margin: 0;
   padding: 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background var(--theme-transition), color var(--theme-transition);
+}
+
+/* Apply transitions to all themed elements */
+.theme-transition,
+.theme-transition * {
+  transition: 
+    background var(--theme-transition),
+    background-color var(--theme-transition),
+    border-color var(--theme-transition),
+    color var(--theme-transition),
+    fill var(--theme-transition),
+    stroke var(--theme-transition),
+    box-shadow var(--theme-transition) !important;
 }
 
 /* Infinite Scroll Animation - seamless loop */
@@ -93,22 +214,24 @@ body {
   }
 }
 
-/* Custom scrollbar for dark theme */
+/* Custom scrollbar - theme aware */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #030303;
+  background: var(--scrollbar-track);
+  transition: background var(--theme-transition);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: var(--scrollbar-thumb);
   border-radius: 4px;
+  transition: background var(--theme-transition);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: var(--scrollbar-hover);
 }
 
 /* Hide scrollbar for tech stack section */
@@ -156,4 +279,357 @@ a:focus:not(:focus-visible) {
 
 .skip-link:focus {
   top: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LIGHT MODE OVERRIDES - Premium Cyan → Coral Theme
+   "A better dark mode that happens to be light"
+═══════════════════════════════════════════════════════════════ */
+
+/* Wave transition animation */
+@keyframes theme-wave {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(200%) skewX(-15deg);
+    opacity: 0;
+  }
+}
+
+/* Subtle invitation pulse for first-time visitors */
+@keyframes invite-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+.theme-wave-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9997;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--gradient-cyan) 30%,
+    var(--gradient-coral) 70%,
+    transparent 100%
+  );
+  animation: theme-wave 600ms ease-out forwards;
+  mix-blend-mode: overlay;
+  opacity: 0.4;
+}
+
+/* Background overrides */
+.light .bg-\[\#030303\],
+.light .bg-\[\#0a0a0a\],
+.light .bg-\[\#050505\] {
+  background-color: var(--bg-primary) !important;
+}
+
+.light .bg-gradient-to-b {
+  background: linear-gradient(
+    to bottom, 
+    var(--bg-primary) 0%,
+    var(--bg-secondary) 50%,
+    var(--bg-primary) 100%
+  ) !important;
+}
+
+/* Surface backgrounds with subtle shadows */
+.light .bg-white\/5 {
+  background-color: var(--bg-surface) !important;
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}
+
+.light .bg-white\/10 {
+  background-color: var(--bg-elevated) !important;
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.05),
+    0 2px 4px rgba(0, 0, 0, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Header - crisp white with subtle bottom glow */
+.light header {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(255, 255, 255, 0.95) 100%
+  ) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom-color: var(--border-subtle) !important;
+}
+
+/* The signature gradient line under header - Cyan → Coral */
+.light header::after,
+.light .bg-gradient-to-r.from-transparent.via-cyan-500\/50.to-transparent {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--gradient-cyan) 20%,
+    var(--gradient-coral) 80%,
+    transparent 100%
+  ) !important;
+  filter: drop-shadow(0 0 8px var(--glow-cyan)) drop-shadow(0 0 8px var(--glow-coral));
+}
+
+/* Footer */
+.light footer {
+  background-color: var(--bg-surface) !important;
+  border-top-color: var(--border-subtle) !important;
+}
+
+/* Border colors */
+.light .border-white\/5,
+.light .border-white\/10 {
+  border-color: var(--border-subtle) !important;
+}
+
+.light .border-white\/20 {
+  border-color: var(--border-default) !important;
+}
+
+/* Text - high contrast #171717 */
+.light .text-white {
+  color: var(--text-primary) !important;
+}
+
+.light .text-gray-300 {
+  color: var(--text-secondary) !important;
+}
+
+.light .text-gray-400 {
+  color: var(--text-secondary) !important;
+}
+
+.light .text-gray-500 {
+  color: var(--text-muted) !important;
+}
+
+.light .text-gray-600 {
+  color: var(--text-muted) !important;
+}
+
+/* Accent colors - Cyan stays cyan, Violet becomes Coral */
+.light .text-cyan-400 {
+  color: var(--accent-cyan) !important;
+}
+
+.light .text-violet-400,
+.light .text-fuchsia-400 {
+  color: var(--accent-coral) !important;
+}
+
+/* Gradient text - the hero headline */
+.light .text-transparent.bg-clip-text.bg-gradient-to-r {
+  background: linear-gradient(
+    135deg,
+    var(--gradient-cyan) 0%,
+    var(--gradient-coral) 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+
+/* Cards and surfaces - premium feel */
+.light .rounded-2xl,
+.light .rounded-3xl,
+.light .rounded-xl {
+  transition: box-shadow 300ms ease, transform 300ms ease;
+}
+
+.light .rounded-2xl.border,
+.light .rounded-3xl.border,
+.light .rounded-xl.border {
+  border-color: var(--border-subtle) !important;
+  background-color: var(--bg-surface) !important;
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 4px 12px rgba(0, 0, 0, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}
+
+.light .rounded-2xl.border:hover,
+.light .rounded-3xl.border:hover,
+.light .rounded-xl.border:hover {
+  border-color: var(--border-default) !important;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.08),
+    0 8px 24px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+  transform: translateY(-1px);
+}
+
+/* CTA Buttons - Cyan → Coral gradient */
+.light .bg-gradient-to-r.from-cyan-500.to-violet-500,
+.light .bg-gradient-to-r.from-cyan-500.to-violet-600 {
+  background: linear-gradient(
+    135deg,
+    #06B6D4 0%,
+    #FF6B6B 100%
+  ) !important;
+  color: white !important;
+  box-shadow: 
+    0 4px 14px rgba(6, 182, 212, 0.25),
+    0 2px 6px rgba(255, 107, 107, 0.2) !important;
+}
+
+.light .bg-gradient-to-r.from-cyan-500.to-violet-500:hover,
+.light .bg-gradient-to-r.from-cyan-500.to-violet-600:hover {
+  box-shadow: 
+    0 6px 20px rgba(6, 182, 212, 0.35),
+    0 4px 10px rgba(255, 107, 107, 0.25) !important;
+  filter: brightness(1.05);
+}
+
+/* Quote block - soft coral wash */
+.light blockquote,
+.light .italic.text-gray-400 {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 107, 107, 0.05) 100%
+  );
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 
+    0 2px 8px rgba(255, 107, 107, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Glows and blurs - warmer in light mode */
+.light .blur-3xl {
+  opacity: 0.15 !important;
+}
+
+.light .bg-cyan-500\/10 {
+  background-color: rgba(6, 182, 212, 0.08) !important;
+}
+
+.light .bg-violet-500\/10 {
+  background-color: rgba(255, 107, 107, 0.08) !important;
+}
+
+.light .bg-cyan-500\/5 {
+  background-color: rgba(6, 182, 212, 0.04) !important;
+}
+
+.light .bg-violet-500\/5 {
+  background-color: rgba(255, 107, 107, 0.04) !important;
+}
+
+/* Modal backgrounds */
+.light .bg-black\/80,
+.light .bg-black\/90 {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(8px);
+}
+
+/* Form inputs - clean and crisp */
+.light input,
+.light textarea,
+.light select {
+  background-color: var(--bg-surface) !important;
+  border-color: var(--border-default) !important;
+  color: var(--text-primary) !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+}
+
+.light input:focus,
+.light textarea:focus,
+.light select:focus {
+  border-color: #06B6D4 !important;
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.04),
+    0 0 0 3px rgba(6, 182, 212, 0.15) !important;
+}
+
+.light input::placeholder,
+.light textarea::placeholder {
+  color: var(--text-muted) !important;
+}
+
+/* Logo - keep original colors */
+.light .brightness-0.invert {
+  filter: none !important;
+}
+
+/* Hover states */
+.light .hover\:bg-white\/5:hover,
+.light .hover\:bg-white\/10:hover {
+  background-color: var(--bg-elevated) !important;
+}
+
+.light .hover\:border-white\/20:hover,
+.light .hover\:border-white\/40:hover {
+  border-color: var(--border-default) !important;
+}
+
+/* Tech logos - visible with hover glow */
+.light .grayscale {
+  filter: grayscale(100%) brightness(0.4) contrast(1.1) !important;
+  opacity: 0.7;
+  transition: all 300ms ease !important;
+}
+
+.light .grayscale:hover {
+  filter: grayscale(0%) brightness(1) contrast(1) !important;
+  opacity: 1;
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+}
+
+/* Icon gradients in cards */
+.light .bg-gradient-to-br.from-cyan-500,
+.light .bg-gradient-to-br.from-cyan-600 {
+  background: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%) !important;
+}
+
+.light .bg-gradient-to-br.from-violet-500,
+.light .bg-gradient-to-br.from-violet-600,
+.light .bg-gradient-to-br.from-fuchsia-500 {
+  background: linear-gradient(135deg, #FF6B6B 0%, #F97316 100%) !important;
+}
+
+.light .bg-gradient-to-br.from-emerald-500,
+.light .bg-gradient-to-br.from-emerald-600 {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+}
+
+/* Emerald accents */
+.light .text-emerald-400 {
+  color: #059669 !important;
+}
+
+/* Badge/pill styles */
+.light .bg-cyan-500\/5,
+.light .border-cyan-500\/20 {
+  background-color: rgba(6, 182, 212, 0.06) !important;
+  border-color: rgba(6, 182, 212, 0.2) !important;
+}
+
+/* Stats numbers glow */
+.light .text-5xl.font-bold,
+.light .text-4xl.font-bold {
+  text-shadow: 0 0 30px rgba(6, 182, 212, 0.15);
 }
