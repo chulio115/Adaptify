@@ -6,6 +6,11 @@
   # Directory to publish
   publish = "build"
 
+# Node.js version
+[build.environment]
+  NODE_VERSION = "18"
+  CI = "false"
+
 # Redirect all routes to index.html for React Router (SPA)
 [[redirects]]
   from = "/*"
