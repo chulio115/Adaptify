@@ -164,10 +164,10 @@ export default function UeberUns() {
           
           <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 mb-12">
             {[
-              { value: '63%', label: 'haben keine klare Digitalstrategie', source: 'Bitkom 2025' },
-              { value: '78%', label: 'wissen nicht, wo sie anfangen sollen', source: 'BMWK 2025' },
-              { value: '41%', label: 'haben eine Website älter als 5 Jahre', source: 'Statista 2025' },
-              { value: '2,6×', label: 'schneller wachsen digitale KMUs', source: 'Google/Bitkom 2025', highlight: true }
+              { value: '63%', labelKey: 'about.reality.stats.noStrategy', source: 'Bitkom 2025' },
+              { value: '78%', labelKey: 'about.reality.stats.dontKnow', source: 'BMWK 2025' },
+              { value: '41%', labelKey: 'about.reality.stats.oldWebsite', source: 'Statista 2025' },
+              { value: '2,6×', labelKey: 'about.reality.stats.fasterGrowth', source: 'Google/Bitkom 2025', highlight: true }
             ].map((stat, i) => (
               <div 
                 key={i}
@@ -180,34 +180,29 @@ export default function UeberUns() {
                 <div className={`text-3xl md:text-4xl font-bold mb-2 ${stat.highlight ? 'text-emerald-400' : 'text-white'}`}>
                   {stat.value}
                 </div>
-                <p className="text-gray-300 text-sm mb-2">{stat.label}</p>
-                <p className="text-xs text-gray-600">Quelle: {stat.source}</p>
+                <p className="text-gray-300 text-sm mb-2">{t(stat.labelKey)}</p>
+                <p className="text-xs text-gray-600">{t('about.reality.source')}: {stat.source}</p>
               </div>
             ))}
           </div>
           
           <div className="bg-white/5 border border-white/10 rounded-2xl p-8 md:p-10">
-            <h3 className="text-xl font-semibold mb-6 text-white">Warum's so schwer ist – und warum das völlig normal ist</h3>
+            <h3 className="text-xl font-semibold mb-6 text-white">{t('about.reality.whyHard.title')}</h3>
             <div className="grid md:grid-cols-2 gap-8 text-gray-400">
               <div className="space-y-4">
                 <p>
-                  <strong className="text-white">Ihr habt ein Geschäft zu führen.</strong> Kunden zu betreuen. 
-                  Mitarbeiter zu managen. Rechnungen zu schreiben. Wer hat da noch Zeit, sich in 
-                  React, SEO und DSGVO einzuarbeiten?
+                  <strong className="text-white">{t('about.reality.whyHard.business.title')}</strong> {t('about.reality.whyHard.business.text')}
                 </p>
                 <p>
-                  <strong className="text-white">Die großen Agenturen?</strong> Wollen 50.000€ für eine Website. 
-                  Und dann habt ihr immer noch kein Buchungssystem.
+                  <strong className="text-white">{t('about.reality.whyHard.agencies.title')}</strong> {t('about.reality.whyHard.agencies.text')}
                 </p>
               </div>
               <div className="space-y-4">
                 <p>
-                  <strong className="text-white">Die Baukästen?</strong> Klar, Wix und Jimdo gibt's. 
-                  Aber nach 3 Abenden Rumklicken sieht das immer noch aus wie „Webseite Baujahr 2015".
+                  <strong className="text-white">{t('about.reality.whyHard.builders.title')}</strong> {t('about.reality.whyHard.builders.text')}
                 </p>
                 <p>
-                  <strong className="text-white">Das ist kein Versagen</strong> – das ist einfach nicht euer Job. 
-                  Genau dafür gibt's uns.
+                  <strong className="text-white">{t('about.reality.whyHard.notFailure.title')}</strong> {t('about.reality.whyHard.notFailure.text')}
                 </p>
               </div>
             </div>
@@ -224,9 +219,9 @@ export default function UeberUns() {
       >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <span className="text-xs uppercase tracking-[0.3em] text-cyan-400 mb-4 block">Unsere Geschichte</span>
+            <span className="text-xs uppercase tracking-[0.3em] text-cyan-400 mb-4 block">{t('about.story.badge')}</span>
             <h2 className="text-2xl md:text-4xl font-bold mb-4">
-              Wie alles mit einem selbstgebauten Katamaran begann
+              {t('about.story.title')}
             </h2>
           </div>
           
@@ -236,33 +231,27 @@ export default function UeberUns() {
               <div className="lg:col-span-3 space-y-6 text-gray-300 leading-relaxed">
                 <div className="flex items-center gap-3 mb-6">
                   <Ship className="w-8 h-8 text-cyan-400" />
-                  <h3 className="text-2xl font-bold text-white">Easy Living – ein Lebenswerk</h3>
+                  <h3 className="text-2xl font-bold text-white">{t('about.story.easyLiving.title')}</h3>
                 </div>
                 
                 <p className="text-lg">
-                  <strong className="text-white">Mein Vater hat über 10 Jahre lang einen 44-Fuß-Segelkatamaran gebaut.</strong> Mit 
-                  den eigenen Händen. Jede Planke, jedes Segel, jede Schraube. Wer so etwas macht, 
-                  der weiß, was Durchhaltevermögen bedeutet.
+                  <strong className="text-white">{t('about.story.easyLiving.built')}</strong> {t('about.story.easyLiving.builtDesc')}
                 </p>
                 
                 <p>
-                  Seit 2016 ist er damit im Charter-Geschäft – <strong className="text-white">Karibik, Mittelmeer, 
-                  Ostsee-Törns von Travemünde aus</strong>. Ein Ein-Mann-Unternehmen, aufgebaut mit nichts außer 
-                  Können, Leidenschaft und verdammt viel Arbeit.
+                  {t('about.story.easyLiving.charterIntro')} <strong className="text-white">{t('about.story.easyLiving.charterLocations')}</strong>. {t('about.story.easyLiving.charterDesc')}
                 </p>
                 
                 <p>
-                  <strong className="text-white">Sein Geschäft? Läuft.</strong> Die Stammkunden schwärmen. Die Bewertungen sind 
-                  erstklassig. Wer einmal mit ihm gesegelt ist, kommt wieder.
+                  <strong className="text-white">{t('about.story.easyLiving.businessGood')}</strong> {t('about.story.easyLiving.businessDesc')}
                 </p>
                 
                 <p className="text-lg text-white">
-                  Aber die Website? Die war von 2012.
+                  {t('about.story.easyLiving.butWebsite')}
                 </p>
                 
                 <p>
-                  Kein Responsive Design. Keine Online-Buchung. Kein SEO. Während neue Kunden bei Google 
-                  nach „Katamaran Charter Ostsee" suchten, fanden sie die Konkurrenz – nicht meinen Vater.
+                  {t('about.story.easyLiving.noSeo')}
                 </p>
               </div>
               
@@ -270,25 +259,25 @@ export default function UeberUns() {
                 <div className="bg-[#0a0a0a] border border-white/10 rounded-2xl p-6 sticky top-28">
                   <div className="flex items-center gap-3 mb-4">
                     <Hammer className="w-6 h-6 text-amber-400" />
-                    <span className="text-sm font-medium text-amber-400">10 Jahre Handarbeit</span>
+                    <span className="text-sm font-medium text-amber-400">{t('about.story.card.yearsWork')}</span>
                   </div>
                   
                   <Anchor className="w-16 h-16 text-cyan-400 mb-4" />
                   <h4 className="text-xl font-bold mb-2">Easy Living</h4>
-                  <p className="text-gray-500 text-sm mb-4">44-Fuß-Katamaran • Heimathafen Travemünde</p>
+                  <p className="text-gray-500 text-sm mb-4">{t('about.story.card.specs')}</p>
                   
                   <div className="space-y-3 text-sm">
                     <div className="flex items-center gap-2 text-gray-400">
                       <Compass className="w-4 h-4 text-cyan-400" />
-                      <span>Karibik, Mittelmeer, Ostsee</span>
+                      <span>{t('about.story.card.locations')}</span>
                     </div>
                     <div className="flex items-center gap-2 text-gray-400">
                       <Calendar className="w-4 h-4 text-cyan-400" />
-                      <span>Im Charter seit 2016</span>
+                      <span>{t('about.story.card.since')}</span>
                     </div>
                     <div className="flex items-center gap-2 text-gray-400">
                       <Heart className="w-4 h-4 text-cyan-400" />
-                      <span>Ein-Mann-Unternehmen</span>
+                      <span>{t('about.story.card.oneMan')}</span>
                     </div>
                   </div>
                 </div>
@@ -300,30 +289,26 @@ export default function UeberUns() {
           <div className="grid md:grid-cols-2 gap-8 mb-12">
             <div className="bg-white/5 border border-white/10 rounded-2xl p-8">
               <h4 className="text-lg font-semibold mb-4 text-white flex items-center gap-2">
-                <span className="text-2xl">🤔</span> Das Problem
+                <span className="text-2xl">🤔</span> {t('about.story.problem.title')}
               </h4>
               <p className="text-gray-400 leading-relaxed">
-                „Ich bin Segler, kein IT-Mensch", hat mein Vater immer gesagt. Und er hatte völlig recht. 
-                <strong className="text-white"> Warum sollte jemand, der einen Katamaran von Hand bauen kann, 
-                auch noch wissen, wie man React-Apps programmiert?</strong>
+                {t('about.story.problem.text1')}
+                <strong className="text-white"> {t('about.story.problem.text1Bold')}</strong>
               </p>
               <p className="text-gray-400 mt-4 leading-relaxed">
-                Er hatte schlicht keine Zeit und keine Lust, sich monatelang mit Code, SEO, DSGVO und 
-                Zahlungssystemen zu beschäftigen. Er wollte segeln und seine Gäste glücklich machen.
+                {t('about.story.problem.text2')}
               </p>
             </div>
             
             <div className="bg-gradient-to-br from-cyan-500/20 to-violet-500/20 border border-cyan-500/30 rounded-2xl p-8">
               <h4 className="text-lg font-semibold mb-4 text-white flex items-center gap-2">
-                <span className="text-2xl">💡</span> Die Lösung
+                <span className="text-2xl">💡</span> {t('about.story.solution.title')}
               </h4>
               <p className="text-gray-300 leading-relaxed">
-                <strong className="text-white">Also haben wir es 2024 für ihn gemacht.</strong> Eine komplett 
-                neue Plattform: Moderne React-Website, Echtzeit-Buchungskalender, 
-                automatisierte E-Mails, 100% mobil-optimiert, SEO-stark.
+                <strong className="text-white">{t('about.story.solution.text1Bold')}</strong> {t('about.story.solution.text1')}
               </p>
               <p className="text-gray-300 mt-4 leading-relaxed">
-                Alles, was er brauchte – ohne selbst eine Zeile Code anfassen zu müssen.
+                {t('about.story.solution.text2')}
               </p>
             </div>
           </div>
@@ -331,16 +316,15 @@ export default function UeberUns() {
           {/* Erkenntnis */}
           <div className="bg-gradient-to-r from-violet-500/20 to-fuchsia-500/20 border border-violet-500/30 rounded-2xl p-8 md:p-10 text-center">
             <Sparkles className="w-10 h-10 text-violet-400 mx-auto mb-6" />
-            <h3 className="text-xl md:text-2xl font-bold mb-4">Und dann haben wir's kapiert:</h3>
+            <h3 className="text-xl md:text-2xl font-bold mb-4">{t('about.story.realization.title')}</h3>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Wenn mein Vater – <strong className="text-white">ein erfolgreicher Unternehmer, der einen verdammten 
-              Katamaran mit eigenen Händen gebaut hat</strong> – bei der Digitalisierung Hilfe braucht...
+              {t('about.story.realization.text1')} <strong className="text-white">{t('about.story.realization.text1Bold')}</strong> {t('about.story.realization.text1End')}
             </p>
             <p className="text-xl text-white mt-6 font-semibold">
-              ...wie viele andere Unternehmer da draußen stehen vor dem gleichen Problem?
+              {t('about.story.realization.question')}
             </p>
             <p className="text-gray-400 mt-4">
-              Tausende? Zehntausende? Der gesamte deutsche Mittelstand?
+              {t('about.story.realization.answer')}
             </p>
           </div>
         </div>

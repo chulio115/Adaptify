@@ -163,7 +163,76 @@
     "reality": {
       "badge": "Reality Check",
       "title": "Let's be honest: Here's what SMB looks like",
-      "subtitle": "No fear-mongering – just facts you probably know yourself."
+      "subtitle": "No fear-mongering – just facts you probably know yourself.",
+      "source": "Source",
+      "stats": {
+        "noStrategy": "have no clear digital strategy",
+        "dontKnow": "don't know where to start",
+        "oldWebsite": "have a website older than 5 years",
+        "fasterGrowth": "faster growth for digital SMBs"
+      },
+      "whyHard": {
+        "title": "Why it's so hard – and why that's totally normal",
+        "business": {
+          "title": "You've got a business to run.",
+          "text": "Clients to serve. Employees to manage. Invoices to write. Who has time to dive into React, SEO, and GDPR?"
+        },
+        "agencies": {
+          "title": "The big agencies?",
+          "text": "Want €50,000 for a website. And then you still don't have a booking system."
+        },
+        "builders": {
+          "title": "The website builders?",
+          "text": "Sure, Wix and Squarespace exist. But after 3 evenings of clicking around, it still looks like 'Website circa 2015'."
+        },
+        "notFailure": {
+          "title": "That's not failure",
+          "text": "– it's just not your job. That's exactly why we exist."
+        }
+      }
+    },
+    "story": {
+      "badge": "Our Story",
+      "title": "How it all started with a handbuilt catamaran",
+      "easyLiving": {
+        "title": "Easy Living – a life's work",
+        "built": "My father spent over 10 years building a 44-foot sailing catamaran.",
+        "builtDesc": "With his own hands. Every plank, every sail, every screw. Anyone who does something like that knows what perseverance means.",
+        "charterIntro": "Since 2016, he's been running charter trips –",
+        "charterLocations": "Caribbean, Mediterranean, Baltic Sea trips from Travemünde",
+        "charterDesc": "A one-man business, built with nothing but skill, passion, and a hell of a lot of work.",
+        "businessGood": "His business? Thriving.",
+        "businessDesc": "Regulars rave about it. Reviews are top-notch. Anyone who's sailed with him comes back.",
+        "butWebsite": "But the website? It was from 2012.",
+        "noSeo": "No responsive design. No online booking. No SEO. While new customers searched Google for 'catamaran charter Baltic Sea', they found the competition – not my father."
+      },
+      "card": {
+        "yearsWork": "10 years of craftsmanship",
+        "specs": "44-foot catamaran • Home port Travemünde",
+        "locations": "Caribbean, Mediterranean, Baltic Sea",
+        "since": "Chartering since 2016",
+        "oneMan": "One-man business"
+      },
+      "problem": {
+        "title": "The Problem",
+        "text1": "'I'm a sailor, not an IT guy,' my father always said. And he was absolutely right.",
+        "text1Bold": "Why should someone who can build a catamaran by hand also know how to program React apps?",
+        "text2": "He simply had no time or desire to spend months dealing with code, SEO, GDPR, and payment systems. He wanted to sail and make his guests happy."
+      },
+      "solution": {
+        "title": "The Solution",
+        "text1Bold": "So in 2024, we built it for him.",
+        "text1": "A completely new platform: Modern React website, real-time booking calendar, automated emails, 100% mobile-optimized, SEO-strong.",
+        "text2": "Everything he needed – without having to touch a single line of code himself."
+      },
+      "realization": {
+        "title": "And then it hit us:",
+        "text1": "If my father –",
+        "text1Bold": "a successful entrepreneur who built a damn catamaran with his own hands",
+        "text1End": "– needs help with digitalization...",
+        "question": "...how many other entrepreneurs out there are facing the same problem?",
+        "answer": "Thousands? Tens of thousands? The entire German SMB sector?"
+      }
     },
     "mission": {
       "badge": "Our Mission",

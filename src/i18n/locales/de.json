@@ -163,7 +163,76 @@
     "reality": {
       "badge": "Die Realität",
       "title": "Mal ehrlich: So sieht's aus im Mittelstand",
-      "subtitle": "Keine Panikmache – nur Fakten, die ihr wahrscheinlich selbst kennt."
+      "subtitle": "Keine Panikmache – nur Fakten, die ihr wahrscheinlich selbst kennt.",
+      "source": "Quelle",
+      "stats": {
+        "noStrategy": "haben keine klare Digitalstrategie",
+        "dontKnow": "wissen nicht, wo sie anfangen sollen",
+        "oldWebsite": "haben eine Website älter als 5 Jahre",
+        "fasterGrowth": "schneller wachsen digitale KMUs"
+      },
+      "whyHard": {
+        "title": "Warum's so schwer ist – und warum das völlig normal ist",
+        "business": {
+          "title": "Ihr habt ein Geschäft zu führen.",
+          "text": "Kunden zu betreuen. Mitarbeiter zu managen. Rechnungen zu schreiben. Wer hat da noch Zeit, sich in React, SEO und DSGVO einzuarbeiten?"
+        },
+        "agencies": {
+          "title": "Die großen Agenturen?",
+          "text": "Wollen 50.000€ für eine Website. Und dann habt ihr immer noch kein Buchungssystem."
+        },
+        "builders": {
+          "title": "Die Baukästen?",
+          "text": "Klar, Wix und Jimdo gibt's. Aber nach 3 Abenden Rumklicken sieht das immer noch aus wie Webseite Baujahr 2015."
+        },
+        "notFailure": {
+          "title": "Das ist kein Versagen",
+          "text": "– das ist einfach nicht euer Job. Genau dafür gibt's uns."
+        }
+      }
+    },
+    "story": {
+      "badge": "Unsere Geschichte",
+      "title": "Wie alles mit einem selbstgebauten Katamaran begann",
+      "easyLiving": {
+        "title": "Easy Living – ein Lebenswerk",
+        "built": "Mein Vater hat über 10 Jahre lang einen 44-Fuß-Segelkatamaran gebaut.",
+        "builtDesc": "Mit den eigenen Händen. Jede Planke, jedes Segel, jede Schraube. Wer so etwas macht, der weiß, was Durchhaltevermögen bedeutet.",
+        "charterIntro": "Seit 2016 ist er damit im Charter-Geschäft –",
+        "charterLocations": "Karibik, Mittelmeer, Ostsee-Törns von Travemünde aus",
+        "charterDesc": "Ein Ein-Mann-Unternehmen, aufgebaut mit nichts außer Können, Leidenschaft und verdammt viel Arbeit.",
+        "businessGood": "Sein Geschäft? Läuft.",
+        "businessDesc": "Die Stammkunden schwärmen. Die Bewertungen sind erstklassig. Wer einmal mit ihm gesegelt ist, kommt wieder.",
+        "butWebsite": "Aber die Website? Die war von 2012.",
+        "noSeo": "Kein Responsive Design. Keine Online-Buchung. Kein SEO. Während neue Kunden bei Google nach 'Katamaran Charter Ostsee' suchten, fanden sie die Konkurrenz – nicht meinen Vater."
+      },
+      "card": {
+        "yearsWork": "10 Jahre Handarbeit",
+        "specs": "44-Fuß-Katamaran • Heimathafen Travemünde",
+        "locations": "Karibik, Mittelmeer, Ostsee",
+        "since": "Im Charter seit 2016",
+        "oneMan": "Ein-Mann-Unternehmen"
+      },
+      "problem": {
+        "title": "Das Problem",
+        "text1": "'Ich bin Segler, kein IT-Mensch', hat mein Vater immer gesagt. Und er hatte völlig recht.",
+        "text1Bold": "Warum sollte jemand, der einen Katamaran von Hand bauen kann, auch noch wissen, wie man React-Apps programmiert?",
+        "text2": "Er hatte schlicht keine Zeit und keine Lust, sich monatelang mit Code, SEO, DSGVO und Zahlungssystemen zu beschäftigen. Er wollte segeln und seine Gäste glücklich machen."
+      },
+      "solution": {
+        "title": "Die Lösung",
+        "text1Bold": "Also haben wir es 2024 für ihn gemacht.",
+        "text1": "Eine komplett neue Plattform: Moderne React-Website, Echtzeit-Buchungskalender, automatisierte E-Mails, 100% mobil-optimiert, SEO-stark.",
+        "text2": "Alles, was er brauchte – ohne selbst eine Zeile Code anfassen zu müssen."
+      },
+      "realization": {
+        "title": "Und dann haben wir's kapiert:",
+        "text1": "Wenn mein Vater –",
+        "text1Bold": "ein erfolgreicher Unternehmer, der einen verdammten Katamaran mit eigenen Händen gebaut hat",
+        "text1End": "– bei der Digitalisierung Hilfe braucht...",
+        "question": "...wie viele andere Unternehmer da draußen stehen vor dem gleichen Problem?",
+        "answer": "Tausende? Zehntausende? Der gesamte deutsche Mittelstand?"
+      }
     },
     "mission": {
       "badge": "Unsere Mission",
