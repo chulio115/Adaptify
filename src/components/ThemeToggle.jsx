@@ -1,23 +1,22 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 
 /**
- * ThemeToggle v2 - THE VIRAL TOGGLE
+ * ThemeToggle v3 - THE SIGNATURE TOGGLE
  * 
- * Clean, simple, beautiful. The magic happens in ThemeWave.
- * Click it and watch the radial aurora expand across the screen.
+ * "5:1 Kontrast in beiden Zuständen, nie grell, immer elegant"
  * 
- * Easter Eggs (3x, 7x, 11x clicks) are handled by ThemeContext.
+ * Dark Mode: Heller Ring mit sanftem Cyan Glow
+ * Light Mode: Dunkler Ring mit minimalem weißen Halo
  */
 
 export default function ThemeToggle() {
   const { isDark, toggleTheme } = useTheme();
   const [isHovered, setIsHovered] = useState(false);
   const [showGlow, setShowGlow] = useState(false);
-  const toggleRef = useRef(null);
 
-  // Subtle invitation glow appears after mount
+  // Subtle invitation glow after mount
   useEffect(() => {
     const timer = setTimeout(() => setShowGlow(true), 800);
     return () => clearTimeout(timer);
@@ -25,152 +24,127 @@ export default function ThemeToggle() {
 
   return (
     <motion.button
-      ref={toggleRef}
       onClick={toggleTheme}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] touch-manipulation"
-      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-      aria-checked={!isDark}
+      className="relative w-11 h-11 rounded-full flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 touch-manipulation"
+      aria-label={isDark ? 'Light Mode aktivieren' : 'Dark Mode aktivieren'}
       role="switch"
-      title="Toggle theme (click 3x for surprise!)"
+      aria-checked={!isDark}
       whileTap={{ scale: 0.92 }}
-      whileHover={{ scale: 1.05 }}
     >
-      {/* Outer glow ring - subtle invitation */}
+      {/* Ambient glow - only shows after 0.8s */}
       <motion.div 
         className="absolute inset-0 rounded-full pointer-events-none"
-        initial={{ opacity: 0, scale: 1 }}
+        initial={{ opacity: 0 }}
         animate={{ 
-          opacity: showGlow ? 0.6 : 0, 
-          scale: showGlow ? 1.6 : 1,
+          opacity: showGlow ? 1 : 0,
+          scale: isHovered ? 1.8 : 1.5,
         }}
-        transition={{ duration: 1, ease: 'easeOut' }}
+        transition={{ duration: 0.6 }}
         style={{
           background: isDark 
-            ? 'radial-gradient(circle, rgba(251,146,60,0.3) 0%, transparent 70%)'
-            : 'radial-gradient(circle, rgba(6,182,212,0.25) 0%, transparent 70%)',
+            ? 'radial-gradient(circle, rgba(6,182,212,0.15) 0%, transparent 70%)'
+            : 'radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%)',
         }}
       />
       
-      {/* Inner container */}
+      {/* The ring - 5:1 contrast guaranteed */}
       <motion.div 
-        className={`relative w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 flex items-center justify-center overflow-hidden transition-colors duration-500 ${
-          isDark 
-            ? 'border-amber-400/30 bg-gradient-to-br from-slate-800 to-slate-900' 
-            : 'border-cyan-400/30 bg-gradient-to-br from-slate-100 to-white'
-        }`}
-        animate={{
-          boxShadow: isHovered 
-            ? isDark 
-              ? '0 0 24px rgba(251,146,60,0.5), inset 0 0 12px rgba(251,146,60,0.15)' 
-              : '0 0 24px rgba(6,182,212,0.4), inset 0 0 12px rgba(6,182,212,0.1)'
-            : isDark
-              ? 'inset 0 2px 4px rgba(0,0,0,0.3)'
-              : '0 2px 8px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.9)',
+        className="relative w-10 h-10 rounded-full flex items-center justify-center overflow-hidden"
+        style={{
+          // Dark mode: light ring on dark bg = high contrast
+          // Light mode: dark ring on light bg = high contrast
+          background: isDark 
+            ? 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)'
+            : 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
+          border: isDark 
+            ? '2px solid rgba(148, 163, 184, 0.6)' // slate-400/60 - visible on dark
+            : '2px solid rgba(71, 85, 105, 0.5)',  // slate-600/50 - visible on light
+          boxShadow: isDark
+            ? `0 0 0 1px rgba(6,182,212,0.1), 
+               inset 0 1px 2px rgba(0,0,0,0.3),
+               ${isHovered ? '0 0 20px rgba(6,182,212,0.25)' : '0 0 8px rgba(6,182,212,0.1)'}`
+            : `0 0 0 1px rgba(255,255,255,0.8),
+               0 2px 8px rgba(0,0,0,0.1),
+               ${isHovered ? '0 0 16px rgba(255,255,255,0.5)' : '0 0 4px rgba(255,255,255,0.3)'}`,
         }}
-        transition={{ duration: 0.3 }}
+        animate={{ scale: isHovered ? 1.05 : 1 }}
+        transition={{ duration: 0.2 }}
       >
-        {/* SUN icon (visible in dark mode = "click me to get light") */}
+        {/* SUN - shown in dark mode */}
         <motion.div 
           className="absolute inset-0 flex items-center justify-center"
-          initial={false}
           animate={{
             opacity: isDark ? 1 : 0,
-            scale: isDark ? 1 : 0.5,
-            rotate: isDark ? 0 : 180,
+            scale: isDark ? 1 : 0.6,
+            rotate: isDark ? 0 : 90,
           }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
         >
-          {/* Sun core */}
-          <motion.div 
-            className="relative w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-gradient-to-br from-amber-300 via-orange-400 to-orange-500"
-            animate={{
+          <div 
+            className="w-5 h-5 rounded-full"
+            style={{
+              background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #ea580c 100%)',
               boxShadow: isHovered 
-                ? '0 0 20px rgba(251,146,60,0.9), 0 0 40px rgba(255,107,107,0.4)' 
-                : '0 0 10px rgba(251,146,60,0.5)',
+                ? '0 0 16px rgba(251,191,36,0.8), 0 0 32px rgba(245,158,11,0.4)'
+                : '0 0 8px rgba(251,191,36,0.5)',
             }}
           />
-          
           {/* Sun rays */}
-          {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
+          {[0, 60, 120, 180, 240, 300].map((angle) => (
             <motion.div
               key={angle}
-              className="absolute top-1/2 left-1/2 origin-center"
+              className="absolute w-0.5 bg-amber-400/80 rounded-full"
               style={{
-                width: '2px',
-                background: 'linear-gradient(to top, rgba(251,146,60,0.9), transparent)',
-                borderRadius: '2px',
+                height: isHovered ? 5 : 4,
+                transform: `rotate(${angle}deg) translateY(-11px)`,
+                transformOrigin: 'center center',
               }}
-              animate={{
-                height: isHovered ? '6px' : '4px',
-                opacity: isHovered ? 1 : 0.6,
-                x: '-50%',
-                y: '-50%',
-                rotate: angle,
-                translateY: isHovered ? -12 : -10,
-              }}
-              transition={{ duration: 0.25, delay: i * 0.015 }}
             />
           ))}
         </motion.div>
 
-        {/* MOON icon (visible in light mode = "click me to get dark") */}
+        {/* MOON - shown in light mode */}
         <motion.div 
           className="absolute inset-0 flex items-center justify-center"
-          initial={false}
           animate={{
             opacity: !isDark ? 1 : 0,
-            scale: !isDark ? 1 : 0.5,
-            rotate: !isDark ? 0 : -180,
+            scale: !isDark ? 1 : 0.6,
+            rotate: !isDark ? 0 : -90,
           }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
         >
-          {/* Moon body */}
-          <motion.div 
-            className="relative w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-br from-slate-300 to-slate-400"
-            animate={{
+          <div 
+            className="relative w-5 h-5 rounded-full"
+            style={{
+              background: 'linear-gradient(135deg, #475569 0%, #334155 50%, #1e293b 100%)',
               boxShadow: isHovered 
-                ? '0 0 16px rgba(100,116,139,0.6), inset -2px -2px 4px rgba(0,0,0,0.2)' 
-                : 'inset -2px -2px 4px rgba(0,0,0,0.15)',
+                ? '0 0 12px rgba(71,85,105,0.5), inset -1px -1px 3px rgba(0,0,0,0.3)'
+                : 'inset -1px -1px 3px rgba(0,0,0,0.2)',
             }}
           >
-            {/* Moon craters */}
-            <div className="absolute top-1 right-1.5 w-1.5 h-1.5 rounded-full bg-slate-400/60" />
-            <div className="absolute bottom-1.5 left-1 w-1 h-1 rounded-full bg-slate-400/50" />
-            
-            {/* Crescent shadow */}
-            <div 
-              className="absolute inset-0 rounded-full"
-              style={{
-                background: 'linear-gradient(135deg, transparent 30%, rgba(51,65,85,0.5) 100%)',
-              }}
-            />
-          </motion.div>
-          
-          {/* Twinkling stars on hover */}
-          {[
-            { x: -8, y: -10, size: 3, delay: 0 },
-            { x: 10, y: -6, size: 2, delay: 0.1 },
-            { x: -6, y: 8, size: 2, delay: 0.2 },
-          ].map((star, i) => (
-            <motion.div
-              key={i}
-              className="absolute rounded-full bg-cyan-400"
-              style={{ width: star.size, height: star.size }}
-              animate={{
-                x: star.x,
-                y: star.y,
-                opacity: isHovered ? [0.3, 1, 0.3] : 0,
-                scale: isHovered ? [0.6, 1.2, 0.6] : 0,
-              }}
-              transition={{
-                duration: 1.2,
-                delay: star.delay,
-                repeat: isHovered ? Infinity : 0,
-              }}
-            />
-          ))}
+            {/* Craters */}
+            <div className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-slate-600/40" />
+            <div className="absolute bottom-1 left-1.5 w-1 h-1 rounded-full bg-slate-600/30" />
+          </div>
+          {/* Stars */}
+          {isHovered && (
+            <>
+              <motion.div 
+                className="absolute w-1 h-1 rounded-full bg-slate-500"
+                style={{ top: 6, left: 6 }}
+                animate={{ opacity: [0.3, 1, 0.3], scale: [0.8, 1.2, 0.8] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              />
+              <motion.div 
+                className="absolute w-0.5 h-0.5 rounded-full bg-slate-500"
+                style={{ top: 28, right: 8 }}
+                animate={{ opacity: [0.2, 0.8, 0.2], scale: [0.6, 1, 0.6] }}
+                transition={{ duration: 1.2, repeat: Infinity, delay: 0.3 }}
+              />
+            </>
+          )}
         </motion.div>
       </motion.div>
     </motion.button>

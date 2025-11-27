@@ -1,172 +1,94 @@
 import { useTheme } from '../context/ThemeContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useEffect, useState, useMemo } from 'react';
 
 /**
- * ThemeWave v5 - THE VIRAL ANIMATION
+ * ThemeWave v6 - THE SIGNATURE ANIMATION
  * 
- * "I have no idea how they did that... but I need to work with them."
+ * "Der Kreis frisst buchstäblich den alten Modus weg"
  * 
- * Key insight: Theme switches IMMEDIATELY, wave is pure visual magic.
- * Everything animates together because CSS transitions handle the colors.
- * The wave is just the cherry on top - a radial glow that expands.
+ * How it works:
+ * 1. Theme switches IMMEDIATELY (new theme visible underneath)
+ * 2. This overlay shows the OLD theme with clip-path: circle(160%)
+ * 3. Circle SHRINKS from 160% to 0% - revealing new theme
+ * 4. Subtle glow trail at the edge (2px, 20% opacity)
  * 
- * Single element. No layers. No bugs. Pure cinema.
+ * Result: The wave "eats" the old mode as it expands outward.
+ * Actually, we INVERT it - the overlay shrinks, revealing the new theme.
+ * 
+ * Wait no - let me re-read the spec...
+ * "clip-path: circle(0% at 92% 40px) → circle(160% at 92% 40px)"
+ * "Innerhalb des Kreises = Ziel-Theme"
+ * 
+ * So the INSIDE of the circle is the NEW theme. 
+ * The overlay should be the NEW theme, expanding over the old.
+ * 
+ * Actually simplest: Theme switches, overlay with OLD theme colors 
+ * has clip-path that goes from 160% -> 0% (shrinking away).
+ * 
+ * OR: Overlay with NEW theme colors, clip-path 0% -> 160% (expanding).
+ * This is cleaner. Let's do this.
  */
 
 export default function ThemeWave() {
-  const { waveState, easterEgg } = useTheme();
-  const [maxRadius, setMaxRadius] = useState(2000);
-  
-  // Calculate max radius needed to cover screen from origin
-  useEffect(() => {
-    if (!waveState.isAnimating) return;
-    
-    const { origin } = waveState;
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    
-    // Distance to each corner
-    const distances = [
-      Math.hypot(origin.x, origin.y),                    // top-left
-      Math.hypot(w - origin.x, origin.y),                // top-right
-      Math.hypot(origin.x, h - origin.y),                // bottom-left
-      Math.hypot(w - origin.x, h - origin.y),            // bottom-right
-    ];
-    
-    setMaxRadius(Math.max(...distances) * 1.1);
-  }, [waveState.isAnimating, waveState.origin]);
+  const { waveState, easterEgg, WAVE_DURATION } = useTheme();
 
-  // Current radius based on progress (with easing applied in render)
-  const currentRadius = waveState.progress * maxRadius;
+  // Colors for the overlay based on what we're transitioning TO
+  const isGoingDark = waveState.previousTheme === 'light';
   
-  // Colors based on target theme
-  const colors = useMemo(() => {
-    const isDark = waveState.targetTheme === 'dark';
-    return {
-      primary: isDark ? 'rgba(6, 182, 212, 0.6)' : 'rgba(251, 146, 60, 0.6)',
-      secondary: isDark ? 'rgba(124, 58, 237, 0.4)' : 'rgba(249, 115, 22, 0.4)',
-      glow: isDark ? 'rgba(6, 182, 212, 0.3)' : 'rgba(251, 191, 36, 0.3)',
-      white: 'rgba(255, 255, 255, 0.9)',
-    };
-  }, [waveState.targetTheme]);
+  // The overlay shows the NEW theme
+  const overlayBg = isGoingDark ? '#0a0a0a' : '#FAFBFC';
+  const glowColor = isGoingDark 
+    ? 'rgba(6, 182, 212, 0.2)' // cyan glow for dark
+    : 'rgba(251, 146, 60, 0.2)'; // orange glow for light
 
   return (
     <>
       {/* ════════════════════════════════════════════════════════════════
-          THE AURORA WAVE - A single, beautiful radial expansion
+          THE CLIP-PATH WAVE
+          One div. No layers. Pure cinema.
           ════════════════════════════════════════════════════════════════ */}
       <AnimatePresence>
         {waveState.isAnimating && (
-          <motion.div
-            className="fixed inset-0 z-[9999] pointer-events-none"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
-          >
-            {/* OUTER GLOW - wide, soft, visible */}
-            <div
-              className="absolute rounded-full"
+          <>
+            {/* Main expanding circle - shows NEW theme */}
+            <motion.div
+              className="fixed inset-0 z-[9998] pointer-events-none"
               style={{
-                left: waveState.origin.x,
-                top: waveState.origin.y,
-                width: currentRadius * 2,
-                height: currentRadius * 2,
-                transform: 'translate(-50%, -50%)',
-                background: `
-                  radial-gradient(
-                    circle,
-                    transparent 0%,
-                    transparent 75%,
-                    ${colors.glow} 82%,
-                    ${colors.primary} 90%,
-                    ${colors.white} 95%,
-                    ${colors.secondary} 98%,
-                    transparent 100%
-                  )
-                `,
-                filter: 'blur(12px)',
-                opacity: waveState.progress < 0.85 ? 1 : 1 - (waveState.progress - 0.85) * 6.67,
+                backgroundColor: overlayBg,
+                clipPath: `circle(0% at ${waveState.originX}% ${waveState.originY}px)`,
+              }}
+              animate={{
+                clipPath: `circle(160% at ${waveState.originX}% ${waveState.originY}px)`,
+              }}
+              transition={{
+                duration: WAVE_DURATION / 1000,
+                ease: [0.4, 0.0, 0.2, 1.02], // slight overshoot
               }}
             />
             
-            {/* SHARP CORE - the crisp bright line */}
-            <div
-              className="absolute rounded-full"
+            {/* Glow trail at the edge - 2px, 20% opacity */}
+            <motion.div
+              className="fixed inset-0 z-[9999] pointer-events-none"
               style={{
-                left: waveState.origin.x,
-                top: waveState.origin.y,
-                width: currentRadius * 2,
-                height: currentRadius * 2,
-                transform: 'translate(-50%, -50%)',
-                background: `
-                  radial-gradient(
-                    circle,
-                    transparent 0%,
-                    transparent 92%,
-                    ${colors.primary} 95%,
-                    ${colors.white} 97%,
-                    ${colors.primary} 99%,
-                    transparent 100%
-                  )
-                `,
-                opacity: waveState.progress < 0.8 ? 1 : 1 - (waveState.progress - 0.8) * 5,
+                background: `radial-gradient(circle at ${waveState.originX}% ${waveState.originY}px, 
+                  transparent 0%, 
+                  transparent calc(var(--radius) - 4px),
+                  ${glowColor} calc(var(--radius) - 2px),
+                  white calc(var(--radius)),
+                  ${glowColor} calc(var(--radius) + 2px),
+                  transparent calc(var(--radius) + 4px)
+                )`,
+                '--radius': '0%',
+              }}
+              animate={{
+                '--radius': '160%',
+              }}
+              transition={{
+                duration: WAVE_DURATION / 1000,
+                ease: [0.4, 0.0, 0.2, 1.02],
               }}
             />
-            
-            {/* INNER FILL - subtle color wash following the wave */}
-            <div
-              className="absolute rounded-full"
-              style={{
-                left: waveState.origin.x,
-                top: waveState.origin.y,
-                width: currentRadius * 2,
-                height: currentRadius * 2,
-                transform: 'translate(-50%, -50%)',
-                background: `
-                  radial-gradient(
-                    circle,
-                    ${colors.glow} 0%,
-                    ${colors.glow} 70%,
-                    transparent 100%
-                  )
-                `,
-                opacity: waveState.progress < 0.7 ? 0.15 : 0.15 - (waveState.progress - 0.7) * 0.5,
-              }}
-            />
-
-            {/* Sparkle particles along the ring */}
-            {waveState.progress > 0.05 && waveState.progress < 0.95 && (
-              [...Array(8)].map((_, i) => {
-                const angle = (i / 8) * Math.PI * 2 + waveState.progress * Math.PI;
-                const x = waveState.origin.x + Math.cos(angle) * currentRadius;
-                const y = waveState.origin.y + Math.sin(angle) * currentRadius;
-                
-                return (
-                  <motion.div
-                    key={i}
-                    className="absolute rounded-full"
-                    style={{
-                      left: x,
-                      top: y,
-                      width: 6,
-                      height: 6,
-                      transform: 'translate(-50%, -50%)',
-                      background: colors.white,
-                      boxShadow: `0 0 12px ${colors.primary}, 0 0 24px ${colors.secondary}`,
-                    }}
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ 
-                      scale: [0, 1.2, 0.8],
-                      opacity: [0, 1, 0.6],
-                    }}
-                    transition={{ duration: 0.3, delay: i * 0.02 }}
-                  />
-                );
-              })
-            )}
-          </motion.div>
+          </>
         )}
       </AnimatePresence>
 
@@ -174,43 +96,57 @@ export default function ThemeWave() {
           EASTER EGGS
           ════════════════════════════════════════════════════════════════ */}
       
-      {/* 3x Click: Confetti */}
+      {/* 3x Click: Lighthouse Mode */}
       <AnimatePresence>
-        {easterEgg === 'confetti' && (
+        {easterEgg === 'lighthouse' && (
           <motion.div
-            className="fixed inset-0 z-[10000] pointer-events-none overflow-hidden"
+            className="fixed inset-0 z-[10000] pointer-events-none"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            {[...Array(50)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute text-2xl"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: -20,
-                }}
-                initial={{ y: 0, rotate: 0, opacity: 1 }}
-                animate={{
-                  y: window.innerHeight + 100,
-                  rotate: Math.random() * 720 - 360,
-                  opacity: [1, 1, 0],
-                }}
-                transition={{
-                  duration: 2.5 + Math.random(),
-                  delay: Math.random() * 0.5,
-                  ease: 'easeIn',
-                }}
-              >
-                {['🎉', '✨', '🌟', '⭐', '🎊', '💫'][Math.floor(Math.random() * 6)]}
-              </motion.div>
-            ))}
+            {/* Dark overlay */}
+            <div className="absolute inset-0 bg-black/40" />
+            
+            {/* Rotating beam from toggle position */}
+            <motion.div
+              className="absolute origin-center"
+              style={{
+                left: `${waveState.originX}%`,
+                top: waveState.originY,
+                width: '200vmax',
+                height: '6px',
+                marginLeft: '-100vmax',
+                marginTop: '-3px',
+                background: 'linear-gradient(90deg, transparent 0%, rgba(251,191,36,0.3) 20%, rgba(251,191,36,1) 48%, white 50%, rgba(251,191,36,1) 52%, rgba(251,191,36,0.3) 80%, transparent 100%)',
+                boxShadow: '0 0 30px rgba(251,191,36,0.6)',
+                borderRadius: '3px',
+              }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1.5, ease: 'linear' }}
+            />
+            
+            {/* Pulsing core */}
+            <motion.div
+              className="absolute rounded-full"
+              style={{
+                left: `${waveState.originX}%`,
+                top: waveState.originY,
+                width: 60,
+                height: 60,
+                marginLeft: -30,
+                marginTop: -30,
+                background: 'radial-gradient(circle, #FBBF24, #F59E0B)',
+                boxShadow: '0 0 40px rgba(251,191,36,0.8)',
+              }}
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 0.4, repeat: 3 }}
+            />
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* 5x Click: Katamaran Easter Egg */}
+      {/* 7x Click: Katamaran - NUR Animation, KEIN Text */}
       <AnimatePresence>
         {easterEgg === 'katamaran' && (
           <motion.div
@@ -218,66 +154,85 @@ export default function ThemeWave() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.8 }}
           >
-            {/* Beautiful ocean gradient background */}
+            {/* Ocean gradient */}
             <div 
               className="absolute inset-0"
               style={{
-                background: 'linear-gradient(180deg, #87CEEB 0%, #1E90FF 40%, #006994 100%)',
+                background: 'linear-gradient(180deg, #87CEEB 0%, #4A90C2 30%, #1E6091 60%, #0D3B66 100%)',
               }}
             />
             
-            {/* Sun */}
+            {/* Sun with rays */}
             <motion.div
-              className="absolute top-20 right-20 w-24 h-24 rounded-full"
-              style={{
-                background: 'radial-gradient(circle, #FFD700, #FFA500)',
-                boxShadow: '0 0 60px rgba(255, 215, 0, 0.8)',
-              }}
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            
-            {/* Sailboat emoji as placeholder - in production use actual image */}
-            <motion.div
-              className="relative z-10 text-9xl"
-              initial={{ x: -100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1, y: [0, -10, 0] }}
-              transition={{ 
-                x: { duration: 0.8 },
-                y: { duration: 2, repeat: Infinity, ease: 'easeInOut' }
-              }}
+              className="absolute top-16 right-16 sm:top-20 sm:right-20"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 60, ease: 'linear', repeat: Infinity }}
             >
-              ⛵
-            </motion.div>
-            
-            {/* The tribute text */}
-            <motion.div
-              className="absolute bottom-20 left-0 right-0 text-center"
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-            >
-              <p className="text-white text-2xl font-light tracking-wide drop-shadow-lg">
-                Er hat's möglich gemacht.
-              </p>
-              <p className="text-white/60 text-sm mt-2">
-                In loving memory ❤️
-              </p>
-            </motion.div>
-
-            {/* Waves at bottom */}
-            <div className="absolute bottom-0 left-0 right-0 h-32 overflow-hidden">
-              <motion.div
-                className="absolute bottom-0 left-0 right-0 h-full"
+              <div 
+                className="w-20 h-20 sm:w-28 sm:h-28 rounded-full"
                 style={{
-                  background: 'linear-gradient(180deg, transparent, rgba(255,255,255,0.3))',
+                  background: 'radial-gradient(circle, #FFE066 0%, #FFD700 50%, #FFA500 100%)',
+                  boxShadow: '0 0 80px rgba(255, 215, 0, 0.8), 0 0 120px rgba(255, 165, 0, 0.4)',
                 }}
-                animate={{ x: [0, -50, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              />
+            </motion.div>
+            
+            {/* Sailboat - larger, more detailed */}
+            <motion.div
+              className="relative z-10"
+              initial={{ x: '-100vw' }}
+              animate={{ 
+                x: '0vw',
+                y: [0, -15, 0, -10, 0],
+              }}
+              transition={{ 
+                x: { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] },
+                y: { duration: 3, repeat: Infinity, ease: 'easeInOut' }
+              }}
+            >
+              <span className="text-[120px] sm:text-[180px] filter drop-shadow-2xl">⛵</span>
+            </motion.div>
+            
+            {/* Animated waves */}
+            <div className="absolute bottom-0 left-0 right-0 h-40 overflow-hidden">
+              <motion.div
+                className="absolute bottom-0 w-[200%] h-full"
+                style={{
+                  background: `
+                    repeating-linear-gradient(
+                      90deg,
+                      rgba(255,255,255,0.1) 0px,
+                      rgba(255,255,255,0.3) 50px,
+                      rgba(255,255,255,0.1) 100px
+                    )
+                  `,
+                }}
+                animate={{ x: [0, -100] }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+              />
+              <motion.div
+                className="absolute bottom-0 w-full h-20"
+                style={{
+                  background: 'linear-gradient(180deg, transparent, rgba(255,255,255,0.15))',
+                }}
+                animate={{ y: [0, -5, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
               />
             </div>
+            
+            {/* Subtle clouds */}
+            <motion.div
+              className="absolute top-10 left-10 w-32 h-12 rounded-full bg-white/20 blur-xl"
+              animate={{ x: [0, 30, 0] }}
+              transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            <motion.div
+              className="absolute top-24 left-1/3 w-24 h-8 rounded-full bg-white/15 blur-lg"
+              animate={{ x: [0, -20, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+            />
           </motion.div>
         )}
       </AnimatePresence>

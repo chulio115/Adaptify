@@ -1,25 +1,29 @@
 import { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 
 /**
- * ThemeContext v2 - The Viral Toggle
+ * ThemeContext v3 - THE SIGNATURE TOGGLE
  * 
- * "I have no idea how they did that... but I need to work with them."
+ * "Entwickler schließen die Seite und öffnen sie wieder – nur um den Toggle noch einmal zu klicken."
  * 
- * Features:
- * - Buttery smooth 1000ms wave animation
- * - Click counter for Easter Eggs (3x, 7x, 11x)
- * - Three wave variants: Aurora, Glass, Matrix
- * - prefers-color-scheme + localStorage
- * - Zero FOUC, 60fps guaranteed
+ * Architecture:
+ * - clip-path: circle() expandiert und "frisst" den alten Modus
+ * - Ein einziges Overlay mit dem ALTEN Theme
+ * - Darunter ist bereits das NEUE Theme sichtbar
+ * - 980ms, butter-smooth, 60fps
+ * 
+ * Easter Eggs:
+ * - 3x = Lighthouse Mode
+ * - 7x = Katamaran (nur Animation, kein Text)
  */
 
 const ThemeContext = createContext(null);
 
-// Animation config - the magic numbers
-const WAVE_DURATION = 1000; // ms - the sweet spot
+// THE magic numbers
+const WAVE_DURATION = 980;
+const EASING = 'cubic-bezier(0.4, 0.0, 0.2, 1)';
 
 export function ThemeProvider({ children }) {
-  // Theme state
+  // Theme state - true = dark
   const [isDark, setIsDark] = useState(() => {
     if (typeof window === 'undefined') return true;
     const stored = localStorage.getItem('adaptify-theme');
@@ -27,125 +31,107 @@ export function ThemeProvider({ children }) {
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
   
-  // Wave animation state
+  // Wave state for the clip-path animation
   const [waveState, setWaveState] = useState({
     isAnimating: false,
-    origin: { x: 0, y: 0 },
-    targetTheme: null,
-    progress: 0,
-    variant: 'aurora', // 'aurora' | 'glass' | 'matrix'
+    originX: 92,      // % from left (toggle position)
+    originY: 40,      // px from top
+    previousTheme: 'dark', // The theme we're transitioning FROM
   });
   
-  // Easter egg click counter
+  // Easter eggs
   const [clickCount, setClickCount] = useState(0);
-  const [easterEgg, setEasterEgg] = useState(null); // 'confetti' | 'disco' | 'katamaran'
-  
-  const clickResetRef = useRef(null);
-  const animationRef = useRef(null);
+  const [easterEgg, setEasterEgg] = useState(null);
+  const clickResetTimer = useRef(null);
 
-  // Apply theme class to document - INSTANT, no delay
+  // Apply theme to DOM immediately
   useEffect(() => {
     const root = document.documentElement;
     root.classList.remove('light', 'dark');
     root.classList.add(isDark ? 'dark' : 'light');
     localStorage.setItem('adaptify-theme', isDark ? 'dark' : 'light');
-    
-    // Mobile browser chrome color
-    const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', isDark ? '#0a0a0a' : '#FAFBFC');
   }, [isDark]);
 
-  // System preference listener
+  // System theme listener
   useEffect(() => {
     const mq = window.matchMedia('(prefers-color-scheme: dark)');
     const handler = (e) => {
-      if (!localStorage.getItem('adaptify-theme')) setIsDark(e.matches);
+      if (!localStorage.getItem('adaptify-theme')) {
+        setIsDark(e.matches);
+      }
     };
     mq.addEventListener('change', handler);
     return () => mq.removeEventListener('change', handler);
   }, []);
 
-  // Easter egg handler
+  // Easter egg triggers
   useEffect(() => {
     if (clickCount === 3) {
-      setEasterEgg('confetti');
-      setTimeout(() => setEasterEgg(null), 3000);
-    } else if (clickCount === 5) {
+      setEasterEgg('lighthouse');
+      setTimeout(() => setEasterEgg(null), 1500);
+    } else if (clickCount === 7) {
       setEasterEgg('katamaran');
-      setTimeout(() => setEasterEgg(null), 3000);
+      setTimeout(() => setEasterEgg(null), 5000);
     }
   }, [clickCount]);
 
-  // The main toggle function
+  // THE toggle function
   const toggleTheme = useCallback((event) => {
-    // Get origin from click/touch position
+    // Get click origin for wave
     const rect = event?.currentTarget?.getBoundingClientRect();
-    const origin = rect 
-      ? { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }
-      : { x: window.innerWidth - 80, y: 40 };
+    let originX = 92; // default: top right
+    let originY = 40;
+    
+    if (rect) {
+      originX = ((rect.left + rect.width / 2) / window.innerWidth) * 100;
+      originY = rect.top + rect.height / 2;
+    }
 
-    // Increment click counter (reset after 2s of no clicks)
+    // Click counting for Easter eggs
     setClickCount(prev => prev + 1);
-    if (clickResetRef.current) clearTimeout(clickResetRef.current);
-    clickResetRef.current = setTimeout(() => setClickCount(0), 2000);
+    if (clickResetTimer.current) clearTimeout(clickResetTimer.current);
+    clickResetTimer.current = setTimeout(() => setClickCount(0), 2000);
 
-    // Cancel any running animation
-    if (animationRef.current) cancelAnimationFrame(animationRef.current);
+    // Don't toggle during animation
+    if (waveState.isAnimating) return;
 
-    const newTheme = isDark ? 'light' : 'dark';
-
-    // START: Switch theme IMMEDIATELY so everything animates together
-    setIsDark(prev => !prev);
-
-    // Start wave animation
+    // Remember current theme BEFORE switching
+    const previousTheme = isDark ? 'dark' : 'light';
+    
+    // Start animation
     setWaveState({
       isAnimating: true,
-      origin,
-      targetTheme: newTheme,
-      progress: 0,
-      variant: 'aurora',
+      originX,
+      originY,
+      previousTheme,
     });
 
-    // Animate progress from 0 to 1
-    const startTime = performance.now();
-    const animate = (currentTime) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / WAVE_DURATION, 1);
-      
-      setWaveState(prev => ({ ...prev, progress }));
-      
-      if (progress < 1) {
-        animationRef.current = requestAnimationFrame(animate);
-      } else {
-        // Animation complete
-        setTimeout(() => {
-          setWaveState(prev => ({ ...prev, isAnimating: false, progress: 0 }));
-        }, 100);
-      }
-    };
+    // Switch theme IMMEDIATELY - the new theme is now visible
+    // The overlay will show the OLD theme and shrink away
+    setIsDark(!isDark);
+
+    // End animation after duration
+    setTimeout(() => {
+      setWaveState(prev => ({ ...prev, isAnimating: false }));
+    }, WAVE_DURATION + 50);
     
-    animationRef.current = requestAnimationFrame(animate);
-  }, [isDark]);
+  }, [isDark, waveState.isAnimating]);
 
-  // Set variant
-  const setVariant = useCallback((variant) => {
-    setWaveState(prev => ({ ...prev, variant }));
-  }, []);
-
-  // Direct set (no animation)
-  const setTheme = useCallback((theme) => {
-    setIsDark(theme === 'dark');
+  // Cleanup
+  useEffect(() => {
+    return () => {
+      if (clickResetTimer.current) clearTimeout(clickResetTimer.current);
+    };
   }, []);
 
   return (
     <ThemeContext.Provider value={{
       isDark,
       toggleTheme,
-      setTheme,
       waveState,
-      setVariant,
       easterEgg,
-      clickCount,
+      WAVE_DURATION,
+      EASING,
     }}>
       {children}
     </ThemeContext.Provider>
