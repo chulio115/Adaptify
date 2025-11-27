@@ -66,6 +66,11 @@ export default function ThemeWave() {
     bright: 'rgba(255, 255, 255, 0.9)',
   };
 
+  // Current theme (for Matrix visibility tuning)
+  const isLightTheme =
+    typeof document !== 'undefined' &&
+    document.documentElement.classList.contains('light');
+
   // Fade out near the end
   const ringOpacity = ringProgress > 150 
     ? Math.max(0, 1 - (ringProgress - 150) / 30)
@@ -180,7 +185,7 @@ export default function ThemeWave() {
         )}
       </AnimatePresence>
 
-      {/* 5x Click: Matrix Rain - MOBILE & THEME OPTIMIZED */}
+      {/* 5x Click: Matrix Rain - MOBILE & THEME OPTIMIZED (Dark vs Light tuned) */}
       <AnimatePresence>
         {easterEgg === 'matrix' && (
           <motion.div
@@ -191,8 +196,9 @@ export default function ThemeWave() {
             transition={{ duration: 0.5 }}
             style={{
               // Semi-transparent, theme-friendly overlay so the page stays visible
-              background:
-                'radial-gradient(circle at center, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.4) 40%, transparent 85%)',
+              background: isLightTheme
+                ? 'radial-gradient(circle at center, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.08) 85%)'
+                : 'radial-gradient(circle at center, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.4) 40%, transparent 85%)',
               backdropFilter: 'blur(2px)',
             }}
           >
@@ -214,10 +220,14 @@ export default function ThemeWave() {
                     // Use theme accent cyan instead of neon green
                     color: 'var(--accent-cyan)',
                     textShadow: isMobile
-                      ? '0 0 8px var(--accent-cyan), 0 0 15px rgba(0,0,0,0.8)'
-                      : '0 0 10px var(--accent-cyan), 0 0 22px var(--accent-cyan), 0 0 32px rgba(0,0,0,0.9)',
+                      ? (isLightTheme
+                          ? '0 0 10px rgba(6,182,212,0.9), 0 0 18px rgba(0,0,0,0.6)'
+                          : '0 0 8px var(--accent-cyan), 0 0 15px rgba(0,0,0,0.8)')
+                      : (isLightTheme
+                          ? '0 0 14px rgba(6,182,212,1), 0 0 26px rgba(0,0,0,0.75)'
+                          : '0 0 10px var(--accent-cyan), 0 0 22px var(--accent-cyan), 0 0 32px rgba(0,0,0,0.9)'),
                     writingMode: 'vertical-rl',
-                    opacity: 0.45 + Math.random() * 0.35,
+                    opacity: (isLightTheme ? 0.7 : 0.45) + Math.random() * (isLightTheme ? 0.25 : 0.35),
                   }}
                   initial={{ y: '-100%' }}
                   animate={{ y: '120vh' }}
@@ -245,8 +255,12 @@ export default function ThemeWave() {
                     // Lead characters in secondary accent (maps to violet/coral in light mode)
                     color: 'var(--accent-violet)',
                     textShadow: isMobile
-                      ? '0 0 15px var(--accent-violet), 0 0 25px rgba(0,0,0,0.85)'
-                      : '0 0 22px var(--accent-violet), 0 0 42px rgba(0,0,0,0.9)',
+                      ? (isLightTheme
+                          ? '0 0 18px rgba(124,58,237,0.95), 0 0 26px rgba(0,0,0,0.7)'
+                          : '0 0 15px var(--accent-violet), 0 0 25px rgba(0,0,0,0.85)')
+                      : (isLightTheme
+                          ? '0 0 24px rgba(124,58,237,1), 0 0 44px rgba(0,0,0,0.85)'
+                          : '0 0 22px var(--accent-violet), 0 0 42px rgba(0,0,0,0.9)'),
                   }}
                   initial={{ y: -50 }}
                   animate={{ y: '120vh' }}
