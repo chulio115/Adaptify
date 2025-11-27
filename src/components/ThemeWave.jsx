@@ -343,7 +343,7 @@ export default function ThemeWave() {
               />
             </motion.div>
             
-            {/* Sailboat - larger, more detailed */}
+            {/* Sailboat - polished, stylized */}
             <motion.div
               className="relative z-10"
               initial={{ x: '-100vw' }}
@@ -356,11 +356,81 @@ export default function ThemeWave() {
                 y: { duration: 3, repeat: Infinity, ease: 'easeInOut' }
               }}
             >
-              <span className="text-[120px] sm:text-[180px] filter drop-shadow-2xl">⛵</span>
+              <div className="relative w-32 h-24 sm:w-44 sm:h-32">
+                {/* Hull */}
+                <div
+                  className="absolute bottom-0 rounded-full"
+                  style={{
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    width: '100%',
+                    height: '24px',
+                    background: 'linear-gradient(90deg, #0f172a, #1e293b)',
+                    boxShadow: '0 12px 28px rgba(15,23,42,0.7)',
+                  }}
+                />
+
+                {/* Mast */}
+                <div
+                  className="absolute bg-slate-100/90"
+                  style={{
+                    left: '50%',
+                    bottom: '24px',
+                    transform: 'translateX(-50%)',
+                    width: '4px',
+                    height: '72px',
+                    boxShadow: '0 0 10px rgba(255,255,255,0.9)',
+                  }}
+                />
+
+                {/* Main sail */}
+                <div
+                  className="absolute"
+                  style={{
+                    left: '50%',
+                    bottom: '24px',
+                    transform: 'translateX(-6px)',
+                    width: 0,
+                    height: 0,
+                    borderLeft: '0 solid transparent',
+                    borderRight: '60px solid transparent',
+                    borderBottom: '110px solid rgba(248,250,252,0.98)',
+                    filter: 'drop-shadow(0 0 16px rgba(248,250,252,0.9))',
+                  }}
+                />
+
+                {/* Accent sail */}
+                <div
+                  className="absolute"
+                  style={{
+                    left: '50%',
+                    bottom: '24px',
+                    transform: 'translateX(-40px)',
+                    width: 0,
+                    height: 0,
+                    borderLeft: '40px solid transparent',
+                    borderRight: '0 solid transparent',
+                    borderBottom: '85px solid rgba(56,189,248,0.9)',
+                    filter: 'drop-shadow(0 0 14px rgba(56,189,248,0.8))',
+                  }}
+                />
+
+                {/* Subtle reflection on waterline */}
+                <div
+                  className="absolute rounded-full bg-white/50 blur-sm"
+                  style={{
+                    left: '50%',
+                    bottom: '0px',
+                    transform: 'translateX(-50%)',
+                    width: '72%',
+                    height: '8px',
+                  }}
+                />
+              </div>
             </motion.div>
             
             {/* Animated waves */}
-            <div className="absolute bottom-0 left-0 right-0 h-40 overflow-hidden">
+            <div className="absolute bottom-0 left-0 right-0 h-32 sm:h-40 overflow-hidden">
               <motion.div
                 className="absolute bottom-0 w-[200%] h-full"
                 style={{
