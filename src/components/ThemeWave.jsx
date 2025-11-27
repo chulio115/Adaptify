@@ -175,46 +175,96 @@ export default function ThemeWave() {
         )}
       </AnimatePresence>
 
-      {/* 5x Click: Matrix Rain */}
+      {/* 5x Click: Matrix Rain - POLISHED */}
       <AnimatePresence>
         {easterEgg === 'matrix' && (
           <motion.div
-            className="fixed inset-0 z-[10000] pointer-events-none overflow-hidden"
+            className="fixed inset-0 z-[10000] overflow-hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            style={{ background: 'rgba(0, 0, 0, 0.9)' }}
+            transition={{ duration: 0.5 }}
+            style={{ background: '#000000' }}
           >
-            {/* Matrix rain columns */}
-            {[...Array(30)].map((_, i) => (
+            {/* Matrix rain columns - more dense */}
+            {[...Array(50)].map((_, i) => {
+              const speed = 1.5 + Math.random() * 2;
+              const delay = Math.random() * 2;
+              const chars = [...Array(30)].map(() => 
+                String.fromCharCode(0x30A0 + Math.random() * 96)
+              ).join('');
+              
+              return (
+                <motion.div
+                  key={i}
+                  className="absolute font-mono text-xs sm:text-sm whitespace-pre leading-none"
+                  style={{
+                    left: `${(i / 50) * 100}%`,
+                    color: '#00ff00',
+                    textShadow: '0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #008800',
+                    writingMode: 'vertical-rl',
+                    opacity: 0.6 + Math.random() * 0.4,
+                  }}
+                  initial={{ y: '-100%' }}
+                  animate={{ y: '120vh' }}
+                  transition={{
+                    duration: speed,
+                    delay: delay,
+                    repeat: Infinity,
+                    ease: 'linear',
+                  }}
+                >
+                  {chars}
+                </motion.div>
+              );
+            })}
+            
+            {/* Brighter "lead" characters */}
+            {[...Array(20)].map((_, i) => (
               <motion.div
-                key={i}
-                className="absolute top-0 text-green-500 font-mono text-sm whitespace-pre leading-tight"
+                key={`lead-${i}`}
+                className="absolute font-mono text-lg font-bold"
                 style={{
-                  left: `${(i / 30) * 100}%`,
-                  textShadow: '0 0 8px #00ff00, 0 0 16px #00ff00',
-                  writingMode: 'vertical-rl',
+                  left: `${(i / 20) * 100 + Math.random() * 2}%`,
+                  color: '#ffffff',
+                  textShadow: '0 0 20px #00ff00, 0 0 40px #00ff00',
                 }}
-                initial={{ y: '-100%' }}
-                animate={{ y: '100vh' }}
+                initial={{ y: -50 }}
+                animate={{ y: '120vh' }}
                 transition={{
-                  duration: 2 + Math.random() * 2,
-                  delay: Math.random() * 1,
-                  repeat: 2,
+                  duration: 2 + Math.random(),
+                  delay: Math.random() * 3,
+                  repeat: Infinity,
                   ease: 'linear',
                 }}
               >
-                {[...Array(20)].map(() => 
-                  String.fromCharCode(0x30A0 + Math.random() * 96)
-                ).join('')}
+                {String.fromCharCode(0x30A0 + Math.random() * 96)}
               </motion.div>
             ))}
             
-            {/* Center glow */}
-            <div 
-              className="absolute inset-0 flex items-center justify-center"
+            {/* Center glow pulse */}
+            <motion.div 
+              className="absolute inset-0"
               style={{
-                background: 'radial-gradient(circle, rgba(0,255,0,0.1) 0%, transparent 50%)',
+                background: 'radial-gradient(circle, rgba(0,255,0,0.15) 0%, transparent 60%)',
+              }}
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+            
+            {/* Scanline effect */}
+            <div 
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px)',
+              }}
+            />
+            
+            {/* Vignette */}
+            <div 
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: 'radial-gradient(circle, transparent 40%, rgba(0,0,0,0.8) 100%)',
               }}
             />
           </motion.div>

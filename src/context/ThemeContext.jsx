@@ -42,6 +42,7 @@ export function ThemeProvider({ children }) {
   // Easter eggs
   const [clickCount, setClickCount] = useState(0);
   const [easterEgg, setEasterEgg] = useState(null);
+  const [matrixWasShown, setMatrixWasShown] = useState(false); // Unlocks boat on language click
   const clickResetTimer = useRef(null);
 
   // Apply theme to DOM immediately
@@ -71,12 +72,21 @@ export function ThemeProvider({ children }) {
       setTimeout(() => setEasterEgg(null), 1500);
     } else if (clickCount === 5) {
       setEasterEgg('matrix');
+      setMatrixWasShown(true); // Unlock the boat!
       setTimeout(() => setEasterEgg(null), 4000);
-    } else if (clickCount === 7) {
-      setEasterEgg('katamaran');
-      setTimeout(() => setEasterEgg(null), 5000);
     }
   }, [clickCount]);
+
+  // Function to trigger boat (called from LanguageToggle after matrix)
+  const triggerBoat = useCallback(() => {
+    if (matrixWasShown) {
+      setEasterEgg('katamaran');
+      setMatrixWasShown(false); // Only works once
+      setTimeout(() => setEasterEgg(null), 5000);
+      return true; // Boat was shown
+    }
+    return false; // Boat not unlocked
+  }, [matrixWasShown]);
 
   // THE toggle function - uses View Transitions API for magic!
   const toggleTheme = useCallback(async (event) => {
@@ -147,6 +157,8 @@ export function ThemeProvider({ children }) {
       toggleTheme,
       waveState,
       easterEgg,
+      triggerBoat, // For language toggle to trigger boat after matrix
+      matrixWasShown,
       WAVE_DURATION,
     }}>
       {children}

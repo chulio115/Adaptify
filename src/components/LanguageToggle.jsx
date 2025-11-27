@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useTheme } from '../context/ThemeContext';
 
 /**
  * LanguageToggle - Premium Language Switcher
@@ -8,7 +9,7 @@ import { useTranslation } from 'react-i18next';
  * - Rotating globe icon with glow
  * - Smooth text crossfade (250ms)
  * - Headlines get blur → sharp effect
- * - Easter Egg: Alt+Click = Konfetti
+ * - SECRET: After Matrix (5x theme toggle), click here for ⛵
  * - Mobile optimized
  */
 
@@ -28,6 +29,7 @@ const ConfettiParticle = ({ emoji, delay, x }) => (
 
 export default function LanguageToggle() {
   const { i18n, t } = useTranslation();
+  const { triggerBoat, matrixWasShown } = useTheme();
   const [isHovered, setIsHovered] = useState(false);
   const [showGlow, setShowGlow] = useState(false);
   const [isRotating, setIsRotating] = useState(false);
@@ -76,6 +78,12 @@ export default function LanguageToggle() {
 
   // Handle language toggle
   const toggleLanguage = useCallback((e) => {
+    // SECRET: After Matrix, trigger the boat! 🚢
+    if (matrixWasShown) {
+      triggerBoat();
+      // Still switch language too
+    }
+
     // Easter Egg: Alt+Click
     if (e.altKey) {
       setShowEasterEgg(true);
@@ -116,7 +124,7 @@ export default function LanguageToggle() {
     setTimeout(() => {
       setIsRotating(false);
     }, 600);
-  }, [isGerman, i18n, spawnConfetti, triggerHeadlineEffect]);
+  }, [isGerman, i18n, spawnConfetti, triggerHeadlineEffect, matrixWasShown, triggerBoat]);
 
   return (
     <>
