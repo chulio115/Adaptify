@@ -79,21 +79,28 @@ function useFadeIn() {
 }
 
 /**
- * Tools/Partners Data
- * type: 'tool' = Software tools we use
- * type: 'client' = Customer logos (for later)
- * Easy to swap tool icons with client logos later
+ * Tech Stack Tools with CDN logos
+ * Using Simple Icons CDN for consistent, high-quality SVG logos
  */
-const toolsAndPartners = [
-  { name: 'Atlassian', color: '#0052CC', type: 'tool' },
-  { name: 'Jira', color: '#0052CC', type: 'tool' },
-  { name: 'Confluence', color: '#0052CC', type: 'tool' },
-  { name: 'Trello', color: '#0079BF', type: 'tool' },
-  { name: 'Jira Service', color: '#0052CC', type: 'tool' },
-  { name: 'Windsurf', color: '#00D4AA', type: 'tool' },
-  { name: 'Slack', color: '#4A154B', type: 'tool' },
-  { name: 'Teams', color: '#6264A7', type: 'tool' },
-  { name: 'GitHub', color: '#ffffff', type: 'tool' },
+const techStackTools = [
+  { name: 'Figma', logo: 'https://cdn.simpleicons.org/figma/white' },
+  { name: 'React', logo: 'https://cdn.simpleicons.org/react/61DAFB' },
+  { name: 'Tailwind CSS', logo: 'https://cdn.simpleicons.org/tailwindcss/06B6D4' },
+  { name: 'GitHub', logo: 'https://cdn.simpleicons.org/github/white' },
+  { name: 'GitHub Copilot', logo: 'https://cdn.simpleicons.org/githubcopilot/white' },
+  { name: 'Supabase', logo: 'https://cdn.simpleicons.org/supabase/3FCF8E' },
+  { name: 'MongoDB', logo: 'https://cdn.simpleicons.org/mongodb/47A248' },
+  { name: 'Netlify', logo: 'https://cdn.simpleicons.org/netlify/00C7B7' },
+  { name: 'Vercel', logo: 'https://cdn.simpleicons.org/vercel/white' },
+  { name: 'Stripe', logo: 'https://cdn.simpleicons.org/stripe/635BFF' },
+  { name: 'Zapier', logo: 'https://cdn.simpleicons.org/zapier/FF4A00' },
+  { name: 'Notion', logo: 'https://cdn.simpleicons.org/notion/white' },
+  { name: 'Slack', logo: 'https://cdn.simpleicons.org/slack/4A154B' },
+  { name: 'Jira', logo: 'https://cdn.simpleicons.org/jira/0052CC' },
+  { name: 'Confluence', logo: 'https://cdn.simpleicons.org/confluence/172B4D' },
+  { name: 'Trello', logo: 'https://cdn.simpleicons.org/trello/0052CC' },
+  { name: 'Webflow', logo: 'https://cdn.simpleicons.org/webflow/4353FF' },
+  { name: 'Zoho', logo: 'https://cdn.simpleicons.org/zoho/C8202B' },
 ];
 
 export default function LandingPage() {
@@ -271,30 +278,74 @@ export default function LandingPage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          TOOLS SECTION - Auto-scrolling carousel
-          Easy to swap with client logos later by changing type filter
+          TECH STACK SECTION - Dual row infinite scrolling logos
       ═══════════════════════════════════════════════════════════════ */}
-      <section className="py-16 border-y border-white/5 bg-white/[0.02] overflow-hidden">
-        <p className="text-center text-xs uppercase tracking-[0.3em] text-gray-600 mb-10">
-          Wir arbeiten mit den besten Tools
-        </p>
+      <section className="py-16 pb-8 overflow-hidden">
+        <div className="text-center mb-10">
+          {/* Badge like other sections */}
+          <span className="text-xs uppercase tracking-[0.3em] text-cyan-400 mb-4 block">
+            Unser Tech Stack
+          </span>
+          
+          {/* Main Heading */}
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">
+            Wir arbeiten mit den besten Tools
+          </h2>
+          
+          {/* Subheading */}
+          <p className="text-gray-400 max-w-2xl mx-auto px-6">
+            Von der Planung bis zur automatisierten Live-Schaltung – wir nutzen genau die Tools, die dein Projekt schneller und besser machen.
+          </p>
+        </div>
         
-        <div className="relative">
-          <div className="flex gap-12 animate-scroll">
-            {[...toolsAndPartners, ...toolsAndPartners].map((tool, i) => (
-              <div 
-                key={i} 
-                className="flex-shrink-0 flex items-center gap-3 px-6 py-3 bg-white/5 rounded-xl border border-white/5 hover:border-white/20 hover:bg-white/[0.08] transition-all duration-300"
-              >
+        {/* Dual Row Scrolling Logos - contained width */}
+        <div className="max-w-6xl mx-auto px-6 relative">
+          {/* Gradient Fades */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#030303] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#030303] to-transparent z-10 pointer-events-none" />
+          
+          {/* Row 1 - scrolls left */}
+          <div className="overflow-hidden mb-4">
+            <div className="animate-scroll hover:[animation-play-state:paused]">
+              {[...techStackTools, ...techStackTools].map((tool, i) => (
                 <div 
-                  className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm"
-                  style={{ backgroundColor: tool.color + '15', color: tool.color }}
+                  key={`row1-${i}`} 
+                  className="inline-flex items-center gap-3 mx-8 group"
+                  title={tool.name}
                 >
-                  {tool.name.substring(0, 2).toUpperCase()}
+                  <img 
+                    src={tool.logo} 
+                    alt={tool.name}
+                    className="w-8 h-8 object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+                  />
+                  <span className="text-base text-gray-400 group-hover:text-white transition-colors whitespace-nowrap font-medium">
+                    {tool.name}
+                  </span>
                 </div>
-                <span className="text-sm text-gray-300 whitespace-nowrap font-medium">{tool.name}</span>
-              </div>
-            ))}
+              ))}
+            </div>
+          </div>
+          
+          {/* Row 2 - scrolls right (reverse) */}
+          <div className="overflow-hidden">
+            <div className="animate-scroll-reverse hover:[animation-play-state:paused]">
+              {[...techStackTools.slice().reverse(), ...techStackTools.slice().reverse()].map((tool, i) => (
+                <div 
+                  key={`row2-${i}`} 
+                  className="inline-flex items-center gap-3 mx-8 group"
+                  title={tool.name}
+                >
+                  <img 
+                    src={tool.logo} 
+                    alt={tool.name}
+                    className="w-8 h-8 object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+                  />
+                  <span className="text-base text-gray-400 group-hover:text-white transition-colors whitespace-nowrap font-medium">
+                    {tool.name}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

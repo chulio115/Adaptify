@@ -15,21 +15,41 @@ body {
   padding: 0;
 }
 
-/* Partner Carousel Animation */
+/* Infinite Scroll Animation - seamless loop */
 @keyframes scroll {
-  0% {
+  from {
     transform: translateX(0);
   }
-  100% {
+  to {
     transform: translateX(-50%);
   }
 }
 
-.animate-scroll {
-  animation: scroll 30s linear infinite;
+@keyframes scroll-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
-.animate-scroll:hover {
+.animate-scroll {
+  display: flex;
+  width: max-content;
+  animation: scroll 60s linear infinite;
+  will-change: transform;
+}
+
+.animate-scroll-reverse {
+  display: flex;
+  width: max-content;
+  animation: scroll-reverse 60s linear infinite;
+  will-change: transform;
+}
+
+.animate-scroll:hover,
+.animate-scroll-reverse:hover {
   animation-play-state: paused;
 }
 
@@ -89,4 +109,14 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+/* Hide scrollbar for tech stack section */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
