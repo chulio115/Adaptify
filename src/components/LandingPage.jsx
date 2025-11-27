@@ -405,20 +405,20 @@ export default function LandingPage() {
             {[
               { 
                 icon: Globe, 
-                title: 'Veraltete oder keine Webseite?', 
-                desc: 'Eure Konkurrenz hat moderne Seiten & Apps. Ihr verliert Kunden, bevor sie euch überhaupt finden.',
+                titleKey: 'problem.cards.website.title', 
+                descKey: 'problem.cards.website.desc',
                 gradient: 'from-red-500/20 to-orange-500/20'
               },
               { 
                 icon: FileSpreadsheet, 
-                title: 'Manuelle Prozesse überall?', 
-                desc: 'Excel-Listen, Copy-Paste, E-Mail-Chaos. Jede Aufgabe dauert 3x so lang wie nötig.',
+                titleKey: 'problem.cards.manual.title', 
+                descKey: 'problem.cards.manual.desc',
                 gradient: 'from-orange-500/20 to-yellow-500/20'
               },
               { 
                 icon: Workflow, 
-                title: 'Keine Automatisierung?', 
-                desc: 'Während andere KI nutzen, macht ihr alles von Hand. Ineffizienz kostet bares Geld.',
+                titleKey: 'problem.cards.automation.title', 
+                descKey: 'problem.cards.automation.desc',
                 gradient: 'from-yellow-500/20 to-red-500/20'
               }
             ].map((item, i) => (
@@ -429,8 +429,8 @@ export default function LandingPage() {
                 <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 bg-gradient-to-br ${item.gradient} border border-red-500/20`}>
                   <item.icon className="w-7 h-7 text-red-400" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
-                <p className="text-gray-400 leading-relaxed">{item.desc}</p>
+                <h3 className="text-xl font-semibold mb-3">{t(item.titleKey)}</h3>
+                <p className="text-gray-400 leading-relaxed">{t(item.descKey)}</p>
               </div>
             ))}
           </div>
@@ -597,10 +597,10 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { ref: stat1.ref, value: stat1.count, suffix: '%', label: 'schnellere Prozesse', icon: Zap },
-              { ref: stat2.ref, value: 5, suffix: '+', label: 'Jahre Erfahrung', icon: Calendar },
-              { ref: stat3.ref, value: stat3.count, prefix: '2-', label: 'Wochen Setup', icon: Clock },
-              { ref: null, value: 100, suffix: '%', label: 'maßgeschneidert', icon: CheckCircle2 }
+              { ref: stat1.ref, value: stat1.count, suffix: '%', labelKey: 'stats.faster', icon: Zap },
+              { ref: stat2.ref, value: 5, suffix: '+', labelKey: 'stats.experience', icon: Calendar },
+              { ref: stat3.ref, value: stat3.count, prefix: '2-', labelKey: 'stats.setup', icon: Clock },
+              { ref: null, value: 100, suffix: '%', labelKey: 'stats.custom', icon: CheckCircle2 }
             ].map((stat, i) => (
               <div 
                 key={i} 
@@ -613,7 +613,7 @@ export default function LandingPage() {
                 <div className="text-4xl md:text-5xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300">
                   {stat.prefix}{stat.value}{stat.suffix}
                 </div>
-                <div className="text-gray-500 text-sm uppercase tracking-wider">{stat.label}</div>
+                <div className="text-gray-500 text-sm uppercase tracking-wider">{t(stat.labelKey)}</div>
               </div>
             ))}
           </div>

@@ -18,33 +18,29 @@
     "learnMore": "Mehr erfahren"
   },
   "stats": {
-    "stat1": {
-      "value": "72%",
-      "label": "aller Mittelständler",
-      "sublabel": "scheitern an ihrer Digitalisierung"
-    },
-    "stat2": {
-      "value": "6-12",
-      "label": "Monate",
-      "sublabel": "dauern typische IT-Projekte"
-    },
-    "stat3": {
-      "value": "83%",
-      "label": "der Budgets",
-      "sublabel": "werden überschritten"
-    }
+    "faster": "schnellere Prozesse",
+    "experience": "Jahre Erfahrung",
+    "setup": "Wochen Setup",
+    "custom": "maßgeschneidert"
   },
   "problem": {
     "badge": "Das Problem",
     "title": "Kommt euch das bekannt vor?",
     "subtitle": "Die meisten KMUs verlieren täglich Zeit und Geld – weil niemand alles zusammenbringt.",
-    "problems": [
-      "Die Agentur hat eine schicke Webseite gebaut – aber sie bringt keine Kunden.",
-      "Der IT-Dienstleister hat ein CRM eingeführt – aber niemand nutzt es.",
-      "Das KI-Projekt hat viel gekostet – aber wenig geliefert."
-    ],
-    "quote": "Mittelständler brauchen keine fancy Buzzwords. Sie brauchen Lösungen, die am Ende des Tages wirklich funktionieren.",
-    "quoteAuthor": "– Das Adaptify-Team"
+    "cards": {
+      "website": {
+        "title": "Veraltete oder keine Webseite?",
+        "desc": "Eure Konkurrenz hat moderne Seiten & Apps. Ihr verliert Kunden, bevor sie euch überhaupt finden."
+      },
+      "manual": {
+        "title": "Manuelle Prozesse überall?",
+        "desc": "Excel-Listen, Copy-Paste, E-Mail-Chaos. Jede Aufgabe dauert 3x so lang wie nötig."
+      },
+      "automation": {
+        "title": "Keine Automatisierung?",
+        "desc": "Während andere KI nutzen, macht ihr alles von Hand. Ineffizienz kostet bares Geld."
+      }
+    }
   },
   "tools": {
     "badge": "Unsere Lösung",
@@ -166,31 +162,31 @@
     },
     "mission": {
       "badge": "Unsere Mission",
-      "title": "Warum wir das machen",
-      "text": "Wir haben gesehen, wie Digitalisierung im Mittelstand scheitert: Teure Berater, komplizierte Software, Projekte ohne Ende. Das muss nicht sein. Wir bauen Lösungen, die funktionieren – pragmatisch, schnell, bezahlbar.",
-      "values": [
-        {
-          "title": "Pragmatisch statt perfekt",
-          "desc": "Lieber 80% Lösung in 2 Wochen als 100% Lösung nie."
+      "title": "Deshalb gibt es Adaptify",
+      "subtitle": "Wir machen maßgeschneiderte Digitalisierung für KMUs bezahlbar und menschlich. Keine 08/15-Templates – sondern genau das, was euer Unternehmen braucht.",
+      "values": {
+        "custom": {
+          "title": "Maßgeschneidert",
+          "desc": "Jedes Unternehmen ist anders. Wir bauen keine Websites von der Stange, sondern Lösungen, die zu eurem Geschäft passen."
         },
-        {
-          "title": "Ehrlich statt verkäuferisch",
-          "desc": "Wir sagen euch, wenn etwas keinen Sinn macht."
+        "honest": {
+          "title": "Ehrlich & Fair",
+          "desc": "Wir verkaufen euch nichts, was ihr nicht braucht. Und wir sagen euch vorher, was es kostet – ohne böse Überraschungen."
         },
-        {
-          "title": "Partner statt Dienstleister",
-          "desc": "Wir denken mit – auch über den Projektrahmen hinaus."
+        "fast": {
+          "title": "Schnell & Persönlich",
+          "desc": "Keine Agentur-Bürokratie. Ihr redet direkt mit uns. Und wir liefern in Wochen, nicht Monaten."
         },
-        {
-          "title": "Langfristig an eurer Seite",
-          "desc": "Nach dem Go-Live sind wir weiter für euch da – mit Support, Optimierung und neuen Ideen."
+        "partner": {
+          "title": "An eurer Seite",
+          "desc": "Nach dem Go-Live lassen wir euch nicht allein. Wir betreuen eure Lösungen nachhaltig weiter."
         }
-      ]
+      }
     },
     "team": {
-      "badge": "Unser Team",
+      "badge": "Das Team",
       "title": "Die Menschen hinter Adaptify",
-      "subtitle": "Klein, aber mit vereinter Expertise aus Tech, Design und Business.",
+      "subtitle": "Keine anonyme Agentur – echte Menschen mit echten Geschichten.",
       "hiring": {
         "badge": "Verstärkung gesucht!",
         "title": "Du passt zu uns?",

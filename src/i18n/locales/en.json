@@ -18,33 +18,29 @@
     "learnMore": "See how"
   },
   "stats": {
-    "stat1": {
-      "value": "72%",
-      "label": "of SMBs",
-      "sublabel": "fail at going digital"
-    },
-    "stat2": {
-      "value": "6-12",
-      "label": "months",
-      "sublabel": "is how long typical IT projects drag on"
-    },
-    "stat3": {
-      "value": "83%",
-      "label": "of budgets",
-      "sublabel": "get blown"
-    }
+    "faster": "faster processes",
+    "experience": "years experience",
+    "setup": "weeks setup",
+    "custom": "custom-built"
   },
   "problem": {
     "badge": "The Problem",
     "title": "Sound familiar?",
     "subtitle": "Most SMBs lose time and money every day – because nobody connects the dots.",
-    "problems": [
-      "The agency built a slick website – but it's not bringing in customers.",
-      "IT rolled out a new CRM – but nobody's using it.",
-      "That AI project cost a fortune – and delivered... not much."
-    ],
-    "quote": "SMBs don't need fancy jargon. They need stuff that works when the day is done.",
-    "quoteAuthor": "– The Adaptify Team"
+    "cards": {
+      "website": {
+        "title": "Outdated or no website?",
+        "desc": "Your competition has modern sites & apps. You're losing customers before they even find you."
+      },
+      "manual": {
+        "title": "Manual processes everywhere?",
+        "desc": "Excel sheets, copy-paste, email chaos. Every task takes 3x longer than it should."
+      },
+      "automation": {
+        "title": "No automation?",
+        "desc": "While others use AI, you're doing everything by hand. Inefficiency costs real money."
+      }
+    }
   },
   "tools": {
     "badge": "Our Approach",
@@ -166,31 +162,31 @@
     },
     "mission": {
       "badge": "Our Mission",
-      "title": "Why we do this",
-      "text": "We've watched digital transformation fail for too many SMBs: overpriced consultants, bloated software, projects that never end. It doesn't have to be that way. We build things that work – pragmatic, fast, fair.",
-      "values": [
-        {
-          "title": "Pragmatic beats perfect",
-          "desc": "An 80% solution in 2 weeks beats a 100% solution that never ships."
+      "title": "That's why Adaptify exists",
+      "subtitle": "We make custom digital solutions for SMBs affordable and human. No cookie-cutter templates – just exactly what your business needs.",
+      "values": {
+        "custom": {
+          "title": "Custom-Built",
+          "desc": "Every business is different. We don't build off-the-shelf websites – we build solutions that fit your business."
         },
-        {
-          "title": "Straight talk",
-          "desc": "We'll tell you when something won't work – before you spend the money."
+        "honest": {
+          "title": "Honest & Fair",
+          "desc": "We won't sell you what you don't need. And we'll tell you what it costs upfront – no nasty surprises."
         },
-        {
-          "title": "Partner, not vendor",
-          "desc": "We think with you, not just for you."
+        "fast": {
+          "title": "Fast & Personal",
+          "desc": "No agency bureaucracy. You talk directly to us. And we deliver in weeks, not months."
         },
-        {
-          "title": "We stick around",
-          "desc": "After launch, we're still here – support, optimization, fresh ideas."
+        "partner": {
+          "title": "By Your Side",
+          "desc": "After go-live, we don't leave you hanging. We continue to support your solutions sustainably."
         }
-      ]
+      }
     },
     "team": {
       "badge": "The Team",
       "title": "The People Behind Adaptify",
-      "subtitle": "Small crew. Big combined expertise in tech, design, and business.",
+      "subtitle": "Not an anonymous agency – real people with real stories.",
       "hiring": {
         "badge": "We're Hiring",
         "title": "Think you'd fit?",

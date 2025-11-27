@@ -355,27 +355,26 @@ export default function UeberUns() {
       >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <span className="text-xs uppercase tracking-[0.3em] text-violet-400 mb-4 block">Unsere Mission</span>
-            <h2 className="text-2xl md:text-4xl font-bold mb-6">Deshalb gibt es Adaptify</h2>
+            <span className="text-xs uppercase tracking-[0.3em] text-violet-400 mb-4 block">{t('about.mission.badge')}</span>
+            <h2 className="text-2xl md:text-4xl font-bold mb-6">{t('about.mission.title')}</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Wir machen <strong className="text-white">maßgeschneiderte Digitalisierung für KMUs</strong> bezahlbar und menschlich. 
-              Keine 08/15-Templates – sondern genau das, was euer Unternehmen braucht.
+              {t('about.mission.subtitle')}
             </p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: Target, title: 'Maßgeschneidert', desc: 'Jedes Unternehmen ist anders. Wir bauen keine Websites von der Stange, sondern Lösungen, die zu eurem Geschäft passen.', gradient: 'from-cyan-500 to-cyan-600' },
-              { icon: Shield, title: 'Ehrlich & Fair', desc: 'Wir verkaufen euch nichts, was ihr nicht braucht. Und wir sagen euch vorher, was es kostet – ohne böse Überraschungen.', gradient: 'from-violet-500 to-violet-600' },
-              { icon: Zap, title: 'Schnell & Persönlich', desc: 'Keine Agentur-Bürokratie. Ihr redet direkt mit uns. Und wir liefern in Wochen, nicht Monaten.', gradient: 'from-fuchsia-500 to-fuchsia-600' },
-              { icon: Heart, title: 'An eurer Seite', desc: 'Nach dem Go-Live lassen wir euch nicht allein. Wir betreuen eure Lösungen nachhaltig weiter – ohne dabei zur Last zu werden.', gradient: 'from-emerald-500 to-emerald-600' }
+              { icon: Target, titleKey: 'about.mission.values.custom.title', descKey: 'about.mission.values.custom.desc', gradient: 'from-cyan-500 to-cyan-600' },
+              { icon: Shield, titleKey: 'about.mission.values.honest.title', descKey: 'about.mission.values.honest.desc', gradient: 'from-violet-500 to-violet-600' },
+              { icon: Zap, titleKey: 'about.mission.values.fast.title', descKey: 'about.mission.values.fast.desc', gradient: 'from-fuchsia-500 to-fuchsia-600' },
+              { icon: Heart, titleKey: 'about.mission.values.partner.title', descKey: 'about.mission.values.partner.desc', gradient: 'from-emerald-500 to-emerald-600' }
             ].map((value, i) => (
               <div key={i} className="group bg-white/5 border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-all duration-300">
                 <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${value.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
                   <value.icon className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{value.title}</h3>
-                <p className="text-gray-400 leading-relaxed">{value.desc}</p>
+                <h3 className="text-xl font-semibold mb-3">{t(value.titleKey)}</h3>
+                <p className="text-gray-400 leading-relaxed">{t(value.descKey)}</p>
               </div>
             ))}
           </div>
@@ -391,9 +390,9 @@ export default function UeberUns() {
       >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <span className="text-xs uppercase tracking-[0.3em] text-violet-400 mb-4 block">Das Team</span>
-            <h2 className="text-2xl md:text-4xl font-bold mb-4">Die Menschen hinter Adaptify</h2>
-            <p className="text-gray-500 max-w-xl mx-auto">Keine anonyme Agentur – echte Menschen mit echten Geschichten.</p>
+            <span className="text-xs uppercase tracking-[0.3em] text-violet-400 mb-4 block">{t('about.team.badge')}</span>
+            <h2 className="text-2xl md:text-4xl font-bold mb-4">{t('about.team.title')}</h2>
+            <p className="text-gray-500 max-w-xl mx-auto">{t('about.team.subtitle')}</p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
