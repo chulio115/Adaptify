@@ -220,6 +220,9 @@ export default function LandingPage() {
               <a href="#problem" className="text-sm text-gray-300 hover:text-white transition-colors">
                 {t('nav.problem')}
               </a>
+              <a href="#realitaet" className="text-sm text-gray-300 hover:text-white transition-colors">
+                {t('nav.reality')}
+              </a>
               <a href="#leistungen" className="text-sm text-gray-300 hover:text-white transition-colors">
                 {t('nav.services')}
               </a>
@@ -278,6 +281,13 @@ export default function LandingPage() {
               className="text-lg text-white hover:text-cyan-400 transition-colors py-3 px-4 rounded-xl hover:bg-white/5"
             >
               {t('nav.problem')}
+            </a>
+            <a 
+              href="#realitaet" 
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-lg text-white hover:text-cyan-400 transition-colors py-3 px-4 rounded-xl hover:bg-white/5"
+            >
+              {t('nav.reality')}
             </a>
             <a 
               href="#leistungen" 
@@ -441,6 +451,7 @@ export default function LandingPage() {
           (Reused from Über Uns, directly after Problem)
       ═══════════════════════════════════════════════════════════════ */}
       <section
+        id="realitaet"
         className="py-20 md:py-24 px-6 transition-all duration-1000 delay-300"
       >
         <div className="max-w-6xl mx-auto">
