@@ -154,9 +154,16 @@
   },
   "about": {
     "badge": "Our Story",
-    "title": "Digital done right for SMBs –",
-    "titleHighlight": "by people who actually get it.",
-    "subtitle": "We're a small, focused team of digital natives. One mission: give SMBs the same digital firepower that the big players have.",
+    "hero": {
+      "title": "Digital for SMBs –",
+      "titleHighlight": "by people who get it",
+      "subtitle": "We grew up in the SMB world ourselves. We know what it's like when day-to-day business leaves no time for digital projects. That's why we take care of it – pragmatic, affordable, no buzzword bingo."
+    },
+    "reality": {
+      "badge": "Reality Check",
+      "title": "Let's be honest: Here's what SMB looks like",
+      "subtitle": "No fear-mongering – just facts you probably know yourself."
+    },
     "mission": {
       "badge": "Our Mission",
       "title": "Why we do this",

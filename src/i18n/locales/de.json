@@ -154,9 +154,16 @@
   },
   "about": {
     "badge": "Unsere Geschichte",
-    "title": "Digitalisierung für den Mittelstand –",
-    "titleHighlight": "von Menschen, die verstehen, was ihr braucht.",
-    "subtitle": "Wir sind ein kleines, aber feines Team aus Digital-Enthusiasten. Unser Ziel: Mittelständlern die gleichen digitalen Werkzeuge geben, die sonst nur Tech-Konzerne haben.",
+    "hero": {
+      "title": "Digitalisierung für den Mittelstand –",
+      "titleHighlight": "von Menschen, die verstehen",
+      "subtitle": "Wir sind selbst im Mittelstand aufgewachsen und wissen, wie es ist, wenn das Tagesgeschäft keine Zeit für Digitalprojekte lässt. Deshalb übernehmen wir das – pragmatisch, bezahlbar und ohne Buzzword-Bingo."
+    },
+    "reality": {
+      "badge": "Die Realität",
+      "title": "Mal ehrlich: So sieht's aus im Mittelstand",
+      "subtitle": "Keine Panikmache – nur Fakten, die ihr wahrscheinlich selbst kennt."
+    },
     "mission": {
       "badge": "Unsere Mission",
       "title": "Warum wir das machen",

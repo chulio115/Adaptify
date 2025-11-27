@@ -20,6 +20,7 @@ import {
 import logo from '../assets/logo.png';
 import ThemeToggle from '../components/ThemeToggle';
 import LanguageToggle from '../components/LanguageToggle';
+import { useTranslation } from 'react-i18next';
 
 /**
  * Fade In Animation Hook
@@ -48,6 +49,7 @@ function useFadeIn() {
  * Tonfall: Schwäbischer Handwerksmeister - nahbar, ehrlich, bodenständig
  */
 export default function UeberUns() {
+  const { t } = useTranslation();
   const heroFade = useFadeIn();
   const realityFade = useFadeIn();
   const storyFade = useFadeIn();
@@ -101,11 +103,11 @@ export default function UeberUns() {
             <ThemeToggle />
             <Link to="/" className="hidden sm:flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
               <ArrowLeft className="w-4 h-4" />
-              <span>Zurück zur Startseite</span>
+              <span>{t('nav.backToHome')}</span>
             </Link>
             <Link to="/" className="sm:hidden flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors text-sm">
               <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Zurück</span>
+              <span>{t('nav.back')}</span>
             </Link>
             {/* Language Toggle - dezent rechts */}
             <LanguageToggle />
@@ -126,20 +128,18 @@ export default function UeberUns() {
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <div className="inline-flex items-center gap-2 text-sm text-cyan-400 mb-6 border border-cyan-500/20 rounded-full px-4 py-2 bg-cyan-500/5">
             <Heart className="w-4 h-4" />
-            <span>Unsere Geschichte</span>
+            <span>{t('about.badge')}</span>
           </div>
           
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-            Digitalisierung für den Mittelstand –{' '}
+            {t('about.hero.title')}{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-400">
-              von Menschen, die verstehen
+              {t('about.hero.titleHighlight')}
             </span>
           </h1>
           
           <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            Wir sind selbst im Mittelstand aufgewachsen und wissen, wie es ist, 
-            wenn das Tagesgeschäft keine Zeit für Digitalprojekte lässt. 
-            Deshalb übernehmen wir das – pragmatisch, bezahlbar und ohne Buzzword-Bingo.
+            {t('about.hero.subtitle')}
           </p>
         </div>
       </section>
@@ -153,12 +153,12 @@ export default function UeberUns() {
       >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <span className="text-xs uppercase tracking-[0.3em] text-amber-400 mb-4 block">Die Realität</span>
+            <span className="text-xs uppercase tracking-[0.3em] text-amber-400 mb-4 block">{t('about.reality.badge')}</span>
             <h2 className="text-2xl md:text-4xl font-bold mb-4">
-              Mal ehrlich: So sieht's aus im Mittelstand
+              {t('about.reality.title')}
             </h2>
             <p className="text-gray-500 max-w-2xl mx-auto">
-              Keine Panikmache – nur Fakten, die ihr wahrscheinlich selbst kennt.
+              {t('about.reality.subtitle')}
             </p>
           </div>
           
