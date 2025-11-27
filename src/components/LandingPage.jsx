@@ -25,6 +25,8 @@ import {
 } from 'lucide-react';
 import logo from '../assets/logo.png';
 import ThemeToggle from './ThemeToggle';
+import LanguageToggle from './LanguageToggle';
+import { useTranslation } from 'react-i18next';
 
 // Counter Animation Hook
 function useCountUp(end, duration = 2000, start = 0) {
@@ -105,6 +107,7 @@ const techStackTools = [
 ];
 
 export default function LandingPage() {
+  const { t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -216,20 +219,20 @@ export default function LandingPage() {
           <div className="flex items-center gap-8">
             <nav className="hidden md:flex items-center gap-6">
               <a href="#problem" className="text-sm text-gray-300 hover:text-white transition-colors">
-                Problem
+                {t('nav.problem')}
               </a>
               <a href="#leistungen" className="text-sm text-gray-300 hover:text-white transition-colors">
-                Leistungen
+                {t('nav.services')}
               </a>
               <a href="#technologie" className="text-sm text-gray-300 hover:text-white transition-colors">
-                Technologie
+                {t('nav.technology')}
               </a>
               <Link to="/ueber-uns" className="text-sm text-gray-300 hover:text-white transition-colors">
-                Über uns
+                {t('nav.about')}
               </Link>
             </nav>
             
-            {/* Theme Toggle - the magic happens here */}
+            {/* Theme Toggle */}
             <ThemeToggle />
             
             {/* Desktop CTA */}
@@ -237,8 +240,18 @@ export default function LandingPage() {
               onClick={() => setModalOpen(true)}
               className="hidden md:block relative group bg-gradient-to-r from-cyan-500 to-violet-500 hover:from-cyan-400 hover:to-violet-400 px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/25"
             >
-              <span className="relative z-10">Gespräch buchen</span>
+              <span className="relative z-10">{t('nav.bookCall')}</span>
             </button>
+            
+            {/* Language Toggle - subtle, after CTA (desktop) */}
+            <div className="hidden md:block">
+              <LanguageToggle />
+            </div>
+            
+            {/* Mobile: Theme + Language + Menu */}
+            <div className="flex md:hidden items-center gap-1">
+              <LanguageToggle />
+            </div>
             
             {/* Mobile Menu Button */}
             <button 
@@ -265,35 +278,35 @@ export default function LandingPage() {
               onClick={() => setMobileMenuOpen(false)}
               className="text-lg text-white hover:text-cyan-400 transition-colors py-3 px-4 rounded-xl hover:bg-white/5"
             >
-              Problem
+              {t('nav.problem')}
             </a>
             <a 
               href="#leistungen" 
               onClick={() => setMobileMenuOpen(false)}
               className="text-lg text-white hover:text-cyan-400 transition-colors py-3 px-4 rounded-xl hover:bg-white/5"
             >
-              Leistungen
+              {t('nav.services')}
             </a>
             <a 
               href="#technologie" 
               onClick={() => setMobileMenuOpen(false)}
               className="text-lg text-white hover:text-cyan-400 transition-colors py-3 px-4 rounded-xl hover:bg-white/5"
             >
-              Technologie
+              {t('nav.technology')}
             </a>
             <Link 
               to="/ueber-uns" 
               onClick={() => setMobileMenuOpen(false)}
               className="text-lg text-white hover:text-cyan-400 transition-colors py-3 px-4 rounded-xl hover:bg-white/5"
             >
-              Über uns
+              {t('nav.about')}
             </Link>
             <div className="mt-4 pt-4 border-t border-white/10">
               <button 
                 onClick={() => { setModalOpen(true); setMobileMenuOpen(false); }}
                 className="w-full bg-gradient-to-r from-cyan-500 to-violet-500 hover:from-cyan-400 hover:to-violet-400 px-6 py-4 rounded-xl text-base font-semibold shadow-lg shadow-violet-500/20"
               >
-                Gespräch buchen
+                {t('nav.bookCall')}
               </button>
             </div>
           </nav>
@@ -320,26 +333,24 @@ export default function LandingPage() {
         <div className="max-w-5xl text-center relative z-10">
           <div className="mb-8 inline-flex items-center gap-3 text-sm text-gray-300 border border-white/10 rounded-full px-5 py-2.5 bg-white/5 backdrop-blur-sm">
             <Sparkles className="w-4 h-4 text-cyan-400" />
-            <span>Digitalisierung aus einer Hand – für ambitionierte Mittelständler</span>
+            <span>{t('hero.badge')}</span>
           </div>
           
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6 md:mb-8 tracking-tight">
-            Euer kompletter{' '}
+            {t('hero.title')}{' '}
             <span className="relative inline-block">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-violet-400 to-fuchsia-400">
-                Digitalisierungspartner
+                {t('hero.titleHighlight')}
               </span>
             </span>
             <br />
             <span className="text-gray-400 text-2xl sm:text-3xl md:text-5xl lg:text-6xl">
-              von der Webseite bis zur KI
+              {t('hero.subtitle2')}
             </span>
           </h1>
           
           <p className="text-lg md:text-xl lg:text-2xl text-gray-400 mb-8 md:mb-12 max-w-3xl mx-auto leading-relaxed px-2">
-            Keine halben Sachen. Wir bauen{' '}
-            <span className="text-white">Webseiten, Apps, Automationen & KI-Workflows</span>{' '}
-            – alles aus einer Hand.
+            {t('hero.subtitle')}
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -347,7 +358,7 @@ export default function LandingPage() {
               onClick={() => setModalOpen(true)}
               className="group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-cyan-500 to-violet-500 hover:from-cyan-400 hover:to-violet-400 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/25 hover:scale-105"
             >
-              <span className="hidden sm:inline">Kostenloses </span>Strategiegespräch
+              {t('hero.cta')}
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
             <button 
@@ -362,7 +373,7 @@ export default function LandingPage() {
         
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-500 animate-bounce">
-          <span className="text-xs">Entdecken</span>
+          <span className="text-xs">{t('hero.learnMore')}</span>
           <div className="w-6 h-10 border-2 border-gray-600 rounded-full flex justify-center pt-2">
             <div className="w-1 h-2 bg-gray-500 rounded-full" />
           </div>
@@ -381,12 +392,12 @@ export default function LandingPage() {
       >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <span className="text-xs uppercase tracking-[0.3em] text-red-400 mb-4 block">Das Problem</span>
+            <span className="text-xs uppercase tracking-[0.3em] text-red-400 mb-4 block">{t('problem.badge')}</span>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Kommt euch das bekannt vor?
+              {t('problem.title')}
             </h2>
             <p className="text-gray-500 max-w-xl mx-auto">
-              Die meisten KMUs verlieren täglich Zeit und Geld – weil niemand alles zusammenbringt.
+              {t('problem.subtitle')}
             </p>
           </div>
           
@@ -449,9 +460,9 @@ export default function LandingPage() {
         
         {/* Dual Row Scrolling Logos - contained width */}
         <div className="max-w-6xl mx-auto px-6 relative">
-          {/* Gradient Fades */}
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#030303] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#030303] to-transparent z-10 pointer-events-none" />
+          {/* Gradient Fades - theme aware */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none carousel-fade-left" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none carousel-fade-right" />
           
           {/* Row 1 - scrolls left */}
           <div className="overflow-hidden mb-4">
@@ -710,17 +721,16 @@ export default function LandingPage() {
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <span className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-cyan-400 mb-6">
             <Sparkles className="w-4 h-4" />
-            Jetzt durchstarten
+            {t('cta.badge')}
           </span>
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            Bereit für die komplette{' '}
+            {t('cta.title')}{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-400">
-              Digitalisierung?
+              {t('cta.titleHighlight')}
             </span>
           </h2>
           <p className="text-gray-400 text-xl mb-10 max-w-2xl mx-auto">
-            In 30 Minuten zeigen wir euch live, wie euer Business 2025+ aussehen kann – 
-            <span className="text-white"> mit Webseite, Automationen und KI.</span>
+            {t('cta.subtitle')}
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -728,13 +738,13 @@ export default function LandingPage() {
               onClick={() => setModalOpen(true)}
               className="group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-cyan-500 to-violet-500 hover:from-cyan-400 hover:to-violet-400 px-10 py-5 rounded-full text-lg font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-violet-500/25 hover:scale-105"
             >
-              Kostenloses Strategiegespräch buchen
+              {t('cta.button')}
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
           
           <p className="mt-8 text-sm text-gray-600">
-            ✓ Unverbindlich · ✓ Keine Kosten · ✓ Innerhalb von 24h Termin
+            {t('cta.note')}
           </p>
         </div>
       </section>

@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import logo from '../assets/logo.png';
 import ThemeToggle from '../components/ThemeToggle';
+import LanguageToggle from '../components/LanguageToggle';
 
 /**
  * Fade In Animation Hook
@@ -96,13 +97,18 @@ export default function UeberUns() {
             </div>
             <span className="text-xl font-bold tracking-tight">Adaptify</span>
           </Link>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-3">
             <ThemeToggle />
-            <Link to="/" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+            <Link to="/" className="hidden sm:flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
               <ArrowLeft className="w-4 h-4" />
-              <span className="hidden sm:inline">Zurück zur Startseite</span>
-              <span className="sm:hidden">Zurück</span>
+              <span>Zurück zur Startseite</span>
             </Link>
+            <Link to="/" className="sm:hidden flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors text-sm">
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>Zurück</span>
+            </Link>
+            {/* Language Toggle - dezent rechts */}
+            <LanguageToggle />
           </div>
         </div>
       </header>

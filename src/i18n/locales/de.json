@@ -1,0 +1,182 @@
+{
+  "nav": {
+    "problem": "Problem",
+    "services": "Leistungen",
+    "technology": "Technologie",
+    "about": "Über uns",
+    "bookCall": "Gespräch buchen",
+    "backToHome": "Zurück zur Startseite",
+    "back": "Zurück"
+  },
+  "hero": {
+    "badge": "Digitalisierung aus einer Hand – für ambitionierte Mittelständler",
+    "title": "Euer kompletter",
+    "titleHighlight": "Digitalisierungspartner",
+    "subtitle": "Keine halben Sachen. Wir bauen Webseiten, Apps, Automationen & KI-Workflows – alles aus einer Hand.",
+    "subtitle2": "von der Webseite bis zur KI",
+    "cta": "Kostenloses Erstgespräch",
+    "learnMore": "Mehr erfahren"
+  },
+  "stats": {
+    "stat1": {
+      "value": "72%",
+      "label": "aller Mittelständler",
+      "sublabel": "scheitern an ihrer Digitalisierung"
+    },
+    "stat2": {
+      "value": "6-12",
+      "label": "Monate",
+      "sublabel": "dauern typische IT-Projekte"
+    },
+    "stat3": {
+      "value": "83%",
+      "label": "der Budgets",
+      "sublabel": "werden überschritten"
+    }
+  },
+  "problem": {
+    "badge": "Das Problem",
+    "title": "Kommt euch das bekannt vor?",
+    "subtitle": "Die meisten KMUs verlieren täglich Zeit und Geld – weil niemand alles zusammenbringt.",
+    "problems": [
+      "Die Agentur hat eine schicke Webseite gebaut – aber sie bringt keine Kunden.",
+      "Der IT-Dienstleister hat ein CRM eingeführt – aber niemand nutzt es.",
+      "Das KI-Projekt hat viel gekostet – aber wenig geliefert."
+    ],
+    "quote": "Mittelständler brauchen keine fancy Buzzwords. Sie brauchen Lösungen, die am Ende des Tages wirklich funktionieren.",
+    "quoteAuthor": "– Das Adaptify-Team"
+  },
+  "tools": {
+    "badge": "Unsere Lösung",
+    "title": "Wir lösen das – mit den besten Tools",
+    "subtitle": "Wir setzen die Tools ein, mit denen Tech-Startups und Konzerne arbeiten – für euer KMU."
+  },
+  "services": {
+    "badge": "Unsere Leistungen",
+    "title": "Wir digitalisieren euer komplettes Business",
+    "subtitle": "Alles aus einer Hand – von der Webseite über Automatisierung bis zur KI. Kein Flickwerk, sondern ein System.",
+    "items": {
+      "web": {
+        "title": "Moderne Webseiten & Shops",
+        "desc": "Webflow, Shopify oder Custom – schnell, schön und konvertierend."
+      },
+      "automation": {
+        "title": "KI-gestützte Automatisierung",
+        "desc": "Workflows, die von selbst laufen – mehr Zeit fürs Kerngeschäft, weniger Routinearbeit."
+      },
+      "apps": {
+        "title": "Apps & Custom Software",
+        "desc": "Interne Tools, Kundenportale, individuelle Lösungen – professionell entwickelt, schnell geliefert."
+      },
+      "design": {
+        "title": "Design & Branding",
+        "desc": "Corporate Identity, UI/UX Design, Grafikdesign – ein Auftritt, der überzeugt."
+      },
+      "analytics": {
+        "title": "Daten & Analytics",
+        "desc": "Dashboards und Reports, die euch echte Insights liefern – keine Zahlenfriedhöfe."
+      },
+      "support": {
+        "title": "Betreuung & Support",
+        "desc": "Langfristiger Partner statt einmaliger Dienstleister – wir sind da, wenn ihr uns braucht."
+      }
+    }
+  },
+  "tech": {
+    "badge": "Tech Stack",
+    "title": "Unser moderner Tech-Stack 2025",
+    "subtitle": "Die besten Tools – perfekt kombiniert und KI-beschleunigt. Das macht uns zu eurem technologischen Vorsprung.",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "automation": "Automation",
+      "ai": "KI & ML",
+      "analytics": "Analytics",
+      "cloud": "Cloud"
+    }
+  },
+  "cta": {
+    "badge": "Jetzt durchstarten",
+    "title": "Bereit für die komplette",
+    "titleHighlight": "Digitalisierung?",
+    "subtitle": "In 30 Minuten zeigen wir euch live, wie euer Business 2025+ aussehen kann – mit Webseite, Automationen und KI.",
+    "button": "Kostenloses Strategiegespräch buchen",
+    "note": "✓ Unverbindlich · ✓ Keine Kosten · ✓ Innerhalb von 24h Termin"
+  },
+  "contact": {
+    "title": "Kostenloses Erstgespräch",
+    "subtitle": "Erzähl uns kurz von eurem Projekt – wir melden uns innerhalb von 24 Stunden.",
+    "form": {
+      "name": "Name",
+      "email": "E-Mail",
+      "phone": "Telefon (optional)",
+      "message": "Wie können wir euch helfen?",
+      "submit": "Anfrage senden",
+      "sending": "Wird gesendet..."
+    },
+    "success": {
+      "title": "Anfrage gesendet!",
+      "message": "Wir melden uns innerhalb von 24 Stunden bei euch."
+    },
+    "error": {
+      "title": "Ups, da ist was schiefgelaufen.",
+      "message": "Bitte versucht es erneut oder schreibt uns direkt eine E-Mail."
+    }
+  },
+  "footer": {
+    "tagline": "Digitalisierung für den Mittelstand – die wirklich funktioniert.",
+    "legal": {
+      "imprint": "Impressum",
+      "privacy": "Datenschutz"
+    },
+    "copyright": "Adaptify Labs. Alle Rechte vorbehalten."
+  },
+  "about": {
+    "badge": "Unsere Geschichte",
+    "title": "Digitalisierung für den Mittelstand –",
+    "titleHighlight": "von Menschen, die verstehen, was ihr braucht.",
+    "subtitle": "Wir sind ein kleines, aber feines Team aus Digital-Enthusiasten. Unser Ziel: Mittelständlern die gleichen digitalen Werkzeuge geben, die sonst nur Tech-Konzerne haben.",
+    "mission": {
+      "badge": "Unsere Mission",
+      "title": "Warum wir das machen",
+      "text": "Wir haben gesehen, wie Digitalisierung im Mittelstand scheitert: Teure Berater, komplizierte Software, Projekte ohne Ende. Das muss nicht sein. Wir bauen Lösungen, die funktionieren – pragmatisch, schnell, bezahlbar.",
+      "values": [
+        {
+          "title": "Pragmatisch statt perfekt",
+          "desc": "Lieber 80% Lösung in 2 Wochen als 100% Lösung nie."
+        },
+        {
+          "title": "Ehrlich statt verkäuferisch",
+          "desc": "Wir sagen euch, wenn etwas keinen Sinn macht."
+        },
+        {
+          "title": "Partner statt Dienstleister",
+          "desc": "Wir denken mit – auch über den Projektrahmen hinaus."
+        },
+        {
+          "title": "Langfristig an eurer Seite",
+          "desc": "Nach dem Go-Live sind wir weiter für euch da – mit Support, Optimierung und neuen Ideen."
+        }
+      ]
+    },
+    "team": {
+      "badge": "Unser Team",
+      "title": "Die Menschen hinter Adaptify",
+      "subtitle": "Klein, aber mit vereinter Expertise aus Tech, Design und Business.",
+      "hiring": {
+        "badge": "Verstärkung gesucht!",
+        "title": "Du passt zu uns?",
+        "text": "Wir wachsen und suchen Leute, die Bock haben, echte Probleme zu lösen.",
+        "button": "Initiativ bewerben"
+      }
+    },
+    "cta": {
+      "title": "Klingt nach dem Partner, den ihr sucht?",
+      "subtitle": "Lasst uns unverbindlich sprechen – wir freuen uns, euch kennenzulernen.",
+      "button": "Kostenloses Erstgespräch"
+    }
+  },
+  "language": {
+    "easter": "Yeah, we speak tech too."
+  }
+}
