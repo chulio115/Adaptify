@@ -180,7 +180,7 @@ export default function ThemeWave() {
         )}
       </AnimatePresence>
 
-      {/* 5x Click: Matrix Rain - MOBILE OPTIMIZED */}
+      {/* 5x Click: Matrix Rain - MOBILE & THEME OPTIMIZED */}
       <AnimatePresence>
         {easterEgg === 'matrix' && (
           <motion.div
@@ -189,7 +189,12 @@ export default function ThemeWave() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            style={{ background: '#000000' }}
+            style={{
+              // Semi-transparent, theme-friendly overlay so the page stays visible
+              background:
+                'radial-gradient(circle at center, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.4) 40%, transparent 85%)',
+              backdropFilter: 'blur(2px)',
+            }}
           >
             {/* Matrix rain columns - fewer on mobile for performance */}
             {[...Array(isMobile ? 20 : 50)].map((_, i) => {
@@ -206,12 +211,13 @@ export default function ThemeWave() {
                   className="absolute font-mono text-[10px] sm:text-sm whitespace-pre leading-none"
                   style={{
                     left: `${(i / columnCount) * 100}%`,
-                    color: '#00ff00',
-                    textShadow: isMobile 
-                      ? '0 0 8px #00ff00, 0 0 15px #008800'
-                      : '0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #008800',
+                    // Use theme accent cyan instead of neon green
+                    color: 'var(--accent-cyan)',
+                    textShadow: isMobile
+                      ? '0 0 8px var(--accent-cyan), 0 0 15px rgba(0,0,0,0.8)'
+                      : '0 0 10px var(--accent-cyan), 0 0 22px var(--accent-cyan), 0 0 32px rgba(0,0,0,0.9)',
                     writingMode: 'vertical-rl',
-                    opacity: 0.6 + Math.random() * 0.4,
+                    opacity: 0.45 + Math.random() * 0.35,
                   }}
                   initial={{ y: '-100%' }}
                   animate={{ y: '120vh' }}
@@ -236,10 +242,11 @@ export default function ThemeWave() {
                   className="absolute font-mono text-base sm:text-lg font-bold"
                   style={{
                     left: `${(i / leadCount) * 100 + Math.random() * 2}%`,
-                    color: '#ffffff',
-                    textShadow: isMobile 
-                      ? '0 0 15px #00ff00, 0 0 25px #00ff00'
-                      : '0 0 20px #00ff00, 0 0 40px #00ff00',
+                    // Lead characters in secondary accent (maps to violet/coral in light mode)
+                    color: 'var(--accent-violet)',
+                    textShadow: isMobile
+                      ? '0 0 15px var(--accent-violet), 0 0 25px rgba(0,0,0,0.85)'
+                      : '0 0 22px var(--accent-violet), 0 0 42px rgba(0,0,0,0.9)',
                   }}
                   initial={{ y: -50 }}
                   animate={{ y: '120vh' }}
@@ -259,7 +266,9 @@ export default function ThemeWave() {
             <motion.div 
               className="absolute inset-0"
               style={{
-                background: 'radial-gradient(circle, rgba(0,255,0,0.15) 0%, transparent 60%)',
+                // Soft theme-colored center glow instead of hard green
+                background:
+                  'radial-gradient(circle, rgba(6,182,212,0.18) 0%, transparent 60%)',
               }}
               animate={{ opacity: [0.5, 1, 0.5] }}
               transition={{ duration: 2, repeat: Infinity }}
@@ -279,7 +288,8 @@ export default function ThemeWave() {
             <div 
               className="absolute inset-0 pointer-events-none"
               style={{
-                background: 'radial-gradient(circle, transparent 40%, rgba(0,0,0,0.8) 100%)',
+                // Slightly softer vignette so content stays visible
+                background: 'radial-gradient(circle, transparent 40%, rgba(0,0,0,0.6) 100%)',
               }}
             />
           </motion.div>
