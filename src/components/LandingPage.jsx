@@ -181,27 +181,40 @@ export default function LandingPage() {
       {/* ═══════════════════════════════════════════════════════════════
           HEADER - Sticky with blur
       ═══════════════════════════════════════════════════════════════ */}
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b ${
         scrolled 
-          ? 'bg-[#030303]/80 backdrop-blur-xl border-b border-white/5 shadow-2xl' 
-          : 'bg-transparent'
+          ? 'bg-[#0a0a0a]/90 backdrop-blur-xl border-white/10 shadow-2xl shadow-black/50' 
+          : 'bg-[#030303]/50 backdrop-blur-sm border-white/5'
       }`}>
         <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-3 group">
+          {/* Logo with permanent glow */}
+          <div className="flex items-center gap-3 group cursor-pointer">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-violet-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <img src={logo} alt="Adaptify" className="h-10 w-auto relative z-10" />
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/50 to-violet-400/50 blur-xl rounded-full" />
+              <img 
+                src={logo} 
+                alt="Adaptify" 
+                className="h-10 w-auto relative z-10 brightness-[1.8] contrast-125" 
+              />
             </div>
-            <span className="text-xl font-bold tracking-tight">Adaptify</span>
+            <span className="text-xl font-bold tracking-tight text-white">
+              Adaptify
+            </span>
           </div>
           
-          <div className="flex items-center gap-4">
-            <a href="#leistungen" className="hidden md:inline text-sm text-gray-400 hover:text-white transition-colors">
-              Leistungen
-            </a>
-            <a href="#tech" className="hidden md:inline text-sm text-gray-400 hover:text-white transition-colors">
-              Tech-Stack
-            </a>
+          {/* Navigation Links */}
+          <div className="flex items-center gap-8">
+            <nav className="hidden md:flex items-center gap-6">
+              <a href="#problem" className="text-sm text-gray-300 hover:text-white transition-colors">
+                Problem
+              </a>
+              <a href="#leistungen" className="text-sm text-gray-300 hover:text-white transition-colors">
+                Leistungen
+              </a>
+              <a href="#technologie" className="text-sm text-gray-300 hover:text-white transition-colors">
+                Technologie
+              </a>
+            </nav>
             <button 
               onClick={() => setModalOpen(true)}
               className="relative group bg-gradient-to-r from-cyan-500 to-violet-500 hover:from-cyan-400 hover:to-violet-400 px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/25"
@@ -260,10 +273,11 @@ export default function LandingPage() {
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
             <button 
-              className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full text-lg font-medium border border-white/20 hover:bg-white/5 transition-all duration-300"
+              disabled
+              className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full text-lg font-medium border border-white/10 text-gray-500 cursor-not-allowed opacity-60"
             >
-              <Play className="w-5 h-5 text-cyan-400" />
-              Live-Demo ansehen
+              <Play className="w-5 h-5 text-gray-500" />
+              Live-Demo (soon)
             </button>
           </div>
         </div>
@@ -278,23 +292,80 @@ export default function LandingPage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          TECH STACK SECTION - Dual row infinite scrolling logos
+          PAIN POINTS - First after Hero (Problem → Solution flow)
+      ═══════════════════════════════════════════════════════════════ */}
+      <section 
+        id="problem"
+        ref={painFade.ref}
+        className={`py-24 px-6 transition-all duration-1000 delay-200 ${
+          painFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
+      >
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <span className="text-xs uppercase tracking-[0.3em] text-red-400 mb-4 block">Das Problem</span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Kommt euch das bekannt vor?
+            </h2>
+            <p className="text-gray-500 max-w-xl mx-auto">
+              Die meisten KMUs verlieren täglich Zeit und Geld – weil niemand alles zusammenbringt.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { 
+                icon: Globe, 
+                title: 'Veraltete oder keine Webseite?', 
+                desc: 'Eure Konkurrenz hat moderne Seiten & Apps. Ihr verliert Kunden, bevor sie euch überhaupt finden.',
+                gradient: 'from-red-500/20 to-orange-500/20'
+              },
+              { 
+                icon: FileSpreadsheet, 
+                title: 'Manuelle Prozesse überall?', 
+                desc: 'Excel-Listen, Copy-Paste, E-Mail-Chaos. Jede Aufgabe dauert 3x so lang wie nötig.',
+                gradient: 'from-orange-500/20 to-yellow-500/20'
+              },
+              { 
+                icon: Workflow, 
+                title: 'Keine Automatisierung?', 
+                desc: 'Während andere KI nutzen, macht ihr alles von Hand. Ineffizienz kostet bares Geld.',
+                gradient: 'from-yellow-500/20 to-red-500/20'
+              }
+            ].map((item, i) => (
+              <div 
+                key={i} 
+                className="group relative bg-gradient-to-b from-white/5 to-transparent border border-red-500/20 rounded-2xl p-8 hover:border-red-500/40 transition-all duration-300 hover:-translate-y-1"
+              >
+                <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 bg-gradient-to-br ${item.gradient} border border-red-500/20`}>
+                  <item.icon className="w-7 h-7 text-red-400" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
+                <p className="text-gray-400 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          TECH STACK SECTION - Solution with tools (after Problem)
       ═══════════════════════════════════════════════════════════════ */}
       <section className="py-16 pb-8 overflow-hidden">
         <div className="text-center mb-10">
-          {/* Badge like other sections */}
+          {/* Badge */}
           <span className="text-xs uppercase tracking-[0.3em] text-cyan-400 mb-4 block">
-            Unser Tech Stack
+            Unsere Lösung
           </span>
           
           {/* Main Heading */}
           <h2 className="text-2xl md:text-3xl font-bold mb-4">
-            Wir arbeiten mit den besten Tools
+            Wir lösen das – mit den besten Tools
           </h2>
           
           {/* Subheading */}
           <p className="text-gray-400 max-w-2xl mx-auto px-6">
-            Von der Planung bis zur automatisierten Live-Schaltung – wir nutzen genau die Tools, die dein Projekt schneller und besser machen.
+            Modernste Technologien, perfekt kombiniert für maximale Effizienz.
           </p>
         </div>
         
@@ -346,62 +417,6 @@ export default function LandingPage() {
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-          PAIN POINTS - Dramatic cards
-      ═══════════════════════════════════════════════════════════════ */}
-      <section 
-        ref={painFade.ref}
-        className={`py-32 px-6 transition-all duration-1000 delay-200 ${
-          painFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}
-      >
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="text-xs uppercase tracking-[0.3em] text-red-400 mb-4 block">Das Problem</span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Kommt euch das bekannt vor?
-            </h2>
-            <p className="text-gray-500 max-w-xl mx-auto">
-              Die meisten KMUs verlieren täglich Zeit und Geld – weil niemand alles zusammenbringt.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { 
-                icon: Globe, 
-                title: 'Veraltete oder keine Webseite?', 
-                desc: 'Eure Konkurrenz hat moderne Seiten & Apps. Ihr verliert Kunden, bevor sie euch überhaupt finden.',
-                gradient: 'from-red-500/20 to-orange-500/20'
-              },
-              { 
-                icon: FileSpreadsheet, 
-                title: 'Manuelle Prozesse überall?', 
-                desc: 'Excel-Listen, Copy-Paste, E-Mail-Chaos. Jede Aufgabe dauert 3x so lang wie nötig.',
-                gradient: 'from-orange-500/20 to-yellow-500/20'
-              },
-              { 
-                icon: Workflow, 
-                title: 'Keine Automatisierung?', 
-                desc: 'Während andere KI nutzen, macht ihr alles von Hand. Ineffizienz kostet bares Geld.',
-                gradient: 'from-yellow-500/20 to-red-500/20'
-              }
-            ].map((item, i) => (
-              <div 
-                key={i} 
-                className="group relative bg-gradient-to-b from-white/5 to-transparent border border-red-500/20 rounded-2xl p-8 hover:border-red-500/40 transition-all duration-300 hover:-translate-y-1"
-              >
-                <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 bg-gradient-to-br ${item.gradient} border border-red-500/20`}>
-                  <item.icon className="w-7 h-7 text-red-400" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
-                <p className="text-gray-400 leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -520,7 +535,7 @@ export default function LandingPage() {
           TECH STACK - The showstopper (NEW!)
       ═══════════════════════════════════════════════════════════════ */}
       <section 
-        id="tech"
+        id="technologie"
         ref={techFade.ref}
         className={`py-32 px-6 transition-all duration-1000 delay-200 ${
           techFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
