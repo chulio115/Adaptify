@@ -129,7 +129,6 @@ export default function LandingPage() {
   const stat1 = useCountUp(40);
   const stat2 = useCountUp(50);
   const stat3 = useCountUp(4);
-  const stat4 = useCountUp(100);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);

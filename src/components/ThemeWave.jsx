@@ -16,7 +16,9 @@ import { useState, useEffect } from 'react';
 export default function ThemeWave() {
   const { waveState, easterEgg, WAVE_DURATION } = useTheme();
   const [ringProgress, setRingProgress] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => (
+    typeof window !== 'undefined' ? window.innerWidth < 640 : false
+  ));
 
   // Detect mobile
   useEffect(() => {
@@ -26,8 +28,12 @@ export default function ThemeWave() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Animate the ring expanding outward
+  // Animate the ring expanding outward (desktop only)
   useEffect(() => {
+    if (isMobile) {
+      setRingProgress(0);
+      return;
+    }
     if (!waveState.isAnimating) {
       setRingProgress(0);
       return;
@@ -48,7 +54,7 @@ export default function ThemeWave() {
       }
     };
     requestAnimationFrame(animate);
-  }, [waveState.isAnimating, WAVE_DURATION]);
+  }, [waveState.isAnimating, WAVE_DURATION, isMobile]);
 
   // Glow colors based on which theme we're going TO
   const isGoingDark = waveState.previousTheme === 'light';
@@ -80,6 +86,11 @@ export default function ThemeWave() {
   const ringOpacity = isMobile
     ? Math.min(1, baseRingOpacity * 1.25)
     : baseRingOpacity;
+
+  // On mobile we skip all custom visuals (no wave, no Easter Eggs) for performance and simplicity
+  if (isMobile) {
+    return null;
+  }
 
   return (
     <>
