@@ -106,6 +106,7 @@ const techStackTools = [
 export default function LandingPage() {
   const [scrolled, setScrolled] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
   
   // Netlify Forms state
@@ -181,21 +182,25 @@ export default function LandingPage() {
       {/* ═══════════════════════════════════════════════════════════════
           HEADER - Sticky with blur
       ═══════════════════════════════════════════════════════════════ */}
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b ${
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled 
-          ? 'bg-[#0a0a0a]/90 backdrop-blur-xl border-white/10 shadow-2xl shadow-black/50' 
-          : 'bg-[#030303]/50 backdrop-blur-sm border-white/5'
+          ? 'bg-[#0c0c0c]/95 backdrop-blur-xl shadow-lg shadow-black/50' 
+          : 'bg-[#0a0a0a]/80 backdrop-blur-md'
       }`}>
+        {/* Gradient border glow at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
         <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-          {/* Logo with permanent glow */}
+          {/* Logo with border and hover glow */}
           <div className="flex items-center gap-3 group cursor-pointer">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/50 to-violet-400/50 blur-xl rounded-full" />
-              <img 
-                src={logo} 
-                alt="Adaptify" 
-                className="h-10 w-auto relative z-10 brightness-[1.8] contrast-125" 
-              />
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/50 to-violet-400/50 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative z-10 p-2 rounded-lg border border-white/20 bg-white/5 group-hover:border-white/40 group-hover:bg-white/10 transition-all duration-300">
+                <img 
+                  src={logo} 
+                  alt="Adaptify" 
+                  className="h-7 w-auto brightness-0 invert" 
+                />
+              </div>
             </div>
             <span className="text-xl font-bold tracking-tight text-white">
               Adaptify
@@ -215,13 +220,63 @@ export default function LandingPage() {
                 Technologie
               </a>
             </nav>
+            
+            {/* Desktop CTA */}
             <button 
               onClick={() => setModalOpen(true)}
-              className="relative group bg-gradient-to-r from-cyan-500 to-violet-500 hover:from-cyan-400 hover:to-violet-400 px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/25"
+              className="hidden md:block relative group bg-gradient-to-r from-cyan-500 to-violet-500 hover:from-cyan-400 hover:to-violet-400 px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/25"
             >
               <span className="relative z-10">Gespräch buchen</span>
             </button>
+            
+            {/* Mobile Menu Button */}
+            <button 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden w-10 h-10 flex items-center justify-center rounded-lg bg-white/5 border border-white/10"
+              aria-label="Menü öffnen"
+            >
+              <div className="space-y-1.5">
+                <div className={`w-5 h-0.5 bg-white transition-all duration-300 ${mobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+                <div className={`w-5 h-0.5 bg-white transition-all duration-300 ${mobileMenuOpen ? 'opacity-0' : ''}`} />
+                <div className={`w-5 h-0.5 bg-white transition-all duration-300 ${mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+              </div>
+            </button>
           </div>
+        </div>
+        
+        {/* Mobile Menu Panel */}
+        <div className={`md:hidden absolute top-full left-0 right-0 bg-[#0a0a0a]/98 backdrop-blur-xl border-b border-white/10 transition-all duration-300 ${
+          mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+        }`}>
+          <nav className="flex flex-col p-6 gap-4">
+            <a 
+              href="#problem" 
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-lg text-gray-300 hover:text-white transition-colors py-2"
+            >
+              Problem
+            </a>
+            <a 
+              href="#leistungen" 
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-lg text-gray-300 hover:text-white transition-colors py-2"
+            >
+              Leistungen
+            </a>
+            <a 
+              href="#technologie" 
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-lg text-gray-300 hover:text-white transition-colors py-2"
+            >
+              Technologie
+            </a>
+            <button 
+              onClick={() => { setModalOpen(true); setMobileMenuOpen(false); }}
+              className="mt-2 bg-gradient-to-r from-cyan-500 to-violet-500 px-6 py-3 rounded-full text-sm font-semibold"
+            >
+              Gespräch buchen
+            </button>
+          </nav>
         </div>
       </header>
 
@@ -245,7 +300,7 @@ export default function LandingPage() {
             <span>KI-gestützte Digitalisierung für KMUs</span>
           </div>
           
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-8 tracking-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6 md:mb-8 tracking-tight">
             Euer kompletter{' '}
             <span className="relative inline-block">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-violet-400 to-fuchsia-400">
@@ -253,15 +308,15 @@ export default function LandingPage() {
               </span>
             </span>
             <br />
-            <span className="text-gray-400 text-4xl md:text-5xl lg:text-6xl">
+            <span className="text-gray-400 text-2xl sm:text-3xl md:text-5xl lg:text-6xl">
               von der Webseite bis zur KI
             </span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl lg:text-2xl text-gray-400 mb-8 md:mb-12 max-w-3xl mx-auto leading-relaxed px-2">
             Keine halben Sachen. Wir bauen{' '}
             <span className="text-white">Webseiten, Apps, Automationen & KI-Workflows</span>{' '}
-            – alles aus einer Hand, alles für euren Erfolg.
+            – alles aus einer Hand.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -269,15 +324,15 @@ export default function LandingPage() {
               onClick={() => setModalOpen(true)}
               className="group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-cyan-500 to-violet-500 hover:from-cyan-400 hover:to-violet-400 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/25 hover:scale-105"
             >
-              Kostenloses Strategiegespräch
+              <span className="hidden sm:inline">Kostenloses </span>Strategiegespräch
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
             <button 
               disabled
-              className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full text-lg font-medium border border-white/10 text-gray-500 cursor-not-allowed opacity-60"
+              className="group inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-medium border border-white/10 text-gray-500 cursor-not-allowed opacity-60"
             >
               <Play className="w-5 h-5 text-gray-500" />
-              Live-Demo (soon)
+              Demo (soon)
             </button>
           </div>
         </div>
@@ -297,7 +352,7 @@ export default function LandingPage() {
       <section 
         id="problem"
         ref={painFade.ref}
-        className={`py-24 px-6 transition-all duration-1000 delay-200 ${
+        className={`py-20 md:py-28 px-6 transition-all duration-1000 delay-200 ${
           painFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
       >
@@ -351,7 +406,7 @@ export default function LandingPage() {
       {/* ═══════════════════════════════════════════════════════════════
           TECH STACK SECTION - Solution with tools (after Problem)
       ═══════════════════════════════════════════════════════════════ */}
-      <section className="py-16 pb-8 overflow-hidden">
+      <section className="py-20 overflow-hidden">
         <div className="text-center mb-10">
           {/* Badge */}
           <span className="text-xs uppercase tracking-[0.3em] text-cyan-400 mb-4 block">
@@ -670,20 +725,38 @@ export default function LandingPage() {
             {/* Brand */}
             <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-4">
-                <img src={logo} alt="Adaptify" className="h-10 w-auto" />
+                <div className="p-2 rounded-lg border border-white/20 bg-white/5">
+                  <img src={logo} alt="Adaptify" className="h-7 w-auto brightness-0 invert" />
+                </div>
                 <span className="text-xl font-bold">Adaptify</span>
               </div>
               <p className="text-gray-500 mb-6 max-w-md">
                 Die moderne Digitalisierungsagentur für KMUs. Webseiten, Apps, Automatisierung & KI – alles aus einer Hand.
               </p>
               <div className="flex gap-4">
-                <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-violet-500/20 hover:border-violet-500/50 transition-colors">
+                <a 
+                  href="https://linkedin.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-violet-500/20 hover:border-violet-500/50 transition-colors"
+                >
                   <Linkedin className="w-5 h-5" />
                 </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-violet-500/20 hover:border-violet-500/50 transition-colors">
+                <a 
+                  href="https://twitter.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label="Twitter"
+                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-violet-500/20 hover:border-violet-500/50 transition-colors"
+                >
                   <Twitter className="w-5 h-5" />
                 </a>
-                <a href="mailto:kontakt@adaptify.de" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-violet-500/20 hover:border-violet-500/50 transition-colors">
+                <a 
+                  href="mailto:kontakt@adaptify.de" 
+                  aria-label="E-Mail"
+                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-violet-500/20 hover:border-violet-500/50 transition-colors"
+                >
                   <Mail className="w-5 h-5" />
                 </a>
               </div>
@@ -722,12 +795,12 @@ export default function LandingPage() {
       ═══════════════════════════════════════════════════════════════ */}
       {modalOpen && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-6 animate-fadeIn" 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 animate-fadeIn" 
           onClick={() => setModalOpen(false)}
         >
           <div className="absolute inset-0 bg-black/90 backdrop-blur-md" />
           <div 
-            className="relative bg-gradient-to-b from-[#0a0a0a] to-[#050505] border border-white/10 rounded-3xl w-full max-w-lg p-8 shadow-2xl animate-scaleIn"
+            className="relative bg-gradient-to-b from-[#0a0a0a] to-[#050505] border border-white/10 rounded-2xl sm:rounded-3xl w-full max-w-lg p-5 sm:p-8 shadow-2xl animate-scaleIn max-h-[90vh] overflow-y-auto"
             onClick={e => e.stopPropagation()}
           >
             {/* Glow */}

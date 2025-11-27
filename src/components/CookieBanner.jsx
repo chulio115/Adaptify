@@ -49,11 +49,11 @@ export default function CookieBanner() {
       }`}
     >
       <div className="max-w-4xl mx-auto">
-        <div className="relative bg-[#0a0a0a]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl">
+        <div className="relative bg-[#111111] backdrop-blur-xl border border-white/15 rounded-2xl p-6 shadow-2xl">
           {/* Close button */}
           <button 
             onClick={handleDecline}
-            className="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors"
+            className="absolute top-4 right-4 text-white hover:text-gray-500 transition-colors"
             aria-label="Schließen"
           >
             <X className="w-5 h-5" />
@@ -67,8 +67,8 @@ export default function CookieBanner() {
 
             {/* Text */}
             <div className="flex-1 pr-8 md:pr-0">
-              <h3 className="font-semibold mb-1">Wir nutzen Cookies 🍪</h3>
-              <p className="text-sm text-gray-400">
+              <h3 className="font-semibold mb-1 text-white">Wir nutzen Cookies 🍪</h3>
+              <p className="text-sm text-gray-300">
                 Wir verwenden Cookies, um deine Erfahrung auf unserer Website zu verbessern.{' '}
                 <Link 
                   to="/datenschutz" 
