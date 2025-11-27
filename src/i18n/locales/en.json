@@ -221,7 +221,7 @@
       },
       "solution": {
         "title": "The Solution",
-        "text1Bold": "So in 2024, we built it for him.",
+        "text1Bold": "So in 2025, we built it for him.",
         "text1": "A completely new platform: Modern React website, real-time booking calendar, automated emails, 100% mobile-optimized, SEO-strong.",
         "text2": "Everything he needed – without having to touch a single line of code himself."
       },
@@ -261,16 +261,60 @@
       "badge": "The Team",
       "title": "The People Behind Adaptify",
       "subtitle": "Not an anonymous agency – real people with real stories.",
+      "julius": {
+        "role": "Founder & Development",
+        "quote": "I've seen how my father - a man who built a catamaran with his own hands - didn't get what he wanted from a website. That shouldn't happen. That's exactly why we do this.",
+        "skills": {
+          "react": "React",
+          "node": "Node.js",
+          "automation": "Automation",
+          "atlassian": "Atlassian"
+        }
+      },
       "hiring": {
-        "badge": "We're Hiring",
-        "title": "Think you'd fit?",
-        "text": "We're growing and looking for people who want to solve real problems.",
-        "button": "Get in Touch"
+        "badge": "We're Growing",
+        "title": "Looking for Talent",
+        "text": "Prefer SMBs over corporations? Real projects over PowerPoint? Get in touch - we're looking for people with a maker mindset.",
+        "button": "Apply Now"
       }
     },
     "cases": {
       "badge": "Success Stories",
-      "title": "What we've built so far"
+      "title": "What we've built so far",
+      "firstProject": "Our First Project",
+      "easyLiving": {
+        "title": "Easy Living Catamaran",
+        "industry": "Charter & Tourism",
+        "result": "Full Digitalization",
+        "desc": "From a 2005 website to a modern booking platform. Online calendar, automated emails - all seamlessly integrated.",
+        "metrics": {
+          "bookings": "Real-time bookings",
+          "atlassian": "Atlassian integration",
+          "seo": "SEO-optimized"
+        }
+      },
+      "placeholder2": {
+        "title": "[Project 2]",
+        "industry": "[Industry]",
+        "result": "[Result]",
+        "desc": "[Your next project could be here. We document every project as a case study.]",
+        "metrics": {
+          "m1": "[Metric 1]",
+          "m2": "[Metric 2]",
+          "m3": "[Metric 3]"
+        }
+      },
+      "placeholder3": {
+        "title": "[Project 3]",
+        "industry": "[Industry]",
+        "result": "[Result]",
+        "desc": "[Space for more success stories - as soon as we've written them together.]",
+        "metrics": {
+          "m1": "[Metric 1]",
+          "m2": "[Metric 2]",
+          "m3": "[Metric 3]"
+        }
+      }
     },
     "quote": {
       "text": "Digitalization doesn't have to be rocket science. And it doesn't have to cost 50,000 euros. We want every small business, every family company to have the same chances as the big players - just at a budget that fits.",

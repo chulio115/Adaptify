@@ -221,14 +221,14 @@
       },
       "solution": {
         "title": "Die Lösung",
-        "text1Bold": "Also haben wir es 2024 für ihn gemacht.",
+        "text1Bold": "Also haben wir es 2025 für ihn gemacht.",
         "text1": "Eine komplett neue Plattform: Moderne React-Website, Echtzeit-Buchungskalender, automatisierte E-Mails, 100% mobil-optimiert, SEO-stark.",
         "text2": "Alles, was er brauchte – ohne selbst eine Zeile Code anfassen zu müssen."
       },
       "realization": {
         "title": "Und dann haben wir's kapiert:",
         "text1": "Wenn mein Vater –",
-        "text1Bold": "ein erfolgreicher Unternehmer, der einen verdammten Katamaran mit eigenen Händen gebaut hat",
+        "text1Bold": "ein erfolgreicher Unternehmer, der einen Katamaran mit eigenen Händen gebaut hat",
         "text1End": "– bei der Digitalisierung Hilfe braucht...",
         "question": "...wie viele andere Unternehmer da draußen stehen vor dem gleichen Problem?",
         "answer": "Tausende? Zehntausende? Der gesamte deutsche Mittelstand?"
@@ -261,16 +261,60 @@
       "badge": "Das Team",
       "title": "Die Menschen hinter Adaptify",
       "subtitle": "Keine anonyme Agentur – echte Menschen mit echten Geschichten.",
+      "julius": {
+        "role": "Gründer & Entwicklung",
+        "quote": "Ich hab gesehen, wie mein Vater - ein Mann, der einen Katamaran mit eigenen Händen gebaut hat - bei einer Website nicht das geschehen hat, was er sehen wollte. Das darf nicht sein. Genau dafür machen wir das hier.",
+        "skills": {
+          "react": "React",
+          "node": "Node.js",
+          "automation": "Automatisierung",
+          "atlassian": "Atlassian"
+        }
+      },
       "hiring": {
-        "badge": "Verstärkung gesucht!",
-        "title": "Du passt zu uns?",
-        "text": "Wir wachsen und suchen Leute, die Bock haben, echte Probleme zu lösen.",
-        "button": "Initiativ bewerben"
+        "badge": "Wir wachsen",
+        "title": "Verstärkung gesucht",
+        "text": "Du hast Bock auf Mittelstand statt Konzern? Auf echte Projekte statt Powerpoint? Dann meld dich - wir suchen Leute mit Macher-Mentalität.",
+        "button": "Jetzt bewerben"
       }
     },
     "cases": {
       "badge": "Erfolgsgeschichten",
-      "title": "Was wir bisher gebaut haben"
+      "title": "Was wir bisher gebaut haben",
+      "firstProject": "Unser erstes Projekt",
+      "easyLiving": {
+        "title": "Easy Living Katamaran",
+        "industry": "Charter & Tourismus",
+        "result": "Komplett-Digitalisierung",
+        "desc": "Von der 2005er-Website zur modernen Buchungsplattform. Online-Kalender, automatische Mails – alles aus einem Guss.",
+        "metrics": {
+          "bookings": "Echtzeit-Buchungen",
+          "atlassian": "Atlassian-Integration",
+          "seo": "SEO-optimiert"
+        }
+      },
+      "placeholder2": {
+        "title": "[Projekt 2]",
+        "industry": "[Branche]",
+        "result": "[Ergebnis]",
+        "desc": "[Dein nächstes Projekt könnte hier stehen. Wir dokumentieren jedes Projekt als Case Study.]",
+        "metrics": {
+          "m1": "[Metrik 1]",
+          "m2": "[Metrik 2]",
+          "m3": "[Metrik 3]"
+        }
+      },
+      "placeholder3": {
+        "title": "[Projekt 3]",
+        "industry": "[Branche]",
+        "result": "[Ergebnis]",
+        "desc": "[Platz für weitere Erfolgsgeschichten – sobald wir sie gemeinsam geschrieben haben.]",
+        "metrics": {
+          "m1": "[Metrik 1]",
+          "m2": "[Metrik 2]",
+          "m3": "[Metrik 3]"
+        }
+      }
     },
     "quote": {
       "text": "Digitalisierung muss kein Hexenwerk sein. Und sie muss nicht 50.000 Euro kosten. Wir wollen, dass jeder Handwerksbetrieb, jedes Familienunternehmen die gleichen Chancen hat wie die großen Player - nur eben passend zum eigenen Budget.",

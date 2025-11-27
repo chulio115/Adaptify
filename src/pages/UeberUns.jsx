@@ -383,13 +383,12 @@ export default function UeberUns() {
             <div className="bg-white/5 border border-white/10 rounded-2xl p-8">
               <div className="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-500 to-violet-500 flex items-center justify-center mb-6 text-2xl font-bold">JS</div>
               <h3 className="text-xl font-bold mb-1">Julius Schulze</h3>
-              <p className="text-cyan-400 text-sm mb-4">Gründer & Entwicklung</p>
+              <p className="text-cyan-400 text-sm mb-4">{t('about.team.julius.role')}</p>
               <p className="text-gray-400 italic mb-6">
-                „Ich hab gesehen, wie mein Vater – ein Mann, der einen Katamaran mit eigenen Händen gebaut hat – 
-                bei einer Website nicht das geschehen hat, was er sehen wollte. Das darf nicht sein. Genau dafür machen wir das hier."
+                {t('about.team.julius.quote')}
               </p>
               <div className="flex flex-wrap gap-2">
-                {['React', 'Node.js', 'Automatisierung', 'Atlassian'].map((skill, j) => (
+                {[t('about.team.julius.skills.react'), t('about.team.julius.skills.node'), t('about.team.julius.skills.automation'), t('about.team.julius.skills.atlassian')].map((skill, j) => (
                   <span key={j} className="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-400">{skill}</span>
                 ))}
               </div>
@@ -397,17 +396,16 @@ export default function UeberUns() {
             
             <div className="bg-white/5 border border-white/10 rounded-2xl p-8">
               <div className="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-600 to-violet-600 flex items-center justify-center mb-6 text-2xl font-bold">+1</div>
-              <h3 className="text-xl font-bold mb-1">Verstärkung gesucht</h3>
-              <p className="text-cyan-400 text-sm mb-4">Wir wachsen</p>
+              <h3 className="text-xl font-bold mb-1">{t('about.team.hiring.title')}</h3>
+              <p className="text-cyan-400 text-sm mb-4">{t('about.team.hiring.badge')}</p>
               <p className="text-gray-400 italic mb-6">
-                „Du hast Bock auf Mittelstand statt Konzern? Auf echte Projekte statt Powerpoint? 
-                Dann meld dich – wir suchen Leute mit Macher-Mentalität."
+                {t('about.team.hiring.text')}
               </p>
               <button 
                 onClick={() => setJobModalOpen(true)}
                 className="text-cyan-400 text-sm hover:text-cyan-300 transition-colors flex items-center gap-2"
               >
-                → Jetzt bewerben
+                → {t('about.team.hiring.button')}
               </button>
             </div>
           </div>
@@ -430,31 +428,31 @@ export default function UeberUns() {
           <div className="grid md:grid-cols-3 gap-6">
             {[
               { 
-                title: 'Easy Living Katamaran', industry: 'Charter & Tourismus', result: 'Komplett-Digitalisierung',
-                desc: 'Von der 2005er-Website zur modernen Buchungsplattform. Online-Kalender, automatische Mails – alles aus einem Guss.',
-                metrics: ['Echtzeit-Buchungen', 'Atlassian-Integration', 'SEO-optimiert'], highlight: true
+                titleKey: 'about.cases.easyLiving.title', industryKey: 'about.cases.easyLiving.industry', resultKey: 'about.cases.easyLiving.result',
+                descKey: 'about.cases.easyLiving.desc',
+                metricsKeys: ['about.cases.easyLiving.metrics.bookings', 'about.cases.easyLiving.metrics.atlassian', 'about.cases.easyLiving.metrics.seo'], highlight: true
               },
               { 
-                title: '[Projekt 2]', industry: '[Branche]', result: '[Ergebnis]',
-                desc: '[Dein nächstes Projekt könnte hier stehen. Wir dokumentieren jedes Projekt als Case Study.]',
-                metrics: ['[Metrik 1]', '[Metrik 2]', '[Metrik 3]'], highlight: false
+                titleKey: 'about.cases.placeholder2.title', industryKey: 'about.cases.placeholder2.industry', resultKey: 'about.cases.placeholder2.result',
+                descKey: 'about.cases.placeholder2.desc',
+                metricsKeys: ['about.cases.placeholder2.metrics.m1', 'about.cases.placeholder2.metrics.m2', 'about.cases.placeholder2.metrics.m3'], highlight: false
               },
               { 
-                title: '[Projekt 3]', industry: '[Branche]', result: '[Ergebnis]',
-                desc: '[Platz für weitere Erfolgsgeschichten – sobald wir sie gemeinsam geschrieben haben.]',
-                metrics: ['[Metrik 1]', '[Metrik 2]', '[Metrik 3]'], highlight: false
+                titleKey: 'about.cases.placeholder3.title', industryKey: 'about.cases.placeholder3.industry', resultKey: 'about.cases.placeholder3.result',
+                descKey: 'about.cases.placeholder3.desc',
+                metricsKeys: ['about.cases.placeholder3.metrics.m1', 'about.cases.placeholder3.metrics.m2', 'about.cases.placeholder3.metrics.m3'], highlight: false
               }
             ].map((c, i) => (
               <div key={i} className={`relative rounded-2xl p-8 ${c.highlight ? 'bg-gradient-to-b from-cyan-500/20 to-transparent border-2 border-cyan-500/30' : 'bg-white/5 border border-white/10'}`}>
-                {c.highlight && <div className="absolute -top-3 left-6 px-3 py-1 bg-cyan-500 text-xs font-semibold rounded-full">Unser erstes Projekt</div>}
-                <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{c.industry}</p>
-                <h3 className="text-xl font-bold mb-2">{c.title}</h3>
-                <p className="text-cyan-400 font-semibold mb-4">{c.result}</p>
-                <p className="text-gray-400 text-sm mb-6">{c.desc}</p>
+                {c.highlight && <div className="absolute -top-3 left-6 px-3 py-1 bg-cyan-500 text-xs font-semibold rounded-full">{t('about.cases.firstProject')}</div>}
+                <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{t(c.industryKey)}</p>
+                <h3 className="text-xl font-bold mb-2">{t(c.titleKey)}</h3>
+                <p className="text-cyan-400 font-semibold mb-4">{t(c.resultKey)}</p>
+                <p className="text-gray-400 text-sm mb-6">{t(c.descKey)}</p>
                 <div className="space-y-2">
-                  {c.metrics.map((m, j) => (
+                  {c.metricsKeys.map((m, j) => (
                     <div key={j} className="flex items-center gap-2 text-sm text-gray-300">
-                      <CheckCircle2 className="w-4 h-4 text-cyan-400" />{m}
+                      <CheckCircle2 className="w-4 h-4 text-cyan-400" />{t(m)}
                     </div>
                   ))}
                 </div>
