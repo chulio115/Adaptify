@@ -306,7 +306,7 @@ export default function LandingPage() {
         <div className="max-w-5xl text-center relative z-10">
           <div className="mb-8 inline-flex items-center gap-3 text-sm text-gray-300 border border-white/10 rounded-full px-5 py-2.5 bg-white/5 backdrop-blur-sm">
             <Sparkles className="w-4 h-4 text-cyan-400" />
-            <span>KI-gestützte Digitalisierung für KMUs</span>
+            <span>Digitalisierung aus einer Hand – für ambitionierte Mittelständler</span>
           </div>
           
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6 md:mb-8 tracking-tight">
@@ -429,7 +429,7 @@ export default function LandingPage() {
           
           {/* Subheading */}
           <p className="text-gray-400 max-w-2xl mx-auto px-6">
-            Modernste Technologien, perfekt kombiniert für maximale Effizienz.
+            Wir setzen die Tools ein, mit denen Tech-Startups und Konzerne arbeiten – für euer KMU.
           </p>
         </div>
         
@@ -517,13 +517,13 @@ export default function LandingPage() {
               { 
                 icon: Bot, 
                 title: 'KI-gestützte Automatisierung', 
-                desc: 'Workflows, die von selbst laufen. Mit Make, Zapier oder eigenen KI-Lösungen.',
+                desc: 'Workflows, die von selbst laufen – mehr Zeit fürs Kerngeschäft, weniger Routinearbeit.',
                 color: 'violet'
               },
               { 
                 icon: Code2, 
                 title: 'Apps & Custom Software', 
-                desc: 'Interne Tools, Kundenportale, alles was ihr braucht – blitzschnell mit KI entwickelt.',
+                desc: 'Interne Tools, Kundenportale, individuelle Lösungen – professionell entwickelt, schnell geliefert.',
                 color: 'fuchsia'
               },
               { 
@@ -612,7 +612,7 @@ export default function LandingPage() {
               Unser moderner Tech-Stack 2025
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Die besten Tools – perfekt kombiniert und KI-beschleunigt. Das macht uns schneller als jede traditionelle Agentur.
+              Die besten Tools – perfekt kombiniert und KI-beschleunigt. Das macht uns zu eurem technologischen Vorsprung.
             </p>
           </div>
           
@@ -622,7 +622,7 @@ export default function LandingPage() {
                 icon: Layers, 
                 name: 'Atlassian Suite', 
                 tagline: 'Prozesse & Kollaboration',
-                desc: 'Jira, Confluence, Bitbucket – Enterprise-Tools für strukturierte Workflows und nahtlose Teamarbeit.',
+                desc: 'Jira, Confluence, Bitbucket – volle Transparenz über jeden Projektschritt. Ihr wisst immer, wo wir stehen.',
                 gradient: 'from-blue-500 to-blue-600',
                 bgGradient: 'from-blue-500/10 to-blue-600/5'
               },
@@ -638,7 +638,7 @@ export default function LandingPage() {
                 icon: Cpu, 
                 name: 'Automation & AI Hub', 
                 tagline: 'Intelligente Workflows',
-                desc: 'Make, Zapier, n8n + eigene KI-Agents. Tausende Prozesse automatisiert – ohne Programmierkenntnisse.',
+                desc: 'Make, Zapier, n8n + eigene KI-Agents. Alle Prozesse automatisiert – damit Sie sich aufs Wesentliche konzentrieren können.',
                 gradient: 'from-violet-500 to-purple-600',
                 bgGradient: 'from-violet-500/10 to-purple-600/5'
               },
@@ -646,7 +646,7 @@ export default function LandingPage() {
                 icon: Globe2, 
                 name: 'Web & App Builder', 
                 tagline: 'Schnelle Umsetzung',
-                desc: 'Webflow, Shopify, React, Next.js – blitzschnelle Webseiten, Apps und Shops mit modernstem Stack.',
+                desc: 'Webflow, Shopify, React, Next.js – performante Webseiten, Apps und Shops, maßgeschneidert für eure Marke.',
                 gradient: 'from-fuchsia-500 to-pink-600',
                 bgGradient: 'from-fuchsia-500/10 to-pink-600/5'
               }
