@@ -44,6 +44,7 @@ export function ThemeProvider({ children }) {
   const [easterEgg, setEasterEgg] = useState(null);
   const [matrixWasShown, setMatrixWasShown] = useState(false); // Unlocks boat on language click
   const clickResetTimer = useRef(null);
+  const [disableViewTransitions, setDisableViewTransitions] = useState(false); // Brave fallback
 
   // Apply theme to DOM immediately
   useEffect(() => {
@@ -52,6 +53,20 @@ export function ThemeProvider({ children }) {
     root.classList.add(isDark ? 'dark' : 'light');
     localStorage.setItem('adaptify-theme', isDark ? 'dark' : 'light');
   }, [isDark]);
+
+  // Detect Brave and disable View Transitions there (they can behave inconsistently)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      const ua = navigator.userAgent || '';
+      const isBrave = ua.includes('Brave') || (navigator.brave && typeof navigator.brave.isBrave === 'function');
+      if (isBrave) {
+        setDisableViewTransitions(true);
+      }
+    } catch {
+      // Fail silently, just don't disable View Transitions
+    }
+  }, []);
 
   // System theme listener
   useEffect(() => {
@@ -115,8 +130,8 @@ export function ThemeProvider({ children }) {
     document.documentElement.style.setProperty('--wave-x', `${x}px`);
     document.documentElement.style.setProperty('--wave-y', `${y}px`);
 
-    // Check if View Transitions API is supported
-    if (document.startViewTransition) {
+    // Check if View Transitions API is supported AND not disabled (e.g. Brave)
+    if (document.startViewTransition && !disableViewTransitions) {
       // THE MAGIC: View Transitions API
       setWaveState({ isAnimating: true, originX: x, originY: y, previousTheme });
       
@@ -142,7 +157,7 @@ export function ThemeProvider({ children }) {
       }, WAVE_DURATION);
     }
     
-  }, [isDark, waveState.isAnimating]);
+  }, [isDark, waveState.isAnimating, disableViewTransitions]);
 
   // Cleanup
   useEffect(() => {

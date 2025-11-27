@@ -93,7 +93,7 @@ export default function ThemeWave() {
                 position: 'absolute',
                 inset: 0,
                 background: `radial-gradient(
-                  circle at ${waveState.originX}% ${waveState.originY}px,
+                  circle at ${waveState.originX}px ${waveState.originY}px,
                   transparent 0%,
                   transparent ${Math.max(0, ringProgress - 15)}%,
                   ${colors.outer} ${Math.max(0, ringProgress - 8)}%,
@@ -146,7 +146,7 @@ export default function ThemeWave() {
             <motion.div
               className="absolute origin-center"
               style={{
-                left: `${waveState.originX}%`,
+                left: waveState.originX,
                 top: waveState.originY,
                 width: '200vmax',
                 height: isMobile ? '4px' : '6px',
@@ -164,7 +164,7 @@ export default function ThemeWave() {
             <motion.div
               className="absolute rounded-full"
               style={{
-                left: `${waveState.originX}%`,
+                left: waveState.originX,
                 top: waveState.originY,
                 width: isMobile ? 40 : 60,
                 height: isMobile ? 40 : 60,
