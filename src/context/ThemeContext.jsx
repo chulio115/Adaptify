@@ -77,6 +77,14 @@ export function ThemeProvider({ children }) {
 
   // THE toggle function - uses View Transitions API for magic!
   const toggleTheme = useCallback(async (event) => {
+    // Click counting for Easter eggs - ALWAYS count, even during animation!
+    setClickCount(prev => prev + 1);
+    if (clickResetTimer.current) clearTimeout(clickResetTimer.current);
+    clickResetTimer.current = setTimeout(() => setClickCount(0), 3000); // 3 seconds to reach 7 clicks
+
+    // Don't toggle during animation (but clicks are still counted above!)
+    if (waveState.isAnimating) return;
+    
     // Get click origin for wave
     const rect = event?.currentTarget?.getBoundingClientRect();
     let x = window.innerWidth - 80;
@@ -86,14 +94,6 @@ export function ThemeProvider({ children }) {
       x = rect.left + rect.width / 2;
       y = rect.top + rect.height / 2;
     }
-
-    // Click counting for Easter eggs
-    setClickCount(prev => prev + 1);
-    if (clickResetTimer.current) clearTimeout(clickResetTimer.current);
-    clickResetTimer.current = setTimeout(() => setClickCount(0), 2000);
-
-    // Don't toggle during animation
-    if (waveState.isAnimating) return;
 
     const previousTheme = isDark ? 'dark' : 'light';
     const newIsDark = !isDark;
