@@ -622,15 +622,15 @@ export default function LandingPage() {
                 icon: Layers, 
                 name: 'Atlassian Suite', 
                 tagline: 'Prozesse & Kollaboration',
-                desc: 'Jira, Confluence, Bitbucket – volle Transparenz über jeden Projektschritt. Ihr wisst immer, wo wir stehen.',
+                desc: 'Jira, Confluence, Bitbucket – wir digitalisieren eure Prozesse damit und arbeiten transparent mit euch zusammen.',
                 gradient: 'from-blue-500 to-blue-600',
                 bgGradient: 'from-blue-500/10 to-blue-600/5'
               },
               { 
                 icon: Sparkles, 
                 name: 'Codium AI / Windsurf', 
-                tagline: 'KI-gestützte Entwicklung',
-                desc: 'KI schreibt & optimiert Code in Sekunden. Was früher Wochen dauerte, schaffen wir in Tagen.',
+                tagline: 'Entwicklung mit KI-Turbo',
+                desc: 'Modernste KI-Tools beschleunigen unsere Entwicklung. Was andere Monate brauchen, liefern wir in Wochen.',
                 gradient: 'from-cyan-400 to-teal-500',
                 bgGradient: 'from-cyan-500/10 to-teal-500/5'
               },
