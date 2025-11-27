@@ -71,12 +71,15 @@ export default function ThemeWave() {
     typeof document !== 'undefined' &&
     document.documentElement.classList.contains('light');
 
-  // Fade out near the end
-  const ringOpacity = ringProgress > 150 
+  // Fade out near the end – slightly stronger on mobile so the effect reads better
+  const baseRingOpacity = ringProgress > 150 
     ? Math.max(0, 1 - (ringProgress - 150) / 30)
     : ringProgress < 5 
       ? ringProgress / 5 
       : 1;
+  const ringOpacity = isMobile
+    ? Math.min(1, baseRingOpacity * 1.25)
+    : baseRingOpacity;
 
   return (
     <>
@@ -92,6 +95,18 @@ export default function ThemeWave() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
           >
+            {/* Subtle dimming on mobile so the wave is visible without blocking content */}
+            {isMobile && (
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background: 'radial-gradient(circle at center, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.25) 40%, transparent 80%)',
+                  opacity: ringOpacity * 0.7,
+                }}
+              />
+            )}
+
             {/* Wide outer glow */}
             <div
               style={{
@@ -118,13 +133,13 @@ export default function ThemeWave() {
                 position: 'absolute',
                 inset: 0,
                 background: `radial-gradient(
-                  circle at ${waveState.originX}% ${waveState.originY}px,
+                  circle at ${waveState.originX}px ${waveState.originY}px,
                   transparent 0%,
                   transparent ${Math.max(0, ringProgress - 1)}%,
                   ${colors.bright} ${ringProgress}%,
                   transparent ${ringProgress + 1}%
                 )`,
-                opacity: ringOpacity * 0.8,
+                opacity: ringOpacity * 0.85,
               }}
             />
           </motion.div>
