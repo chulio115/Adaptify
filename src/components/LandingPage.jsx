@@ -630,7 +630,7 @@ export default function LandingPage() {
                 icon: Sparkles, 
                 name: 'Codium AI / Windsurf', 
                 tagline: 'Entwicklung mit KI-Turbo',
-                desc: 'Modernste KI-Tools beschleunigen unsere Entwicklung. Was andere Monate brauchen, liefern wir in Wochen.',
+                desc: 'Modernste KI-Tools beschleunigen unsere Entwicklung. Was sonst Monate braucht, liefern wir in Wochen.',
                 gradient: 'from-cyan-400 to-teal-500',
                 bgGradient: 'from-cyan-500/10 to-teal-500/5'
               },
