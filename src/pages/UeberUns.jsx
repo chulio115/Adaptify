@@ -51,7 +51,6 @@ function useFadeIn() {
 export default function UeberUns() {
   const { t } = useTranslation();
   const heroFade = useFadeIn();
-  const realityFade = useFadeIn();
   const storyFade = useFadeIn();
   const missionFade = useFadeIn();
   const teamFade = useFadeIn();
@@ -141,72 +140,6 @@ export default function UeberUns() {
           <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
             {t('about.hero.subtitle')}
           </p>
-        </div>
-      </section>
-
-      {/* REALITÄT - Zahlen */}
-      <section 
-        ref={realityFade.ref}
-        className={`py-20 px-6 transition-all duration-1000 delay-200 ${
-          realityFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}
-      >
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="text-xs uppercase tracking-[0.3em] text-amber-400 mb-4 block">{t('about.reality.badge')}</span>
-            <h2 className="text-2xl md:text-4xl font-bold mb-4">
-              {t('about.reality.title')}
-            </h2>
-            <p className="text-gray-500 max-w-2xl mx-auto">
-              {t('about.reality.subtitle')}
-            </p>
-          </div>
-          
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-            {[
-              { value: '63%', labelKey: 'about.reality.stats.noStrategy', source: 'Bitkom 2025' },
-              { value: '78%', labelKey: 'about.reality.stats.dontKnow', source: 'BMWK 2025' },
-              { value: '41%', labelKey: 'about.reality.stats.oldWebsite', source: 'Statista 2025' },
-              { value: '2,6×', labelKey: 'about.reality.stats.fasterGrowth', source: 'Google/Bitkom 2025', highlight: true }
-            ].map((stat, i) => (
-              <div 
-                key={i}
-                className={`rounded-2xl p-6 text-center ${
-                  stat.highlight 
-                    ? 'bg-gradient-to-b from-emerald-500/20 to-transparent border border-emerald-500/30' 
-                    : 'bg-gradient-to-b from-white/5 to-transparent border border-white/10'
-                }`}
-              >
-                <div className={`text-3xl md:text-4xl font-bold mb-2 ${stat.highlight ? 'text-emerald-400' : 'text-white'}`}>
-                  {stat.value}
-                </div>
-                <p className="text-gray-300 text-sm mb-2">{t(stat.labelKey)}</p>
-                <p className="text-xs text-gray-600">{t('about.reality.source')}: {stat.source}</p>
-              </div>
-            ))}
-          </div>
-          
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-8 md:p-10">
-            <h3 className="text-xl font-semibold mb-6 text-white">{t('about.reality.whyHard.title')}</h3>
-            <div className="grid md:grid-cols-2 gap-8 text-gray-400">
-              <div className="space-y-4">
-                <p>
-                  <strong className="text-white">{t('about.reality.whyHard.business.title')}</strong> {t('about.reality.whyHard.business.text')}
-                </p>
-                <p>
-                  <strong className="text-white">{t('about.reality.whyHard.agencies.title')}</strong> {t('about.reality.whyHard.agencies.text')}
-                </p>
-              </div>
-              <div className="space-y-4">
-                <p>
-                  <strong className="text-white">{t('about.reality.whyHard.builders.title')}</strong> {t('about.reality.whyHard.builders.text')}
-                </p>
-                <p>
-                  <strong className="text-white">{t('about.reality.whyHard.notFailure.title')}</strong> {t('about.reality.whyHard.notFailure.text')}
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
