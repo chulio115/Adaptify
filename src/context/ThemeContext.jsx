@@ -70,12 +70,9 @@ export function ThemeProvider({ children }) {
     if (clickCount === 3) {
       setEasterEgg('confetti');
       setTimeout(() => setEasterEgg(null), 3000);
-    } else if (clickCount === 7) {
-      setEasterEgg('disco');
-      setTimeout(() => setEasterEgg(null), 2000);
-    } else if (clickCount === 11) {
+    } else if (clickCount === 5) {
       setEasterEgg('katamaran');
-      setTimeout(() => setEasterEgg(null), 4000);
+      setTimeout(() => setEasterEgg(null), 3000);
     }
   }, [clickCount]);
 

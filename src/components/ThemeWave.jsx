@@ -65,7 +65,7 @@ export default function ThemeWave() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
           >
-            {/* The glowing ring - follows the expanding edge */}
+            {/* OUTER GLOW - wide, soft, visible */}
             <div
               className="absolute rounded-full"
               style={{
@@ -78,20 +78,20 @@ export default function ThemeWave() {
                   radial-gradient(
                     circle,
                     transparent 0%,
-                    transparent ${Math.max(0, 100 - 15)}%,
-                    ${colors.glow} ${Math.max(0, 100 - 10)}%,
-                    ${colors.primary} ${Math.max(0, 100 - 5)}%,
-                    ${colors.white} ${Math.max(0, 100 - 2)}%,
-                    ${colors.secondary} ${Math.max(0, 100 - 1)}%,
+                    transparent 75%,
+                    ${colors.glow} 82%,
+                    ${colors.primary} 90%,
+                    ${colors.white} 95%,
+                    ${colors.secondary} 98%,
                     transparent 100%
                   )
                 `,
-                filter: 'blur(8px)',
-                opacity: waveState.progress < 0.9 ? 1 : 1 - (waveState.progress - 0.9) * 10,
+                filter: 'blur(12px)',
+                opacity: waveState.progress < 0.85 ? 1 : 1 - (waveState.progress - 0.85) * 6.67,
               }}
             />
             
-            {/* Sharp inner ring for definition */}
+            {/* SHARP CORE - the crisp bright line */}
             <div
               className="absolute rounded-full"
               style={{
@@ -104,13 +104,35 @@ export default function ThemeWave() {
                   radial-gradient(
                     circle,
                     transparent 0%,
-                    transparent 97%,
-                    ${colors.white} 98%,
+                    transparent 92%,
+                    ${colors.primary} 95%,
+                    ${colors.white} 97%,
                     ${colors.primary} 99%,
                     transparent 100%
                   )
                 `,
-                opacity: waveState.progress < 0.85 ? 0.8 : 0.8 - (waveState.progress - 0.85) * 5.3,
+                opacity: waveState.progress < 0.8 ? 1 : 1 - (waveState.progress - 0.8) * 5,
+              }}
+            />
+            
+            {/* INNER FILL - subtle color wash following the wave */}
+            <div
+              className="absolute rounded-full"
+              style={{
+                left: waveState.origin.x,
+                top: waveState.origin.y,
+                width: currentRadius * 2,
+                height: currentRadius * 2,
+                transform: 'translate(-50%, -50%)',
+                background: `
+                  radial-gradient(
+                    circle,
+                    ${colors.glow} 0%,
+                    ${colors.glow} 70%,
+                    transparent 100%
+                  )
+                `,
+                opacity: waveState.progress < 0.7 ? 0.15 : 0.15 - (waveState.progress - 0.7) * 0.5,
               }}
             />
 
@@ -188,39 +210,7 @@ export default function ThemeWave() {
         )}
       </AnimatePresence>
 
-      {/* 7x Click: Disco Mode */}
-      <AnimatePresence>
-        {easterEgg === 'disco' && (
-          <motion.div
-            className="fixed inset-0 z-[10000] pointer-events-none"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <motion.div
-              className="absolute inset-0"
-              animate={{
-                background: [
-                  'radial-gradient(circle at 30% 30%, rgba(255,0,128,0.3), transparent 50%)',
-                  'radial-gradient(circle at 70% 70%, rgba(0,255,128,0.3), transparent 50%)',
-                  'radial-gradient(circle at 30% 70%, rgba(128,0,255,0.3), transparent 50%)',
-                  'radial-gradient(circle at 70% 30%, rgba(255,255,0,0.3), transparent 50%)',
-                ],
-              }}
-              transition={{ duration: 0.3, repeat: 6, repeatType: 'loop' }}
-            />
-            <motion.div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-6xl"
-              animate={{ rotate: 360, scale: [1, 1.2, 1] }}
-              transition={{ duration: 0.5, repeat: 4 }}
-            >
-              🪩
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* 11x Click: Katamaran Easter Egg */}
+      {/* 5x Click: Katamaran Easter Egg */}
       <AnimatePresence>
         {easterEgg === 'katamaran' && (
           <motion.div
