@@ -3,17 +3,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 /**
- * ThemeWave v3 - THE Signature Animation
+ * ThemeWave v4 - THE Signature Animation (Elegant Edition)
  * 
- * "Live Color Wipe" - A luminous wave sweeps across the screen,
- * transforming colors in real-time while content stays visible.
+ * Slow, smooth, mesmerizing. People will click it 2-3 times
+ * just to watch the magic happen again.
  * 
- * Technical magic:
- * - Dual-layer rendering (both themes exist)
- * - Diagonal wave clip-path reveals new theme
- * - Glowing edge creates the "magic" feel
- * - Content is ALWAYS visible, only colors change
+ * Duration: 1.4 seconds - slow enough to appreciate, fast enough to not annoy
  */
+
+// Custom easing for that buttery smooth feel
+const ELEGANT_EASE = [0.4, 0, 0.2, 1];
+const DURATION = 1.4; // Slow and elegant
 
 export default function ThemeWave() {
   const { waveState } = useTheme();
@@ -37,8 +37,6 @@ export default function ThemeWave() {
   ) * 1.5;
 
   // Wave direction based on theme change
-  // Dark → Light: wave from bottom-left to top-right (sunrise feel)
-  // Light → Dark: wave from top-right to bottom-left (sunset feel)
   const isGoingLight = waveState.targetTheme === 'light';
 
   return (
@@ -46,8 +44,7 @@ export default function ThemeWave() {
       {waveState.isAnimating && (
         <>
           {/* ═══════════════════════════════════════════════════════════
-              LAYER 1: The New Theme Layer
-              This sits on top and gets revealed by the wave clip-path
+              LAYER 1: The New Theme Layer (Revealed by diagonal wipe)
               ═══════════════════════════════════════════════════════════ */}
           <motion.div
             className="fixed inset-0 z-[9997] pointer-events-none"
@@ -67,123 +64,168 @@ export default function ThemeWave() {
             exit={{ opacity: 0 }}
             transition={{ 
               clipPath: {
-                duration: 0.8,
-                ease: [0.45, 0, 0.15, 1], // Smooth, elegant easing
+                duration: DURATION,
+                ease: ELEGANT_EASE,
               },
-              opacity: { duration: 0.15, delay: 0.7 }
+              opacity: { duration: 0.2, delay: DURATION - 0.2 }
             }}
           />
 
           {/* ═══════════════════════════════════════════════════════════
-              LAYER 2: The Glowing Wave Edge
-              This creates the magical "light passing through" effect
+              LAYER 2: The Beautiful Glowing Edge
+              Wide, soft, and absolutely mesmerizing
               ═══════════════════════════════════════════════════════════ */}
           <motion.div
             className="fixed inset-0 z-[9998] pointer-events-none overflow-hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.1 }}
+            transition={{ duration: 0.2 }}
           >
-            {/* The glowing diagonal line */}
+            {/* Outer glow - wide and soft */}
             <motion.div
               className="absolute"
               style={{
                 width: diagonal,
-                height: '120px',
+                height: '200px',
                 background: waveState.targetTheme === 'dark'
                   ? `linear-gradient(
                       90deg,
                       transparent 0%,
-                      rgba(6, 182, 212, 0.1) 20%,
-                      rgba(6, 182, 212, 0.4) 40%,
-                      rgba(124, 58, 237, 0.6) 50%,
-                      rgba(6, 182, 212, 0.4) 60%,
-                      rgba(6, 182, 212, 0.1) 80%,
+                      rgba(6, 182, 212, 0.05) 15%,
+                      rgba(6, 182, 212, 0.15) 30%,
+                      rgba(124, 58, 237, 0.25) 50%,
+                      rgba(6, 182, 212, 0.15) 70%,
+                      rgba(6, 182, 212, 0.05) 85%,
                       transparent 100%
                     )`
                   : `linear-gradient(
                       90deg,
                       transparent 0%,
-                      rgba(251, 146, 60, 0.1) 20%,
-                      rgba(251, 146, 60, 0.4) 40%,
-                      rgba(249, 115, 22, 0.6) 50%,
-                      rgba(251, 146, 60, 0.4) 60%,
-                      rgba(251, 146, 60, 0.1) 80%,
+                      rgba(251, 146, 60, 0.05) 15%,
+                      rgba(251, 146, 60, 0.15) 30%,
+                      rgba(249, 115, 22, 0.25) 50%,
+                      rgba(251, 146, 60, 0.15) 70%,
+                      rgba(251, 146, 60, 0.05) 85%,
                       transparent 100%
                     )`,
-                filter: 'blur(30px)',
+                filter: 'blur(40px)',
                 transformOrigin: 'center center',
                 rotate: isGoingLight ? '45deg' : '-135deg',
               }}
               initial={{
-                x: isGoingLight ? -diagonal : windowSize.width,
-                y: isGoingLight ? windowSize.height : -diagonal / 2,
+                x: isGoingLight ? -diagonal : windowSize.width + 100,
+                y: isGoingLight ? windowSize.height + 100 : -diagonal / 2,
               }}
               animate={{
-                x: isGoingLight ? windowSize.width : -diagonal,
-                y: isGoingLight ? -diagonal / 2 : windowSize.height,
+                x: isGoingLight ? windowSize.width + 100 : -diagonal,
+                y: isGoingLight ? -diagonal / 2 : windowSize.height + 100,
               }}
               transition={{
-                duration: 0.8,
-                ease: [0.45, 0, 0.15, 1],
+                duration: DURATION,
+                ease: ELEGANT_EASE,
               }}
             />
 
-            {/* Secondary glow for extra depth */}
+            {/* Core glow - the bright center line */}
             <motion.div
               className="absolute"
               style={{
                 width: diagonal,
-                height: '60px',
+                height: '80px',
                 background: waveState.targetTheme === 'dark'
-                  ? 'linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.8), rgba(124, 58, 237, 0.9), rgba(6, 182, 212, 0.8), transparent)'
-                  : 'linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.8), rgba(249, 115, 22, 0.9), rgba(251, 191, 36, 0.8), transparent)',
-                filter: 'blur(8px)',
+                  ? `linear-gradient(
+                      90deg,
+                      transparent 0%,
+                      rgba(6, 182, 212, 0.3) 20%,
+                      rgba(6, 182, 212, 0.6) 40%,
+                      rgba(124, 58, 237, 0.8) 50%,
+                      rgba(6, 182, 212, 0.6) 60%,
+                      rgba(6, 182, 212, 0.3) 80%,
+                      transparent 100%
+                    )`
+                  : `linear-gradient(
+                      90deg,
+                      transparent 0%,
+                      rgba(251, 191, 36, 0.3) 20%,
+                      rgba(251, 146, 60, 0.6) 40%,
+                      rgba(249, 115, 22, 0.8) 50%,
+                      rgba(251, 146, 60, 0.6) 60%,
+                      rgba(251, 191, 36, 0.3) 80%,
+                      transparent 100%
+                    )`,
+                filter: 'blur(20px)',
                 transformOrigin: 'center center',
                 rotate: isGoingLight ? '45deg' : '-135deg',
               }}
               initial={{
-                x: isGoingLight ? -diagonal : windowSize.width,
-                y: isGoingLight ? windowSize.height : -diagonal / 2,
+                x: isGoingLight ? -diagonal : windowSize.width + 100,
+                y: isGoingLight ? windowSize.height + 100 : -diagonal / 2,
               }}
               animate={{
-                x: isGoingLight ? windowSize.width : -diagonal,
-                y: isGoingLight ? -diagonal / 2 : windowSize.height,
+                x: isGoingLight ? windowSize.width + 100 : -diagonal,
+                y: isGoingLight ? -diagonal / 2 : windowSize.height + 100,
               }}
               transition={{
-                duration: 0.8,
-                ease: [0.45, 0, 0.15, 1],
+                duration: DURATION,
+                ease: ELEGANT_EASE,
+              }}
+            />
+
+            {/* Sharp highlight - the crisp edge */}
+            <motion.div
+              className="absolute"
+              style={{
+                width: diagonal,
+                height: '4px',
+                background: waveState.targetTheme === 'dark'
+                  ? 'linear-gradient(90deg, transparent 10%, rgba(6, 182, 212, 0.9) 30%, rgba(255, 255, 255, 1) 50%, rgba(124, 58, 237, 0.9) 70%, transparent 90%)'
+                  : 'linear-gradient(90deg, transparent 10%, rgba(251, 191, 36, 0.9) 30%, rgba(255, 255, 255, 1) 50%, rgba(249, 115, 22, 0.9) 70%, transparent 90%)',
+                filter: 'blur(1px)',
+                transformOrigin: 'center center',
+                rotate: isGoingLight ? '45deg' : '-135deg',
+              }}
+              initial={{
+                x: isGoingLight ? -diagonal : windowSize.width + 100,
+                y: isGoingLight ? windowSize.height + 100 : -diagonal / 2,
+              }}
+              animate={{
+                x: isGoingLight ? windowSize.width + 100 : -diagonal,
+                y: isGoingLight ? -diagonal / 2 : windowSize.height + 100,
+              }}
+              transition={{
+                duration: DURATION,
+                ease: ELEGANT_EASE,
               }}
             />
           </motion.div>
 
           {/* ═══════════════════════════════════════════════════════════
-              LAYER 3: Sparkle Particles
-              Small light particles that ride along the wave
+              LAYER 3: Subtle Sparkle Particles
+              Fewer, slower, more elegant
               ═══════════════════════════════════════════════════════════ */}
-          {[...Array(12)].map((_, i) => {
+          {[...Array(6)].map((_, i) => {
             const startX = isGoingLight ? 0 : windowSize.width;
             const startY = isGoingLight ? windowSize.height : 0;
             const endX = isGoingLight ? windowSize.width : 0;
             const endY = isGoingLight ? 0 : windowSize.height;
             
-            // Distribute particles along the wave
-            const offset = (i / 12) * 200 - 100;
-            const delay = i * 0.03;
+            // Spread particles across the wave
+            const offset = (i / 6) * 300 - 150;
+            const delay = 0.2 + (i * 0.08);
             
             return (
               <motion.div
                 key={i}
                 className="fixed z-[9999] pointer-events-none"
                 style={{
-                  width: 6,
-                  height: 6,
+                  width: 4,
+                  height: 4,
                   borderRadius: '50%',
-                  background: waveState.targetTheme === 'dark' ? '#06B6D4' : '#FBBF24',
+                  background: '#FFFFFF',
                   boxShadow: waveState.targetTheme === 'dark'
-                    ? '0 0 12px #06B6D4, 0 0 24px #7C3AED, 0 0 36px #06B6D4'
-                    : '0 0 12px #FBBF24, 0 0 24px #F97316, 0 0 36px #FBBF24',
+                    ? '0 0 8px #06B6D4, 0 0 16px #7C3AED'
+                    : '0 0 8px #FBBF24, 0 0 16px #F97316',
                 }}
                 initial={{
                   x: startX + (isGoingLight ? offset : -offset),
@@ -194,13 +236,13 @@ export default function ThemeWave() {
                 animate={{
                   x: endX + (isGoingLight ? offset : -offset),
                   y: endY + (isGoingLight ? -offset : offset),
-                  scale: [0, 1.5, 1, 0],
-                  opacity: [0, 1, 1, 0],
+                  scale: [0, 1, 0.5, 0],
+                  opacity: [0, 0.8, 0.6, 0],
                 }}
                 transition={{
-                  duration: 0.8,
+                  duration: DURATION * 0.8,
                   delay,
-                  ease: [0.45, 0, 0.15, 1],
+                  ease: ELEGANT_EASE,
                 }}
               />
             );

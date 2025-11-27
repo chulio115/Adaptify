@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+// Note: useEffect is also used by LighthouseBeam component below
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 
@@ -37,93 +38,89 @@ const ConfettiParticle = ({ emoji, delay, x }) => (
 );
 
 // Lighthouse beam component for Easter Egg
-const LighthouseBeam = ({ isActive }) => (
-  <AnimatePresence>
-    {isActive && (
-      <motion.div
-        className="fixed inset-0 pointer-events-none z-[9999]"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.2 }}
-      >
-        {/* Dark overlay to make the beam pop */}
+const LighthouseBeam = ({ isActive, buttonRef }) => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  
+  useEffect(() => {
+    if (isActive && buttonRef?.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      setPosition({
+        x: rect.left + rect.width / 2,
+        y: rect.top + rect.height / 2,
+      });
+    }
+  }, [isActive, buttonRef]);
+
+  return (
+    <AnimatePresence>
+      {isActive && (
         <motion.div
-          className="absolute inset-0 bg-black/40"
+          className="fixed inset-0 pointer-events-none z-[9999]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-        />
-        
-        {/* The lighthouse tower base (centered on toggle position) */}
-        <div 
-          className="absolute"
-          style={{
-            top: '50%',
-            right: '80px',
-            transform: 'translateY(-50%)',
-          }}
+          transition={{ duration: 0.3 }}
         >
-          {/* Main rotating beam - HUGE and visible */}
+          {/* Subtle dark overlay */}
           <motion.div
-            className="absolute origin-left"
-            style={{
-              width: '100vw',
-              height: '8px',
-              left: '20px',
-              top: '-4px',
-              background: 'linear-gradient(90deg, rgba(251,191,36,1) 0%, rgba(251,191,36,0.8) 20%, rgba(251,191,36,0.3) 50%, transparent 100%)',
-              boxShadow: '0 0 40px rgba(251,191,36,0.9), 0 0 80px rgba(251,191,36,0.6), 0 0 120px rgba(251,191,36,0.3)',
-              borderRadius: '4px',
-            }}
-            initial={{ rotate: -45 }}
-            animate={{ rotate: 315 }}
-            transition={{ duration: 1.2, ease: 'linear' }}
+            className="absolute inset-0 bg-black/30"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           />
           
-          {/* Secondary beam for depth (opposite direction) */}
-          <motion.div
-            className="absolute origin-left"
+          {/* Lighthouse beams - positioned at the toggle */}
+          <div 
+            className="absolute"
             style={{
-              width: '100vw',
-              height: '4px',
-              left: '20px',
-              top: '-2px',
-              background: 'linear-gradient(90deg, rgba(251,191,36,0.8) 0%, rgba(251,191,36,0.4) 30%, transparent 70%)',
-              boxShadow: '0 0 20px rgba(251,191,36,0.5)',
-              borderRadius: '2px',
+              left: position.x,
+              top: position.y,
+              transform: 'translate(-50%, -50%)',
             }}
-            initial={{ rotate: 135 }}
-            animate={{ rotate: 495 }}
-            transition={{ duration: 1.2, ease: 'linear' }}
-          />
-          
-          {/* Pulsing core glow */}
-          <motion.div
-            className="absolute rounded-full"
-            style={{
-              width: '60px',
-              height: '60px',
-              left: '-10px',
-              top: '-30px',
-              background: 'radial-gradient(circle, rgba(251,191,36,0.9) 0%, rgba(251,191,36,0.4) 40%, transparent 70%)',
-              boxShadow: '0 0 60px rgba(251,191,36,0.8), 0 0 100px rgba(251,191,36,0.5)',
-            }}
-            animate={{
-              scale: [1, 1.3, 1],
-              opacity: [0.8, 1, 0.8],
-            }}
-            transition={{
-              duration: 0.6,
-              repeat: 2,
-              ease: 'easeInOut',
-            }}
-          />
-        </div>
-      </motion.div>
-    )}
-  </AnimatePresence>
-);
+          >
+            {/* Main rotating beam */}
+            <motion.div
+              className="absolute origin-center"
+              style={{
+                width: '150vmax',
+                height: '6px',
+                left: '-75vmax',
+                top: '-3px',
+                background: 'linear-gradient(90deg, transparent 0%, rgba(251,191,36,0.3) 20%, rgba(251,191,36,1) 48%, rgba(255,255,255,1) 50%, rgba(251,191,36,1) 52%, rgba(251,191,36,0.3) 80%, transparent 100%)',
+                boxShadow: '0 0 30px rgba(251,191,36,0.8), 0 0 60px rgba(251,191,36,0.5)',
+                borderRadius: '3px',
+              }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1.5, ease: 'linear' }}
+            />
+            
+            {/* Pulsing core glow */}
+            <motion.div
+              className="absolute rounded-full"
+              style={{
+                width: '80px',
+                height: '80px',
+                left: '-40px',
+                top: '-40px',
+                background: 'radial-gradient(circle, rgba(251,191,36,1) 0%, rgba(251,191,36,0.5) 30%, transparent 70%)',
+                boxShadow: '0 0 40px rgba(251,191,36,0.9), 0 0 80px rgba(251,191,36,0.6)',
+              }}
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.9, 1, 0.9],
+              }}
+              transition={{
+                duration: 0.5,
+                repeat: 3,
+                ease: 'easeInOut',
+              }}
+            />
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
 
 export default function ThemeToggle() {
   const { isDark, toggleTheme } = useTheme();
@@ -250,7 +247,7 @@ export default function ThemeToggle() {
         />
         
         {/* Lighthouse Easter Egg */}
-        <LighthouseBeam isActive={showLighthouse} />
+        <LighthouseBeam isActive={showLighthouse} buttonRef={toggleRef} />
         
         {/* Inner container with morphing effect */}
         <motion.div 

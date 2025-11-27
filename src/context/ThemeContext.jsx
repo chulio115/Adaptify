@@ -91,18 +91,18 @@ export function ThemeProvider({ children }) {
       targetTheme: isDark ? 'light' : 'dark',
     });
 
-    // Toggle theme at the right moment (when wave covers ~50% of screen)
+    // Toggle theme when wave reaches ~40% across (elegant timing)
     waveTimeoutRef.current = setTimeout(() => {
       setIsDark(prev => !prev);
-    }, 200);
+    }, 500);
 
-    // End animation
+    // End animation after full duration + buffer
     setTimeout(() => {
       setWaveState(prev => ({
         ...prev,
         isAnimating: false,
       }));
-    }, 600);
+    }, 1500);
   }, [isDark]);
 
   // Direct set without animation (for initialization)
