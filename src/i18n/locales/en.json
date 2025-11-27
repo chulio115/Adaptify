@@ -110,23 +110,28 @@
     "note": "✓ No obligation · ✓ Free · ✓ Appointment within 24h"
   },
   "contact": {
-    "title": "Let's Talk",
-    "subtitle": "Tell us about your project – we'll get back to you within 24 hours.",
+    "title": "Free Strategy Call",
+    "subtitle": "30 minutes that could change your business.",
     "form": {
       "name": "Name",
+      "namePlaceholder": "John Doe",
       "email": "Email",
+      "emailPlaceholder": "john@company.com",
       "phone": "Phone (optional)",
-      "message": "What can we help you with?",
-      "submit": "Send",
-      "sending": "Sending..."
+      "phonePlaceholder": "+1 234 567890",
+      "message": "What's your biggest challenge?",
+      "messagePlaceholder": "e.g. We need a modern website + automation...",
+      "submit": "Request a call",
+      "sending": "Sending...",
+      "note": "We'll get back to you within 24 hours."
     },
     "success": {
-      "title": "Got it!",
+      "title": "Thanks for reaching out!",
       "message": "We'll be in touch within 24 hours."
     },
     "error": {
-      "title": "Something went wrong.",
-      "message": "Please try again or drop us an email directly."
+      "title": "Something went wrong",
+      "message": "Please try again."
     }
   },
   "footer": {
@@ -194,10 +199,22 @@
         "button": "Get in Touch"
       }
     },
+    "cases": {
+      "badge": "Success Stories",
+      "title": "What we've built so far"
+    },
+    "quote": {
+      "text": "Digitalization doesn't have to be rocket science. And it doesn't have to cost 50,000 euros. We want every small business, every family company to have the same chances as the big players - just at a budget that fits.",
+      "author": "– Julius Schulze, Founder Adaptify"
+    },
     "cta": {
-      "title": "Sounds like what you're looking for?",
-      "subtitle": "Let's have a quick chat – zero commitment. We'd love to hear from you.",
-      "button": "Book a Free Call"
+      "title": "Sounds good? Let's talk.",
+      "subtitle": "30 minutes, no strings attached, free. We'll look at where you are – and if we can help. No sales pitch, promise.",
+      "button": "Book a Free Call",
+      "note": "✓ No obligation · ✓ No hidden costs · ✓ Response within 24h"
+    },
+    "footer": {
+      "home": "Home"
     }
   },
   "language": {

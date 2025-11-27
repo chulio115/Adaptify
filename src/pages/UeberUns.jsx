@@ -439,8 +439,8 @@ export default function UeberUns() {
       >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <span className="text-xs uppercase tracking-[0.3em] text-cyan-400 mb-4 block">Erfolgsgeschichten</span>
-            <h2 className="text-2xl md:text-4xl font-bold mb-4">Was wir bisher gebaut haben</h2>
+            <span className="text-xs uppercase tracking-[0.3em] text-cyan-400 mb-4 block">{t('about.cases.badge')}</span>
+            <h2 className="text-2xl md:text-4xl font-bold mb-4">{t('about.cases.title')}</h2>
           </div>
           
           <div className="grid md:grid-cols-3 gap-6">
@@ -490,11 +490,9 @@ export default function UeberUns() {
         <div className="max-w-4xl mx-auto text-center">
           <Quote className="w-12 h-12 text-violet-400 mx-auto mb-8 opacity-50" />
           <blockquote className="text-2xl md:text-3xl font-medium text-white leading-relaxed mb-8">
-            „Digitalisierung muss kein Hexenwerk sein. Und sie muss nicht 50.000 Euro kosten. 
-            Wir wollen, dass jeder Handwerksbetrieb, jedes Familienunternehmen die gleichen Chancen hat 
-            wie die großen Player – nur eben passend zum eigenen Budget."
+            {t('about.quote.text')}
           </blockquote>
-          <p className="text-gray-500">– Julius Schulze, Gründer Adaptify</p>
+          <p className="text-gray-500">{t('about.quote.author')}</p>
         </div>
       </section>
 
@@ -509,22 +507,21 @@ export default function UeberUns() {
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <TrendingUp className="w-12 h-12 text-cyan-400 mx-auto mb-6" />
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">Klingt gut? Dann lasst uns reden.</h2>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">{t('about.cta.title')}</h2>
           <p className="text-lg text-gray-400 mb-10 max-w-2xl mx-auto">
-            30 Minuten, unverbindlich, kostenlos. Wir schauen uns gemeinsam an, wo ihr steht – 
-            und ob wir euch helfen können. <strong className="text-white">Kein Verkaufsgespräch, versprochen.</strong>
+            {t('about.cta.subtitle')}
           </p>
           
           <button 
             onClick={() => setContactModalOpen(true)}
             className="group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-cyan-500 to-violet-500 hover:from-cyan-400 hover:to-violet-400 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/25 hover:scale-105"
           >
-            Kostenloses Erstgespräch buchen
+            {t('about.cta.button')}
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
           
           <p className="mt-6 text-sm text-gray-600">
-            ✓ Unverbindlich · ✓ Keine versteckten Kosten · ✓ Antwort innerhalb 24h
+            {t('about.cta.note')}
           </p>
         </div>
       </section>
@@ -552,24 +549,24 @@ export default function UeberUns() {
             
             <div className="text-center mb-8 relative z-10">
               <Sparkles className="w-8 h-8 text-cyan-400 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold mb-2">Kostenloses Strategiegespräch</h3>
-              <p className="text-gray-400">30 Minuten, die euer Business verändern können.</p>
+              <h3 className="text-2xl font-bold mb-2">{t('contact.title')}</h3>
+              <p className="text-gray-400">{t('contact.subtitle')}</p>
             </div>
             
             {/* Success Message */}
             {submitStatus === 'success' && (
               <div className="relative z-10 p-4 rounded-xl bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-center mb-4">
                 <CheckCircle2 className="w-6 h-6 mx-auto mb-2" />
-                <p className="font-medium">Danke für deine Nachricht!</p>
-                <p className="text-sm text-emerald-400/80">Wir melden uns innerhalb von 24 Stunden.</p>
+                <p className="font-medium">{t('contact.success.title')}</p>
+                <p className="text-sm text-emerald-400/80">{t('contact.success.message')}</p>
               </div>
             )}
             
             {/* Error Message */}
             {submitStatus === 'error' && (
               <div className="relative z-10 p-4 rounded-xl bg-red-500/20 border border-red-500/30 text-red-400 text-center mb-4">
-                <p className="font-medium">Fehler beim Senden</p>
-                <p className="text-sm">Bitte versuche es erneut.</p>
+                <p className="font-medium">{t('contact.error.title')}</p>
+                <p className="text-sm">{t('contact.error.message')}</p>
               </div>
             )}
             
@@ -587,7 +584,7 @@ export default function UeberUns() {
                 <input type="hidden" name="bot-field" />
                 
                 <div>
-                  <label className="text-sm text-gray-400 mb-2 block">Name *</label>
+                  <label className="text-sm text-gray-400 mb-2 block">{t('contact.form.name')} *</label>
                   <input
                     type="text"
                     name="name"
@@ -595,12 +592,12 @@ export default function UeberUns() {
                     value={form.name}
                     onChange={e => setForm({...form, name: e.target.value})}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
-                    placeholder="Max Mustermann"
+                    placeholder={t('contact.form.namePlaceholder')}
                     disabled={isSubmitting}
                   />
                 </div>
                 <div>
-                  <label className="text-sm text-gray-400 mb-2 block">E-Mail *</label>
+                  <label className="text-sm text-gray-400 mb-2 block">{t('contact.form.email')} *</label>
                   <input
                     type="email"
                     name="email"
@@ -608,24 +605,24 @@ export default function UeberUns() {
                     value={form.email}
                     onChange={e => setForm({...form, email: e.target.value})}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
-                    placeholder="max@firma.de"
+                    placeholder={t('contact.form.emailPlaceholder')}
                     disabled={isSubmitting}
                   />
                 </div>
                 <div>
-                  <label className="text-sm text-gray-400 mb-2 block">Telefon (optional)</label>
+                  <label className="text-sm text-gray-400 mb-2 block">{t('contact.form.phone')}</label>
                   <input
                     type="tel"
                     name="phone"
                     value={form.phone}
                     onChange={e => setForm({...form, phone: e.target.value})}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
-                    placeholder="+49 123 456789"
+                    placeholder={t('contact.form.phonePlaceholder')}
                     disabled={isSubmitting}
                   />
                 </div>
                 <div>
-                  <label className="text-sm text-gray-400 mb-2 block">Was ist eure größte Herausforderung? *</label>
+                  <label className="text-sm text-gray-400 mb-2 block">{t('contact.form.message')} *</label>
                   <textarea
                     name="message"
                     required
@@ -633,7 +630,7 @@ export default function UeberUns() {
                     value={form.message}
                     onChange={e => setForm({...form, message: e.target.value})}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all resize-none"
-                    placeholder="z.B. Wir brauchen eine moderne Webseite + Automatisierung..."
+                    placeholder={t('contact.form.messagePlaceholder')}
                     disabled={isSubmitting}
                   />
                 </div>
@@ -648,14 +645,14 @@ export default function UeberUns() {
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                       </svg>
-                      Wird gesendet...
+                      {t('contact.form.sending')}
                     </span>
                   ) : (
-                    'Gespräch anfragen'
+                    t('contact.form.submit')
                   )}
                 </button>
                 <p className="text-center text-xs text-gray-600">
-                  Wir melden uns innerhalb von 24 Stunden.
+                  {t('contact.form.note')}
                 </p>
               </form>
             )}
@@ -738,13 +735,13 @@ export default function UeberUns() {
           </div>
           
           <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-500">
-            <Link to="/" className="hover:text-white transition-colors">Startseite</Link>
-            <Link to="/impressum" className="hover:text-white transition-colors">Impressum</Link>
-            <Link to="/datenschutz" className="hover:text-white transition-colors">Datenschutz</Link>
-            <Link to="/agb" className="hover:text-white transition-colors">AGB</Link>
+            <Link to="/" className="hover:text-white transition-colors">{t('about.footer.home')}</Link>
+            <Link to="/impressum" className="hover:text-white transition-colors">{t('footer.legal.imprint')}</Link>
+            <Link to="/datenschutz" className="hover:text-white transition-colors">{t('footer.legal.privacy')}</Link>
+            <Link to="/agb" className="hover:text-white transition-colors">{t('footer.legal.terms')}</Link>
           </div>
           
-          <p className="text-sm text-gray-600">Made with ❤️ & AI in Germany</p>
+          <p className="text-sm text-gray-600">{t('footer.madeWith')}</p>
         </div>
       </footer>
     </div>

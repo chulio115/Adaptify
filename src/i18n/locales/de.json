@@ -110,23 +110,28 @@
     "note": "✓ Unverbindlich · ✓ Keine Kosten · ✓ Innerhalb von 24h Termin"
   },
   "contact": {
-    "title": "Kostenloses Erstgespräch",
-    "subtitle": "Erzähl uns kurz von eurem Projekt – wir melden uns innerhalb von 24 Stunden.",
+    "title": "Kostenloses Strategiegespräch",
+    "subtitle": "30 Minuten, die euer Business verändern können.",
     "form": {
       "name": "Name",
+      "namePlaceholder": "Max Mustermann",
       "email": "E-Mail",
+      "emailPlaceholder": "max@firma.de",
       "phone": "Telefon (optional)",
-      "message": "Wie können wir euch helfen?",
-      "submit": "Anfrage senden",
-      "sending": "Wird gesendet..."
+      "phonePlaceholder": "+49 123 456789",
+      "message": "Was ist eure größte Herausforderung?",
+      "messagePlaceholder": "z.B. Wir brauchen eine moderne Webseite + Automatisierung...",
+      "submit": "Gespräch anfragen",
+      "sending": "Wird gesendet...",
+      "note": "Wir melden uns innerhalb von 24 Stunden."
     },
     "success": {
-      "title": "Anfrage gesendet!",
-      "message": "Wir melden uns innerhalb von 24 Stunden bei euch."
+      "title": "Danke für deine Nachricht!",
+      "message": "Wir melden uns innerhalb von 24 Stunden."
     },
     "error": {
-      "title": "Ups, da ist was schiefgelaufen.",
-      "message": "Bitte versucht es erneut oder schreibt uns direkt eine E-Mail."
+      "title": "Fehler beim Senden",
+      "message": "Bitte versuche es erneut."
     }
   },
   "footer": {
@@ -194,10 +199,22 @@
         "button": "Initiativ bewerben"
       }
     },
+    "cases": {
+      "badge": "Erfolgsgeschichten",
+      "title": "Was wir bisher gebaut haben"
+    },
+    "quote": {
+      "text": "Digitalisierung muss kein Hexenwerk sein. Und sie muss nicht 50.000 Euro kosten. Wir wollen, dass jeder Handwerksbetrieb, jedes Familienunternehmen die gleichen Chancen hat wie die großen Player - nur eben passend zum eigenen Budget.",
+      "author": "– Julius Schulze, Gründer Adaptify"
+    },
     "cta": {
-      "title": "Klingt nach dem Partner, den ihr sucht?",
-      "subtitle": "Lasst uns unverbindlich sprechen – wir freuen uns, euch kennenzulernen.",
-      "button": "Kostenloses Erstgespräch"
+      "title": "Klingt gut? Dann lasst uns reden.",
+      "subtitle": "30 Minuten, unverbindlich, kostenlos. Wir schauen uns gemeinsam an, wo ihr steht – und ob wir euch helfen können. Kein Verkaufsgespräch, versprochen.",
+      "button": "Kostenloses Erstgespräch buchen",
+      "note": "✓ Unverbindlich · ✓ Keine versteckten Kosten · ✓ Antwort innerhalb 24h"
+    },
+    "footer": {
+      "home": "Startseite"
     }
   },
   "language": {
