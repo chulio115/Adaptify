@@ -43,6 +43,7 @@ export function ThemeProvider({ children }) {
   const [clickCount, setClickCount] = useState(0);
   const [easterEgg, setEasterEgg] = useState(null);
   const [matrixWasShown, setMatrixWasShown] = useState(false); // Unlocks boat on language click
+  const [toggleCounter, setToggleCounter] = useState(0); // Count all successful theme toggles
   const clickResetTimer = useRef(null);
   const [disableViewTransitions, setDisableViewTransitions] = useState(false); // Brave fallback
 
@@ -91,6 +92,15 @@ export function ThemeProvider({ children }) {
       setTimeout(() => setEasterEgg(null), 4000);
     }
   }, [clickCount]);
+
+  // Also trigger Matrix every 5th successful toggle (5,10,15,...) so it appears in both themes over time
+  useEffect(() => {
+    if (toggleCounter > 0 && toggleCounter % 5 === 0) {
+      setEasterEgg('matrix');
+      setMatrixWasShown(true);
+      setTimeout(() => setEasterEgg(null), 4000);
+    }
+  }, [toggleCounter]);
 
   // Function to trigger boat (called from LanguageToggle after matrix)
   const triggerBoat = useCallback(() => {
@@ -141,6 +151,7 @@ export function ThemeProvider({ children }) {
         root.classList.remove('light', 'dark');
         root.classList.add(newIsDark ? 'dark' : 'light');
         setIsDark(newIsDark);
+        setToggleCounter(prev => prev + 1);
       });
 
       // Wait for transition to finish
@@ -151,6 +162,7 @@ export function ThemeProvider({ children }) {
       // Fallback for browsers without View Transitions
       setWaveState({ isAnimating: true, originX: x, originY: y, previousTheme });
       setIsDark(newIsDark);
+      setToggleCounter(prev => prev + 1);
       
       setTimeout(() => {
         setWaveState(prev => ({ ...prev, isAnimating: false }));
