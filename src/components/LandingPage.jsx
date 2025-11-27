@@ -245,37 +245,39 @@ export default function LandingPage() {
         </div>
         
         {/* Mobile Menu Panel */}
-        <div className={`md:hidden absolute top-full left-0 right-0 bg-[#0a0a0a]/98 backdrop-blur-xl border-b border-white/10 transition-all duration-300 ${
+        <div className={`md:hidden absolute top-full left-0 right-0 bg-[#0a0a0a] border-b border-white/10 shadow-2xl transition-all duration-300 ${
           mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}>
-          <nav className="flex flex-col p-6 gap-4">
+          <nav className="flex flex-col p-6 gap-2">
             <a 
               href="#problem" 
               onClick={() => setMobileMenuOpen(false)}
-              className="text-lg text-gray-300 hover:text-white transition-colors py-2"
+              className="text-lg text-white hover:text-cyan-400 transition-colors py-3 px-4 rounded-xl hover:bg-white/5"
             >
               Problem
             </a>
             <a 
               href="#leistungen" 
               onClick={() => setMobileMenuOpen(false)}
-              className="text-lg text-gray-300 hover:text-white transition-colors py-2"
+              className="text-lg text-white hover:text-cyan-400 transition-colors py-3 px-4 rounded-xl hover:bg-white/5"
             >
               Leistungen
             </a>
             <a 
               href="#technologie" 
               onClick={() => setMobileMenuOpen(false)}
-              className="text-lg text-gray-300 hover:text-white transition-colors py-2"
+              className="text-lg text-white hover:text-cyan-400 transition-colors py-3 px-4 rounded-xl hover:bg-white/5"
             >
               Technologie
             </a>
-            <button 
-              onClick={() => { setModalOpen(true); setMobileMenuOpen(false); }}
-              className="mt-2 bg-gradient-to-r from-cyan-500 to-violet-500 px-6 py-3 rounded-full text-sm font-semibold"
-            >
-              Gespräch buchen
-            </button>
+            <div className="mt-4 pt-4 border-t border-white/10">
+              <button 
+                onClick={() => { setModalOpen(true); setMobileMenuOpen(false); }}
+                className="w-full bg-gradient-to-r from-cyan-500 to-violet-500 hover:from-cyan-400 hover:to-violet-400 px-6 py-4 rounded-xl text-base font-semibold shadow-lg shadow-violet-500/20"
+              >
+                Gespräch buchen
+              </button>
+            </div>
           </nav>
         </div>
       </header>
