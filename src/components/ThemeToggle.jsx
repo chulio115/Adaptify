@@ -1,67 +1,93 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
 
 /**
- * ThemeToggle - Premium Dark/Light Mode Toggle
+ * ThemeToggle - THE Signature Kunstwerk
  * 
  * Features:
- * - Shows SUN in dark mode (click to go light)
- * - Shows MOON in light mode (click to go dark)
- * - Wave transition (Cyan → Coral) sweeping across screen
- * - Mobile optimized with touch feedback
- * - Easter Egg: Alt+Click oder 3x schneller Klick
- * - Subtle "invitation" animation on first load
+ * - Morphing Sun/Moon with ray animations
+ * - Triggers the epic clip-path wave transition
+ * - Lighthouse Easter Egg (hold for 1 second)
+ * - Idle glow pulsing
+ * - 60fps, fully accessible
+ * 
+ * "The one toggle to rule them all"
  */
 
 // Konfetti Particle Component
 const ConfettiParticle = ({ emoji, delay, x }) => (
-  <div
+  <motion.div
     className="fixed pointer-events-none text-xl sm:text-2xl z-[9999]"
-    style={{
-      left: `${x}%`,
-      top: '-50px',
-      animation: `confetti-fall 3s ease-out ${delay}s forwards`,
+    style={{ left: `${x}%`, top: -50 }}
+    initial={{ y: 0, opacity: 1, rotate: 0 }}
+    animate={{ 
+      y: '100vh', 
+      opacity: 0, 
+      rotate: 720,
+    }}
+    transition={{ 
+      duration: 3, 
+      delay, 
+      ease: 'easeOut' 
     }}
   >
     {emoji}
-  </div>
+  </motion.div>
+);
+
+// Lighthouse beam component for Easter Egg
+const LighthouseBeam = ({ isActive }) => (
+  <AnimatePresence>
+    {isActive && (
+      <motion.div
+        className="absolute inset-0 pointer-events-none overflow-visible"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        {/* Rotating light beam */}
+        <motion.div
+          className="absolute top-1/2 left-1/2 origin-left"
+          style={{
+            width: '150px',
+            height: '2px',
+            background: 'linear-gradient(90deg, rgba(251,191,36,1) 0%, rgba(251,191,36,0.5) 30%, transparent 100%)',
+            boxShadow: '0 0 20px rgba(251,191,36,0.8), 0 0 40px rgba(251,191,36,0.4)',
+            marginLeft: '-50%',
+            marginTop: '-1px',
+          }}
+          initial={{ rotate: 0 }}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1.5, ease: 'linear' }}
+        />
+        {/* Lighthouse glow */}
+        <motion.div
+          className="absolute inset-0 rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(251,191,36,0.6) 0%, transparent 70%)',
+          }}
+          initial={{ scale: 1, opacity: 0.8 }}
+          animate={{ scale: [1, 1.5, 1], opacity: [0.8, 0.4, 0.8] }}
+          transition={{ duration: 1.5, repeat: 0 }}
+        />
+      </motion.div>
+    )}
+  </AnimatePresence>
 );
 
 export default function ThemeToggle() {
-  const [isDark, setIsDark] = useState(true);
+  const { isDark, toggleTheme } = useTheme();
   const [isHovered, setIsHovered] = useState(false);
   const [showGlow, setShowGlow] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [showEasterEgg, setShowEasterEgg] = useState(false);
+  const [showLighthouse, setShowLighthouse] = useState(false);
   const [confetti, setConfetti] = useState([]);
-  const [showInvite, setShowInvite] = useState(false); // Subtle "try me" animation
+  const [holdProgress, setHoldProgress] = useState(0);
   
-  const clickCountRef = useRef(0);
-  const clickTimeoutRef = useRef(null);
+  const holdTimerRef = useRef(null);
+  const holdStartRef = useRef(null);
+  const progressIntervalRef = useRef(null);
   const toggleRef = useRef(null);
-
-  // Initialize theme from localStorage or system preference
-  useEffect(() => {
-    const stored = localStorage.getItem('adaptify-theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    const shouldBeDark = stored ? stored === 'dark' : prefersDark;
-    setIsDark(shouldBeDark);
-    
-    if (!shouldBeDark) {
-      document.documentElement.classList.add('light');
-    }
-    
-    // Listen for system preference changes
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = (e) => {
-      if (!localStorage.getItem('adaptify-theme')) {
-        setIsDark(e.matches);
-        document.documentElement.classList.toggle('light', !e.matches);
-      }
-    };
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
 
   // Subtle glow after 0.8s
   useEffect(() => {
@@ -69,22 +95,9 @@ export default function ThemeToggle() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Subtle "invitation" effect after 2s - only once per session
-  useEffect(() => {
-    const hasSeenInvite = sessionStorage.getItem('adaptify-theme-invite');
-    if (!hasSeenInvite) {
-      const timer = setTimeout(() => {
-        setShowInvite(true);
-        sessionStorage.setItem('adaptify-theme-invite', 'true');
-        setTimeout(() => setShowInvite(false), 1500);
-      }, 2000);
-      return () => clearTimeout(timer);
-    }
-  }, []);
-
   // Spawn confetti for Easter Egg
   const spawnConfetti = useCallback(() => {
-    const emojis = ['⚛️', '🚀', '⛵', '✨', '💎', '🎯', '⚡'];
+    const emojis = ['⚛️', '🚀', '⛵', '✨', '💎', '🎯', '⚡', '🔥'];
     const particles = Array.from({ length: 30 }, (_, i) => ({
       id: i,
       emoji: emojis[Math.floor(Math.random() * emojis.length)],
@@ -95,103 +108,110 @@ export default function ThemeToggle() {
     setTimeout(() => setConfetti([]), 4000);
   }, []);
 
-  // Handle the actual theme toggle with wave animation
-  const toggleTheme = useCallback((e) => {
-    // Easter Egg: Alt+Click
-    if (e.altKey) {
-      setShowEasterEgg(true);
+  // Long press handling for Lighthouse Easter Egg
+  const handlePressStart = useCallback(() => {
+    holdStartRef.current = Date.now();
+    
+    // Progress animation
+    progressIntervalRef.current = setInterval(() => {
+      const elapsed = Date.now() - holdStartRef.current;
+      const progress = Math.min(elapsed / 1000, 1);
+      setHoldProgress(progress);
+    }, 16);
+    
+    // Trigger lighthouse after 1 second hold
+    holdTimerRef.current = setTimeout(() => {
+      setShowLighthouse(true);
       spawnConfetti();
-      setTimeout(() => setShowEasterEgg(false), 3000);
-      return;
+      
+      // Reset lighthouse after animation
+      setTimeout(() => {
+        setShowLighthouse(false);
+      }, 1500);
+    }, 1000);
+  }, [spawnConfetti]);
+
+  const handlePressEnd = useCallback((e) => {
+    setHoldProgress(0);
+    
+    if (progressIntervalRef.current) {
+      clearInterval(progressIntervalRef.current);
     }
-
-    // Easter Egg: Triple click detection
-    clickCountRef.current += 1;
-    if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current);
     
-    if (clickCountRef.current >= 3) {
-      clickCountRef.current = 0;
-      setShowEasterEgg(true);
-      spawnConfetti();
-      setTimeout(() => setShowEasterEgg(false), 3000);
-      return;
+    // If held less than 1 second, do normal toggle
+    if (holdTimerRef.current) {
+      const holdDuration = Date.now() - (holdStartRef.current || Date.now());
+      clearTimeout(holdTimerRef.current);
+      
+      if (holdDuration < 1000 && !showLighthouse) {
+        toggleTheme(e);
+      }
     }
-    
-    clickTimeoutRef.current = setTimeout(() => {
-      clickCountRef.current = 0;
-    }, 400);
-
-    // Wave transition animation
-    setIsTransitioning(true);
-    
-    // Create wave overlay
-    const wave = document.createElement('div');
-    wave.className = 'theme-wave-overlay';
-    document.body.appendChild(wave);
-
-    // Toggle theme after wave starts
-    setTimeout(() => {
-      const newIsDark = !isDark;
-      setIsDark(newIsDark);
-      document.documentElement.classList.toggle('light', !newIsDark);
-      localStorage.setItem('adaptify-theme', newIsDark ? 'dark' : 'light');
-    }, 150);
-    
-    // Clean up wave
-    setTimeout(() => {
-      wave.remove();
-      setIsTransitioning(false);
-    }, 600);
-  }, [isDark, spawnConfetti]);
+  }, [toggleTheme, showLighthouse]);
 
   return (
     <>
       {/* Main Toggle Button - Mobile optimized */}
-      <button
+      <motion.button
         ref={toggleRef}
-        onClick={toggleTheme}
         onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        onTouchStart={() => setIsHovered(true)}
-        onTouchEnd={() => setTimeout(() => setIsHovered(false), 150)}
-        className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] active:scale-95 transition-transform touch-manipulation"
+        onMouseLeave={() => { setIsHovered(false); handlePressEnd(null); }}
+        onMouseDown={handlePressStart}
+        onMouseUp={handlePressEnd}
+        onTouchStart={handlePressStart}
+        onTouchEnd={handlePressEnd}
+        className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] touch-manipulation"
         aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-        title="Toggle theme (Alt+Click for surprise)"
+        aria-checked={!isDark}
+        role="switch"
+        title="Toggle theme (hold 1s for surprise)"
+        whileTap={{ scale: 0.95 }}
       >
+        {/* Hold progress ring */}
+        <svg 
+          className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none"
+          style={{ opacity: holdProgress > 0 ? 1 : 0 }}
+        >
+          <circle
+            cx="50%"
+            cy="50%"
+            r="45%"
+            fill="none"
+            stroke={isDark ? 'rgba(251,191,36,0.6)' : 'rgba(100,116,139,0.5)'}
+            strokeWidth="2"
+            strokeDasharray={`${holdProgress * 100} 100`}
+            style={{ transition: 'stroke-dasharray 0.05s linear' }}
+          />
+        </svg>
+
         {/* Outer glow ring - appears after 0.8s */}
-        <div 
-          className={`absolute inset-0 rounded-full transition-all duration-700 ${
-            showGlow ? 'opacity-100' : 'opacity-0'
-          }`}
+        <motion.div 
+          className="absolute inset-0 rounded-full"
+          initial={{ opacity: 0, scale: 1 }}
+          animate={{ 
+            opacity: showGlow ? 1 : 0, 
+            scale: showGlow ? 1.8 : 1,
+          }}
+          transition={{ duration: 0.7 }}
           style={{
             background: isDark 
               ? 'radial-gradient(circle, rgba(251,146,60,0.25) 0%, transparent 70%)'
               : 'radial-gradient(circle, rgba(148,163,184,0.2) 0%, transparent 70%)',
-            transform: showGlow ? 'scale(1.8)' : 'scale(1)',
-            animation: showGlow ? 'glow-pulse 2.5s ease-in-out infinite' : 'none',
           }}
         />
-
-        {/* Invitation pulse ring - once per session */}
-        {showInvite && (
-          <div 
-            className="absolute inset-0 rounded-full"
-            style={{
-              border: `2px solid ${isDark ? 'rgba(251,146,60,0.6)' : 'rgba(148,163,184,0.5)'}`,
-              animation: 'invite-pulse 1.5s ease-out forwards',
-            }}
-          />
-        )}
         
-        {/* Inner container */}
-        <div 
-          className={`relative w-8 h-8 sm:w-9 sm:h-9 rounded-full border-2 transition-all duration-300 flex items-center justify-center overflow-hidden ${
+        {/* Lighthouse Easter Egg */}
+        <LighthouseBeam isActive={showLighthouse} />
+        
+        {/* Inner container with morphing effect */}
+        <motion.div 
+          className={`relative w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 flex items-center justify-center overflow-hidden ${
             isDark 
               ? 'border-amber-400/30 bg-gradient-to-br from-slate-800 to-slate-900' 
               : 'border-slate-300 bg-gradient-to-br from-slate-100 to-slate-200'
           }`}
-          style={{
-            transform: isHovered ? 'scale(1.08)' : 'scale(1)',
+          animate={{
+            scale: isHovered ? 1.08 : 1,
             boxShadow: isHovered 
               ? isDark 
                 ? '0 0 24px rgba(251,146,60,0.4), inset 0 0 12px rgba(251,146,60,0.1)' 
@@ -200,128 +220,142 @@ export default function ThemeToggle() {
                 ? 'inset 0 2px 4px rgba(0,0,0,0.3)'
                 : '0 2px 8px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.9)',
           }}
+          transition={{ duration: 0.3 }}
         >
-          {/* DARK MODE shows: Glowing Sun (click to go light) */}
-          <div 
-            className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${
-              isDark ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-75 rotate-90'
-            }`}
+          {/* DARK MODE shows: Glowing Sun */}
+          <motion.div 
+            className="absolute inset-0 flex items-center justify-center"
+            initial={false}
+            animate={{
+              opacity: isDark ? 1 : 0,
+              scale: isDark ? 1 : 0.75,
+              rotate: isDark ? 0 : 90,
+            }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           >
             {/* Sun core */}
-            <div 
-              className="relative w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-gradient-to-br from-amber-300 via-orange-400 to-red-400"
-              style={{
+            <motion.div 
+              className="relative w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-gradient-to-br from-amber-300 via-orange-400 to-red-400"
+              animate={{
                 boxShadow: isHovered 
-                  ? '0 0 16px rgba(251,146,60,0.9), 0 0 32px rgba(255,107,107,0.5)' 
-                  : '0 0 10px rgba(251,146,60,0.6)',
+                  ? '0 0 20px rgba(251,146,60,0.9), 0 0 40px rgba(255,107,107,0.5)' 
+                  : '0 0 12px rgba(251,146,60,0.6)',
               }}
             />
             
-            {/* Sun rays */}
+            {/* Sun rays - animate on hover */}
             {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
-              <div
+              <motion.div
                 key={angle}
-                className="absolute top-1/2 left-1/2 origin-center transition-all duration-300"
+                className="absolute top-1/2 left-1/2 origin-center"
                 style={{
                   width: '2px',
-                  height: isHovered ? '5px' : '3px',
-                  background: `linear-gradient(to top, rgba(251,146,60,${isHovered ? 1 : 0.7}), transparent)`,
+                  background: 'linear-gradient(to top, rgba(251,146,60,0.9), transparent)',
                   borderRadius: '2px',
-                  transform: `translate(-50%, -50%) rotate(${angle}deg) translateY(${isHovered ? '-10px' : '-8px'})`,
-                  transitionDelay: `${i * 20}ms`,
                 }}
+                animate={{
+                  height: isHovered ? '6px' : '4px',
+                  opacity: isHovered ? 1 : 0.7,
+                  x: '-50%',
+                  y: '-50%',
+                  rotate: angle,
+                  translateY: isHovered ? -12 : -10,
+                }}
+                transition={{ duration: 0.3, delay: i * 0.02 }}
               />
             ))}
-          </div>
+          </motion.div>
 
-          {/* LIGHT MODE shows: Shadow Moon (click to go dark) */}
-          <div 
-            className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${
-              !isDark ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-75 -rotate-90'
-            }`}
+          {/* LIGHT MODE shows: Crescent Moon */}
+          <motion.div 
+            className="absolute inset-0 flex items-center justify-center"
+            initial={false}
+            animate={{
+              opacity: !isDark ? 1 : 0,
+              scale: !isDark ? 1 : 0.75,
+              rotate: !isDark ? 0 : -90,
+            }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           >
             {/* Moon body */}
-            <div 
-              className="relative w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-gradient-to-br from-slate-400 to-slate-500"
-              style={{
+            <motion.div 
+              className="relative w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-br from-slate-400 to-slate-500"
+              animate={{
                 boxShadow: isHovered 
-                  ? '0 0 12px rgba(100,116,139,0.5), inset -2px -2px 4px rgba(0,0,0,0.15)' 
+                  ? '0 0 16px rgba(100,116,139,0.5), inset -2px -2px 4px rgba(0,0,0,0.15)' 
                   : 'inset -2px -2px 4px rgba(0,0,0,0.15)',
               }}
             >
               {/* Moon craters */}
-              <div className="absolute top-1 right-1.5 w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-slate-500/50" />
-              <div className="absolute bottom-1.5 left-1 w-0.5 h-0.5 sm:w-1 sm:h-1 rounded-full bg-slate-500/40" />
+              <div className="absolute top-1 right-1.5 w-1.5 h-1.5 rounded-full bg-slate-500/50" />
+              <div className="absolute bottom-1.5 left-1 w-1 h-1 rounded-full bg-slate-500/40" />
               
-              {/* Moon shadow (crescent effect) */}
+              {/* Crescent shadow overlay */}
               <div 
                 className="absolute inset-0 rounded-full"
                 style={{
                   background: 'linear-gradient(135deg, transparent 30%, rgba(51,65,85,0.6) 100%)',
                 }}
               />
-            </div>
+            </motion.div>
             
-            {/* Stars around moon - appear on hover */}
-            <div 
-              className="absolute w-1 h-1 rounded-full bg-slate-400 transition-all duration-300"
-              style={{
-                top: '5px',
-                right: '7px',
-                opacity: isHovered ? 0.8 : 0,
-                transform: isHovered ? 'scale(1)' : 'scale(0)',
-              }}
-            />
-            <div 
-              className="absolute w-0.5 h-0.5 rounded-full bg-slate-400 transition-all duration-300"
-              style={{
-                bottom: '7px',
-                left: '6px',
-                opacity: isHovered ? 0.6 : 0,
-                transform: isHovered ? 'scale(1)' : 'scale(0)',
-                transitionDelay: '50ms',
-              }}
-            />
-          </div>
-        </div>
-        
-        {/* Transition shimmer effect */}
-        {isTransitioning && (
-          <div 
-            className="absolute inset-0 rounded-full overflow-hidden"
-            style={{
-              background: isDark 
-                ? 'linear-gradient(90deg, transparent, rgba(255,107,107,0.6), rgba(6,182,212,0.4), transparent)'
-                : 'linear-gradient(90deg, transparent, rgba(100,116,139,0.5), rgba(148,163,184,0.3), transparent)',
-              backgroundSize: '200% 100%',
-              animation: 'shimmer 0.4s linear',
-            }}
-          />
-        )}
-      </button>
+            {/* Twinkling stars */}
+            {[
+              { x: -8, y: -10, size: 3, delay: 0 },
+              { x: 10, y: -6, size: 2, delay: 0.1 },
+              { x: -6, y: 8, size: 2, delay: 0.2 },
+            ].map((star, i) => (
+              <motion.div
+                key={i}
+                className="absolute rounded-full bg-slate-400"
+                style={{ width: star.size, height: star.size }}
+                animate={{
+                  x: star.x,
+                  y: star.y,
+                  opacity: isHovered ? [0.4, 1, 0.4] : 0,
+                  scale: isHovered ? [0.8, 1.2, 0.8] : 0,
+                }}
+                transition={{
+                  duration: 1.5,
+                  delay: star.delay,
+                  repeat: isHovered ? Infinity : 0,
+                }}
+              />
+            ))}
+          </motion.div>
+        </motion.div>
+      </motion.button>
 
-      {/* Easter Egg Message */}
-      {showEasterEgg && (
-        <div 
-          className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[9999] px-8 py-4 rounded-2xl text-white font-bold text-lg shadow-2xl animate-scaleIn"
-          style={{
-            background: 'linear-gradient(135deg, #06B6D4 0%, #FF6B6B 100%)',
-            boxShadow: '0 0 60px rgba(6,182,212,0.5), 0 0 120px rgba(255,107,107,0.3)',
-          }}
-        >
-          Wir wissen, dass du's gecheckt hast 😉
-        </div>
-      )}
+      {/* Lighthouse Easter Egg Message */}
+      <AnimatePresence>
+        {showLighthouse && (
+          <motion.div 
+            className="fixed top-1/2 left-1/2 z-[9999] px-8 py-4 rounded-2xl text-white font-bold text-lg shadow-2xl"
+            style={{
+              background: 'linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%)',
+              boxShadow: '0 0 60px rgba(251,191,36,0.5), 0 0 120px rgba(245,158,11,0.3)',
+            }}
+            initial={{ x: '-50%', y: '-50%', scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ type: 'spring', damping: 15 }}
+          >
+            🔦 Lighthouse Mode aktiviert!
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Confetti */}
-      {confetti.map((particle) => (
-        <ConfettiParticle
-          key={particle.id}
-          emoji={particle.emoji}
-          delay={particle.delay}
-          x={particle.x}
-        />
-      ))}
+      <AnimatePresence>
+        {confetti.map((particle) => (
+          <ConfettiParticle
+            key={particle.id}
+            emoji={particle.emoji}
+            delay={particle.delay}
+            x={particle.x}
+          />
+        ))}
+      </AnimatePresence>
     </>
   );
 }

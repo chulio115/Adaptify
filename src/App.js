@@ -1,7 +1,9 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from './context/ThemeContext';
 import LandingPage from './components/LandingPage';
 import CookieBanner from './components/CookieBanner';
+import ThemeWave from './components/ThemeWave';
 
 // Lazy load legal pages for better initial bundle size
 const Impressum = lazy(() => import('./pages/Impressum'));
@@ -24,33 +26,38 @@ const PageLoader = () => (
  */
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/impressum" element={
-          <Suspense fallback={<PageLoader />}>
-            <Impressum />
-          </Suspense>
-        } />
-        <Route path="/datenschutz" element={
-          <Suspense fallback={<PageLoader />}>
-            <Datenschutz />
-          </Suspense>
-        } />
-        <Route path="/agb" element={
-          <Suspense fallback={<PageLoader />}>
-            <AGB />
-          </Suspense>
-        } />
-        <Route path="/ueber-uns" element={
-          <Suspense fallback={<PageLoader />}>
-            <UeberUns />
-          </Suspense>
-        } />
-      </Routes>
-      {/* Cookie Banner appears on all pages */}
-      <CookieBanner />
-    </Router>
+    <ThemeProvider>
+      <Router>
+        {/* The magical wave animation layer */}
+        <ThemeWave />
+        
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/impressum" element={
+            <Suspense fallback={<PageLoader />}>
+              <Impressum />
+            </Suspense>
+          } />
+          <Route path="/datenschutz" element={
+            <Suspense fallback={<PageLoader />}>
+              <Datenschutz />
+            </Suspense>
+          } />
+          <Route path="/agb" element={
+            <Suspense fallback={<PageLoader />}>
+              <AGB />
+            </Suspense>
+          } />
+          <Route path="/ueber-uns" element={
+            <Suspense fallback={<PageLoader />}>
+              <UeberUns />
+            </Suspense>
+          } />
+        </Routes>
+        {/* Cookie Banner appears on all pages */}
+        <CookieBanner />
+      </Router>
+    </ThemeProvider>
   );
 }
 
