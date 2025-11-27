@@ -1,94 +1,123 @@
 import { useTheme } from '../context/ThemeContext';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 /**
- * ThemeWave v6 - THE SIGNATURE ANIMATION
+ * ThemeWave v8 - THE REDDIT KARMA ANIMATION
  * 
- * "Der Kreis frisst buchstäblich den alten Modus weg"
+ * KEY INSIGHT: No solid overlay! Just the GLOWING RING.
  * 
- * How it works:
- * 1. Theme switches IMMEDIATELY (new theme visible underneath)
- * 2. This overlay shows the OLD theme with clip-path: circle(160%)
- * 3. Circle SHRINKS from 160% to 0% - revealing new theme
- * 4. Subtle glow trail at the edge (2px, 20% opacity)
+ * The magic:
+ * 1. Theme switches IMMEDIATELY (CSS class change)
+ * 2. All elements have CSS transitions on their colors (in index.css)
+ * 3. The glowing ring EXPANDS from the toggle - pure visual candy
+ * 4. Ring = the "wavefront" of the color change
  * 
- * Result: The wave "eats" the old mode as it expands outward.
- * Actually, we INVERT it - the overlay shrinks, revealing the new theme.
- * 
- * Wait no - let me re-read the spec...
- * "clip-path: circle(0% at 92% 40px) → circle(160% at 92% 40px)"
- * "Innerhalb des Kreises = Ziel-Theme"
- * 
- * So the INSIDE of the circle is the NEW theme. 
- * The overlay should be the NEW theme, expanding over the old.
- * 
- * Actually simplest: Theme switches, overlay with OLD theme colors 
- * has clip-path that goes from 160% -> 0% (shrinking away).
- * 
- * OR: Overlay with NEW theme colors, clip-path 0% -> 160% (expanding).
- * This is cleaner. Let's do this.
+ * Content stays 100% visible. Colors transition smoothly via CSS.
+ * The ring is just the cherry on top - the "wow" factor.
  */
 
 export default function ThemeWave() {
   const { waveState, easterEgg, WAVE_DURATION } = useTheme();
+  const [ringProgress, setRingProgress] = useState(0);
 
-  // Colors for the overlay based on what we're transitioning TO
+  // Animate the ring expanding outward
+  useEffect(() => {
+    if (!waveState.isAnimating) {
+      setRingProgress(0);
+      return;
+    }
+    
+    const startTime = performance.now();
+    const animate = () => {
+      const elapsed = performance.now() - startTime;
+      const progress = Math.min(elapsed / WAVE_DURATION, 1);
+      // Smooth easing with slight overshoot
+      const eased = progress < 1 
+        ? 1 - Math.pow(1 - progress, 3)
+        : 1;
+      setRingProgress(eased * 180); // 180% to cover full screen from corner
+      
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+    requestAnimationFrame(animate);
+  }, [waveState.isAnimating, WAVE_DURATION]);
+
+  // Glow colors based on which theme we're going TO
   const isGoingDark = waveState.previousTheme === 'light';
   
-  // The overlay shows the NEW theme
-  const overlayBg = isGoingDark ? '#0a0a0a' : '#FAFBFC';
-  const glowColor = isGoingDark 
-    ? 'rgba(6, 182, 212, 0.2)' // cyan glow for dark
-    : 'rgba(251, 146, 60, 0.2)'; // orange glow for light
+  // Cyan/teal for dark mode, warm orange for light mode
+  const colors = isGoingDark ? {
+    outer: 'rgba(6, 182, 212, 0.15)',
+    mid: 'rgba(6, 182, 212, 0.4)',
+    core: 'rgba(34, 211, 238, 0.8)',
+    bright: 'rgba(255, 255, 255, 0.9)',
+  } : {
+    outer: 'rgba(251, 146, 60, 0.15)',
+    mid: 'rgba(251, 146, 60, 0.4)',
+    core: 'rgba(251, 191, 36, 0.8)',
+    bright: 'rgba(255, 255, 255, 0.9)',
+  };
+
+  // Fade out near the end
+  const ringOpacity = ringProgress > 150 
+    ? Math.max(0, 1 - (ringProgress - 150) / 30)
+    : ringProgress < 5 
+      ? ringProgress / 5 
+      : 1;
 
   return (
     <>
       {/* ════════════════════════════════════════════════════════════════
-          THE CLIP-PATH WAVE
-          One div. No layers. Pure cinema.
+          THE GLOWING RING - Pure visual magic, no blocking overlay
           ════════════════════════════════════════════════════════════════ */}
       <AnimatePresence>
-        {waveState.isAnimating && (
-          <>
-            {/* Main expanding circle - shows NEW theme */}
-            <motion.div
-              className="fixed inset-0 z-[9998] pointer-events-none"
+        {waveState.isAnimating && ringProgress > 0 && (
+          <motion.div
+            className="fixed inset-0 z-[9999] pointer-events-none"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+          >
+            {/* Wide outer glow */}
+            <div
               style={{
-                backgroundColor: overlayBg,
-                clipPath: `circle(0% at ${waveState.originX}% ${waveState.originY}px)`,
-              }}
-              animate={{
-                clipPath: `circle(160% at ${waveState.originX}% ${waveState.originY}px)`,
-              }}
-              transition={{
-                duration: WAVE_DURATION / 1000,
-                ease: [0.4, 0.0, 0.2, 1.02], // slight overshoot
+                position: 'absolute',
+                inset: 0,
+                background: `radial-gradient(
+                  circle at ${waveState.originX}% ${waveState.originY}px,
+                  transparent 0%,
+                  transparent ${Math.max(0, ringProgress - 15)}%,
+                  ${colors.outer} ${Math.max(0, ringProgress - 8)}%,
+                  ${colors.mid} ${Math.max(0, ringProgress - 3)}%,
+                  ${colors.core} ${ringProgress}%,
+                  ${colors.mid} ${ringProgress + 3}%,
+                  ${colors.outer} ${ringProgress + 8}%,
+                  transparent ${ringProgress + 15}%
+                )`,
+                opacity: ringOpacity,
               }}
             />
             
-            {/* Glow trail at the edge - 2px, 20% opacity */}
-            <motion.div
-              className="fixed inset-0 z-[9999] pointer-events-none"
+            {/* Sharp bright core line */}
+            <div
               style={{
-                background: `radial-gradient(circle at ${waveState.originX}% ${waveState.originY}px, 
-                  transparent 0%, 
-                  transparent calc(var(--radius) - 4px),
-                  ${glowColor} calc(var(--radius) - 2px),
-                  white calc(var(--radius)),
-                  ${glowColor} calc(var(--radius) + 2px),
-                  transparent calc(var(--radius) + 4px)
+                position: 'absolute',
+                inset: 0,
+                background: `radial-gradient(
+                  circle at ${waveState.originX}% ${waveState.originY}px,
+                  transparent 0%,
+                  transparent ${Math.max(0, ringProgress - 1)}%,
+                  ${colors.bright} ${ringProgress}%,
+                  transparent ${ringProgress + 1}%
                 )`,
-                '--radius': '0%',
-              }}
-              animate={{
-                '--radius': '160%',
-              }}
-              transition={{
-                duration: WAVE_DURATION / 1000,
-                ease: [0.4, 0.0, 0.2, 1.02],
+                opacity: ringOpacity * 0.8,
               }}
             />
-          </>
+          </motion.div>
         )}
       </AnimatePresence>
 

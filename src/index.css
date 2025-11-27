@@ -63,8 +63,8 @@
   --scrollbar-thumb: #333;
   --scrollbar-hover: #555;
   
-  /* Transition timing */
-  --theme-transition: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* THE Transition timing - synced with wave animation */
+  --theme-transition: 800ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Light Mode - Premium Cyan → Coral Theme */
@@ -123,7 +123,49 @@ body {
   transition: background var(--theme-transition), color var(--theme-transition);
 }
 
-/* Apply transitions to all themed elements */
+/* ═══════════════════════════════════════════════════════════════
+   GLOBAL THEME TRANSITIONS - All elements animate their colors
+   This is THE KEY to the smooth wave effect!
+═══════════════════════════════════════════════════════════════ */
+
+/* Apply transitions to EVERYTHING */
+*, *::before, *::after {
+  transition: 
+    background-color var(--theme-transition),
+    border-color var(--theme-transition),
+    color var(--theme-transition),
+    fill var(--theme-transition),
+    stroke var(--theme-transition),
+    box-shadow var(--theme-transition),
+    opacity 200ms ease;
+}
+
+/* Specific high-priority transitions */
+h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea {
+  transition: 
+    color var(--theme-transition),
+    background-color var(--theme-transition),
+    border-color var(--theme-transition),
+    box-shadow var(--theme-transition) !important;
+}
+
+/* Background elements */
+div, section, article, header, footer, nav, main {
+  transition: 
+    background-color var(--theme-transition),
+    background var(--theme-transition),
+    border-color var(--theme-transition),
+    box-shadow var(--theme-transition);
+}
+
+/* SVG elements */
+svg, path, circle, rect, line {
+  transition: 
+    fill var(--theme-transition),
+    stroke var(--theme-transition);
+}
+
+/* Legacy class - still works */
 .theme-transition,
 .theme-transition * {
   transition: 
