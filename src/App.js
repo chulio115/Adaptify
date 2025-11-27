@@ -7,6 +7,7 @@ import CookieBanner from './components/CookieBanner';
 const Impressum = lazy(() => import('./pages/Impressum'));
 const Datenschutz = lazy(() => import('./pages/Datenschutz'));
 const AGB = lazy(() => import('./pages/AGB'));
+const UeberUns = lazy(() => import('./pages/UeberUns'));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -39,6 +40,11 @@ function App() {
         <Route path="/agb" element={
           <Suspense fallback={<PageLoader />}>
             <AGB />
+          </Suspense>
+        } />
+        <Route path="/ueber-uns" element={
+          <Suspense fallback={<PageLoader />}>
+            <UeberUns />
           </Suspense>
         } />
       </Routes>

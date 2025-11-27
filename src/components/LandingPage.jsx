@@ -223,6 +223,9 @@ export default function LandingPage() {
               <a href="#technologie" className="text-sm text-gray-300 hover:text-white transition-colors">
                 Technologie
               </a>
+              <Link to="/ueber-uns" className="text-sm text-gray-300 hover:text-white transition-colors">
+                Über uns
+              </Link>
             </nav>
             
             {/* Desktop CTA */}
@@ -274,6 +277,13 @@ export default function LandingPage() {
             >
               Technologie
             </a>
+            <Link 
+              to="/ueber-uns" 
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-lg text-white hover:text-cyan-400 transition-colors py-3 px-4 rounded-xl hover:bg-white/5"
+            >
+              Über uns
+            </Link>
             <div className="mt-4 pt-4 border-t border-white/10">
               <button 
                 onClick={() => { setModalOpen(true); setMobileMenuOpen(false); }}
@@ -785,7 +795,12 @@ export default function LandingPage() {
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Rechtliches</h4>
+              <h4 className="font-semibold mb-4">Unternehmen</h4>
+              <ul className="space-y-3 text-gray-500">
+                <li><Link to="/ueber-uns" className="hover:text-white transition-colors">Über uns</Link></li>
+              </ul>
+              
+              <h4 className="font-semibold mb-4 mt-6">Rechtliches</h4>
               <ul className="space-y-3 text-gray-500">
                 <li><Link to="/impressum" className="hover:text-white transition-colors">Impressum</Link></li>
                 <li><Link to="/datenschutz" className="hover:text-white transition-colors">Datenschutz</Link></li>
