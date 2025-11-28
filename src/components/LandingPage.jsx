@@ -112,13 +112,10 @@ export default function LandingPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
-  
+
   const emailUser = 'info';
   const emailDomain = 'adaptify-labs.de';
   const email = `${emailUser}@${emailDomain}`;
-  const phoneChunks = ['0151', '5630', '3193'];
-  const phoneDisplay = phoneChunks.join(' ');
-  const phoneHref = `tel:${phoneChunks.join('')}`;
 
   // Netlify Forms state
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -867,22 +864,9 @@ export default function LandingPage() {
                 </div>
                 <span className="text-xl font-bold">Adaptify</span>
               </div>
-              <p className="text-gray-500 mb-4 max-w-md">
+              <p className="text-gray-500 mb-6 max-w-md">
                 {t('footer.tagline')}
               </p>
-              <div className="text-gray-500 text-sm mb-6 space-y-1">
-                <p>Julius Schulze</p>
-                <p>
-                  <a href={`mailto:${email}`} className="hover:text-white transition-colors">
-                    {email}
-                  </a>
-                </p>
-                <p>
-                  <a href={phoneHref} className="hover:text-white transition-colors">
-                    {phoneDisplay}
-                  </a>
-                </p>
-              </div>
               <div className="flex gap-4">
                 <a 
                   href="https://linkedin.com" 
