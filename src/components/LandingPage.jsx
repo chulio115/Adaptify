@@ -851,7 +851,7 @@ export default function LandingPage() {
       </main>
 
       {/* ═══════════════════════════════════════════════════════════════
-          FOOTER - Extended with social links
+          FOOTER
       ═══════════════════════════════════════════════════════════════ */}
       <footer className="py-16 px-6 border-t border-white/10 bg-[#030303]">
         <div className="max-w-6xl mx-auto">
@@ -896,9 +896,8 @@ export default function LandingPage() {
               </div>
             </div>
             
-            {/* Links */}
             <div>
-              <h4 className="font-semibold mb-4">{t('footer.services')}</h4>
+              <h4 className="text-xs font-semibold tracking-[0.2em] text-gray-400 uppercase mb-4">{t('footer.services')}</h4>
               <ul className="space-y-3 text-gray-500">
                 <li><a href="#leistungen" className="hover:text-white transition-colors">{t('footer.servicesItems.web')}</a></li>
                 <li><a href="#leistungen" className="hover:text-white transition-colors">{t('footer.servicesItems.apps')}</a></li>
@@ -908,7 +907,7 @@ export default function LandingPage() {
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">{t('footer.company')}</h4>
+              <h4 className="text-xs font-semibold tracking-[0.2em] text-gray-400 uppercase mb-4">{t('footer.company')}</h4>
               <ul className="space-y-3 text-gray-500">
                 <li><Link to="/ueber-uns" className="hover:text-white transition-colors">{t('nav.about')}</Link></li>
                 <li className="pt-2"><Link to="/impressum" className="hover:text-white transition-colors">{t('footer.legal.imprint')}</Link></li>
@@ -918,9 +917,15 @@ export default function LandingPage() {
             </div>
           </div>
           
-          <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-gray-600">{t('footer.copyright')}</p>
-            <p className="text-sm text-gray-600">{t('footer.madeWith')}</p>
+          <div className="pt-8 border-t border-white/5">
+            <div className="flex flex-col gap-2 md:grid md:grid-cols-4 md:items-center">
+              <p className="text-xs md:text-sm text-gray-600 md:col-span-2">
+                {t('footer.copyright')}
+              </p>
+              <p className="text-[11px] md:text-xs text-gray-600 md:col-start-4">
+                {t('footer.madeWith')}
+              </p>
+            </div>
           </div>
         </div>
       </footer>
