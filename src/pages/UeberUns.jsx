@@ -549,6 +549,24 @@ export default function UeberUns() {
                     disabled={isSubmitting}
                   />
                 </div>
+                <div className="flex items-start gap-2 text-xs text-gray-500">
+                  <input
+                    type="checkbox"
+                    name="contactConsent"
+                    required
+                    className="mt-1 w-4 h-4 rounded border-white/20 bg-white/5"
+                    disabled={isSubmitting}
+                  />
+                  <label className="text-left">
+                    {t('contact.form.consentText')}{' '}
+                    <Link 
+                      to="/datenschutz" 
+                      className="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors"
+                    >
+                      {t('contact.form.consentPrivacy')}
+                    </Link>
+                  </label>
+                </div>
                 <button 
                   type="submit" 
                   disabled={isSubmitting}
@@ -631,6 +649,23 @@ export default function UeberUns() {
                 <div>
                   <label className="block text-sm text-gray-400 mb-2">Erzähl was über dich *</label>
                   <textarea name="about" rows={5} required placeholder="Was treibt dich an? Warum Mittelstand? Was kannst du gut?" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 focus:outline-none resize-none" />
+                </div>
+                <div className="flex items-start gap-2 text-xs text-gray-500">
+                  <input
+                    type="checkbox"
+                    name="contactConsent"
+                    required
+                    className="mt-1 w-4 h-4 rounded border-white/20 bg-white/5"
+                  />
+                  <span className="text-left">
+                    {t('contact.form.consentText')}{' '}
+                    <Link 
+                      to="/datenschutz" 
+                      className="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors"
+                    >
+                      {t('contact.form.consentPrivacy')}
+                    </Link>
+                  </span>
                 </div>
                 <button type="submit" className="w-full bg-gradient-to-r from-cyan-500 to-violet-500 hover:from-cyan-400 hover:to-violet-400 py-4 rounded-xl font-semibold transition-all">
                   Bewerbung abschicken

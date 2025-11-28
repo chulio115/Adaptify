@@ -37,10 +37,10 @@ export default function Impressum() {
             <section>
               <h2 className="text-xl font-semibold text-white mb-4">Angaben gemäß § 5 TMG</h2>
               <p>
-                <strong className="text-white">[Firmenname]</strong><br />
-                [Inhaber: Dein Name]<br />
-                [Straße Hausnummer]<br />
-                [PLZ Ort]<br />
+                <strong className="text-white">Adaptify Labs</strong><br />
+                Julius Schulze<br />
+                Poststraße 7<br />
+                21227 Bendestorf<br />
                 Deutschland
               </p>
             </section>
@@ -49,8 +49,8 @@ export default function Impressum() {
             <section>
               <h2 className="text-xl font-semibold text-white mb-4">Kontakt</h2>
               <p>
-                E-Mail: kontakt@[domain].de<br />
-                Telefon: [Telefonnummer]
+                E-Mail: info@adaptify-labs.de<br />
+                Telefon: 0151 5630 3193
               </p>
             </section>
 
@@ -77,9 +77,9 @@ export default function Impressum() {
             <section>
               <h2 className="text-xl font-semibold text-white mb-4">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
               <p>
-                [Dein Name]<br />
-                [Straße Hausnummer]<br />
-                [PLZ Ort]
+                Julius Schulze<br />
+                Poststraße 7<br />
+                21227 Bendestorf
               </p>
             </section>
 

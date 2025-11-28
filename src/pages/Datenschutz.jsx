@@ -31,7 +31,7 @@ export default function Datenschutz() {
       <main className="pt-32 pb-20 px-6">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Datenschutzerklärung</h1>
-          <p className="text-gray-400 mb-12">Stand: [Datum einfügen]</p>
+          <p className="text-gray-400 mb-12">Stand: 28.11.2025</p>
           
           <div className="space-y-10 text-gray-300 leading-relaxed">
             {/* 1. Verantwortlicher */}
@@ -41,12 +41,12 @@ export default function Datenschutz() {
                 Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) ist:
               </p>
               <p className="mt-4 p-4 bg-white/5 rounded-xl border border-white/10">
-                <strong className="text-white">[Firmenname]</strong><br />
-                [Inhaber: Dein Name]<br />
-                [Straße Hausnummer]<br />
-                [PLZ Ort]<br />
-                E-Mail: kontakt@[domain].de<br />
-                Telefon: [Telefonnummer]
+                <strong className="text-white">Adaptify Labs</strong><br />
+                Inhaber: Julius Schulze<br />
+                Poststraße 7<br />
+                21227 Bendestorf<br />
+                E-Mail: info@adaptify-labs.de<br />
+                Telefon: 0151 5630 3193
               </p>
             </section>
 
@@ -94,8 +94,9 @@ export default function Datenschutz() {
             <section>
               <h2 className="text-2xl font-semibold text-white mb-4">4. Cookies</h2>
               <p>
-                Unsere Website verwendet Cookies. Cookies sind kleine Textdateien, die auf Ihrem 
-                Endgerät gespeichert werden und die Ihr Browser speichert.
+                Unsere Website verwendet Cookies und vergleichbare Technologien (z.B. localStorage). 
+                Cookies sind kleine Textdateien, die auf Ihrem Endgerät gespeichert werden und die 
+                Ihr Browser speichert.
               </p>
               <h3 className="text-lg font-semibold text-white mt-6 mb-3">Technisch notwendige Cookies</h3>
               <p>
@@ -103,11 +104,21 @@ export default function Datenschutz() {
                 gestalten. Einige Elemente unserer Website erfordern es, dass der aufrufende Browser 
                 auch nach einem Seitenwechsel identifiziert werden kann.
               </p>
+              <ul className="list-disc list-inside space-y-2 ml-4 mt-4">
+                <li>Speicherung deiner Cookie-Einwilligung (akzeptiert / abgelehnt)</li>
+                <li>Speicherung deiner Spracheinstellung (z.B. Deutsch/Englisch)</li>
+                <li>Speicherung deiner Theme-Einstellung (Hell-/Dunkelmodus)</li>
+              </ul>
+              <p className="mt-4">
+                Wir setzen keine Tracking- oder Marketing-Cookies ein und nutzen keine Webanalyse-
+                Dienste (z.B. Google Analytics, Facebook Pixel, Matomo, Plausible).
+              </p>
               <h3 className="text-lg font-semibold text-white mt-6 mb-3">Cookie-Einstellungen</h3>
               <p>
-                Wir speichern Ihre Cookie-Präferenz (Zustimmung oder Ablehnung) in Ihrem Browser 
-                (localStorage), um Ihnen bei zukünftigen Besuchen das Cookie-Banner nicht erneut 
-                anzeigen zu müssen.
+                Wir speichern Ihre Cookie-Präferenz (Zustimmung oder Ablehnung) sowie bestimmte 
+                Komfort-Einstellungen (Sprache und Theme) in Ihrem Browser (localStorage), um Ihnen 
+                bei zukünftigen Besuchen die passenden Einstellungen anzuzeigen und das Cookie-Banner 
+                nicht erneut einblenden zu müssen.
               </p>
               <h3 className="text-lg font-semibold text-white mt-6 mb-3">Widerspruch und Opt-Out</h3>
               <p>
@@ -121,23 +132,23 @@ export default function Datenschutz() {
             <section>
               <h2 className="text-2xl font-semibold text-white mb-4">5. Hosting</h2>
               <p>
-                Diese Website wird bei GitHub Pages gehostet. Anbieter ist die GitHub Inc., 
-                88 Colin P Kelly Jr St, San Francisco, CA 94107, USA.
+                Diese Website wird bei Netlify gehostet. Anbieter ist die Netlify, Inc.,
+                2325 3rd Street, Suite 296, San Francisco, CA 94107, USA.
               </p>
               <p className="mt-4">
-                Beim Besuch unserer Website erfasst GitHub automatisch Informationen in sogenannten 
-                Server-Log-Files. Diese Informationen werden temporär in einem sog. Logfile 
-                gespeichert. Die Rechtsgrundlage für die Datenverarbeitung ist Art. 6 Abs. 1 lit. f DSGVO.
+                Beim Besuch unserer Website erfasst Netlify automatisch Informationen in sogenannten 
+                Server-Log-Files. Diese Informationen werden temporär in einem Logfile gespeichert. 
+                Die Rechtsgrundlage für die Datenverarbeitung ist Art. 6 Abs. 1 lit. f DSGVO.
               </p>
               <p className="mt-4">
-                Weitere Informationen finden Sie in der Datenschutzerklärung von GitHub:{' '}
+                Weitere Informationen finden Sie in der Datenschutzerklärung von Netlify:{' '}
                 <a 
-                  href="https://docs.github.com/de/site-policy/privacy-policies/github-privacy-statement" 
+                  href="https://www.netlify.com/privacy/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-cyan-400 hover:text-cyan-300 underline underline-offset-2"
                 >
-                  GitHub Privacy Statement
+                  Netlify Privacy Policy
                 </a>
               </p>
             </section>
@@ -187,7 +198,11 @@ export default function Datenschutz() {
               </p>
               <p className="mt-4">
                 Die für uns zuständige Aufsichtsbehörde ist:<br />
-                [Landesbeauftragte/r für Datenschutz des jeweiligen Bundeslandes]
+                Die Landesbeauftragte für den Datenschutz Niedersachsen (LfD Niedersachsen)<br />
+                Prinzenstraße 5<br />
+                30159 Hannover<br />
+                Deutschland<br />
+                Website: https://lfd.niedersachsen.de
               </p>
             </section>
 
@@ -195,7 +210,7 @@ export default function Datenschutz() {
             <section>
               <h2 className="text-2xl font-semibold text-white mb-4">8. Aktualität und Änderung dieser Datenschutzerklärung</h2>
               <p>
-                Diese Datenschutzerklärung ist aktuell gültig und hat den Stand [Datum einfügen].
+                Diese Datenschutzerklärung ist aktuell gültig und hat den Stand 28.11.2025.
               </p>
               <p className="mt-4">
                 Durch die Weiterentwicklung unserer Website oder aufgrund geänderter gesetzlicher 

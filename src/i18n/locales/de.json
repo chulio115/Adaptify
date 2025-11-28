@@ -124,7 +124,9 @@
       "messagePlaceholder": "z.B. Wir brauchen eine moderne Webseite + Automatisierung...",
       "submit": "Gespräch anfragen",
       "sending": "Wird gesendet...",
-      "note": "Wir melden uns innerhalb von 24 Stunden."
+      "note": "Wir melden uns innerhalb von 24 Stunden.",
+      "consentText": "Ich bin einverstanden, dass Adaptify meine Angaben nutzt, um mich bezüglich meiner Anfrage zu kontaktieren.",
+      "consentPrivacy": "Mehr Infos in der Datenschutzerklärung."
     },
     "success": {
       "title": "Danke für deine Nachricht!",

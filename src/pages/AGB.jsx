@@ -31,7 +31,7 @@ export default function AGB() {
       <main className="pt-32 pb-20 px-6">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Allgemeine Geschäftsbedingungen</h1>
-          <p className="text-gray-400 mb-12">Stand: [Datum einfügen]</p>
+          <p className="text-gray-400 mb-12">Stand: 28.11.2025</p>
           
           <div className="space-y-10 text-gray-300 leading-relaxed">
             {/* § 1 Geltungsbereich */}
@@ -39,7 +39,7 @@ export default function AGB() {
               <h2 className="text-2xl font-semibold text-white mb-4">§ 1 Geltungsbereich</h2>
               <p>
                 (1) Diese Allgemeinen Geschäftsbedingungen (AGB) gelten für alle Verträge zwischen 
-                [Firmenname], [Adresse] (nachfolgend "Anbieter") und dem Kunden über 
+                Adaptify Labs, Poststraße 7, 21227 Bendestorf (nachfolgend "Anbieter") und dem Kunden über 
                 Dienstleistungen im Bereich der Digitalisierung, IT-Beratung und Softwareentwicklung.
               </p>
               <p className="mt-4">

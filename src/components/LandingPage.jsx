@@ -113,6 +113,13 @@ export default function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
   
+  const emailUser = 'info';
+  const emailDomain = 'adaptify-labs.de';
+  const email = `${emailUser}@${emailDomain}`;
+  const phoneChunks = ['0151', '5630', '3193'];
+  const phoneDisplay = phoneChunks.join(' ');
+  const phoneHref = `tel:${phoneChunks.join('')}`;
+
   // Netlify Forms state
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error' | null
@@ -860,9 +867,22 @@ export default function LandingPage() {
                 </div>
                 <span className="text-xl font-bold">Adaptify</span>
               </div>
-              <p className="text-gray-500 mb-6 max-w-md">
+              <p className="text-gray-500 mb-4 max-w-md">
                 {t('footer.tagline')}
               </p>
+              <div className="text-gray-500 text-sm mb-6 space-y-1">
+                <p>Julius Schulze</p>
+                <p>
+                  <a href={`mailto:${email}`} className="hover:text-white transition-colors">
+                    {email}
+                  </a>
+                </p>
+                <p>
+                  <a href={phoneHref} className="hover:text-white transition-colors">
+                    {phoneDisplay}
+                  </a>
+                </p>
+              </div>
               <div className="flex gap-4">
                 <a 
                   href="https://linkedin.com" 
@@ -883,7 +903,7 @@ export default function LandingPage() {
                   <Twitter className="w-5 h-5" />
                 </a>
                 <a 
-                  href="mailto:kontakt@adaptify.de" 
+                  href={`mailto:${email}`} 
                   aria-label="E-Mail"
                   className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-violet-500/20 hover:border-violet-500/50 transition-colors"
                 >
@@ -908,9 +928,10 @@ export default function LandingPage() {
               <ul className="space-y-3 text-gray-500">
                 <li><Link to="/ueber-uns" className="hover:text-white transition-colors">{t('nav.about')}</Link></li>
               </ul>
-              
-              <h4 className="font-semibold mb-4 mt-6">{t('footer.legal.title')}</h4>
-              <ul className="space-y-3 text-gray-500">
+            </div>
+            
+            <div>
+              <ul className="space-y-3 text-gray-500 mt-6">
                 <li><Link to="/impressum" className="hover:text-white transition-colors">{t('footer.legal.imprint')}</Link></li>
                 <li><Link to="/datenschutz" className="hover:text-white transition-colors">{t('footer.legal.privacy')}</Link></li>
                 <li><Link to="/agb" className="hover:text-white transition-colors">{t('footer.legal.terms')}</Link></li>
@@ -1035,6 +1056,24 @@ export default function LandingPage() {
                     placeholder={t('contact.form.messagePlaceholder')}
                     disabled={isSubmitting}
                   />
+                </div>
+                <div className="flex items-start gap-2 text-xs text-gray-500">
+                  <input
+                    type="checkbox"
+                    name="contactConsent"
+                    required
+                    className="mt-1 w-4 h-4 rounded border-white/20 bg-white/5"
+                    disabled={isSubmitting}
+                  />
+                  <label className="text-left">
+                    {t('contact.form.consentText')}{' '}
+                    <Link 
+                      to="/datenschutz" 
+                      className="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors"
+                    >
+                      {t('contact.form.consentPrivacy')}
+                    </Link>
+                  </label>
                 </div>
                 <button 
                   type="submit" 

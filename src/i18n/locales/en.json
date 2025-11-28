@@ -124,7 +124,9 @@
       "messagePlaceholder": "e.g. We need a modern website + automation...",
       "submit": "Request a call",
       "sending": "Sending...",
-      "note": "We'll get back to you within 24 hours."
+      "note": "We'll get back to you within 24 hours.",
+      "consentText": "I agree that Adaptify may use my data to contact me regarding my request.",
+      "consentPrivacy": "More information in our privacy policy."
     },
     "success": {
       "title": "Thanks for reaching out!",
