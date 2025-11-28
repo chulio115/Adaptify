@@ -927,12 +927,7 @@ export default function LandingPage() {
               <h4 className="font-semibold mb-4">{t('footer.company')}</h4>
               <ul className="space-y-3 text-gray-500">
                 <li><Link to="/ueber-uns" className="hover:text-white transition-colors">{t('nav.about')}</Link></li>
-              </ul>
-            </div>
-            
-            <div>
-              <ul className="space-y-3 text-gray-500 mt-6">
-                <li><Link to="/impressum" className="hover:text-white transition-colors">{t('footer.legal.imprint')}</Link></li>
+                <li className="pt-2"><Link to="/impressum" className="hover:text-white transition-colors">{t('footer.legal.imprint')}</Link></li>
                 <li><Link to="/datenschutz" className="hover:text-white transition-colors">{t('footer.legal.privacy')}</Link></li>
                 <li><Link to="/agb" className="hover:text-white transition-colors">{t('footer.legal.terms')}</Link></li>
               </ul>
