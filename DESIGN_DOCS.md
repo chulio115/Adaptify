@@ -58,12 +58,21 @@ const transition = document.startViewTransition(() => {
 });
 ```
 
-**3. Fallback für Safari/Firefox**
-```css
-.theme-transitioning * {
-  transition-duration: 600ms !important;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
+**3. Fallback für Safari/Firefox (v11 - Mobile optimiert)**
+```javascript
+// Statt ALLE Elemente zu animieren (laggy auf Mobile),
+// verwenden wir ein einziges GPU-beschleunigtes Overlay:
+const overlay = document.createElement('div');
+overlay.style.cssText = `
+  position: fixed;
+  inset: 0;
+  background: ${newIsDark ? '#030303' : '#fafafa'};
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+  will-change: opacity;
+  transform: translateZ(0); // GPU acceleration
+`;
+// Fade in → Switch theme → Fade out
 ```
 
 ### Parameter zum Anpassen

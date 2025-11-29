@@ -170,13 +170,16 @@ html {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   CSS FALLBACK for Safari/Firefox (no View Transitions API)
-   Uses smooth color transitions on all elements
+   FALLBACK OVERLAY for Safari/Firefox (no View Transitions API)
+   Uses a simple GPU-accelerated overlay fade instead of 
+   animating hundreds of DOM elements (which causes lag on mobile)
 ═══════════════════════════════════════════════════════════════ */
 
-.theme-transitioning * {
-  transition-duration: 600ms !important;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+.theme-fallback-overlay {
+  /* GPU acceleration hints */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Reduce motion for accessibility */
@@ -186,7 +189,7 @@ html {
     animation-duration: 0.01ms !important;
   }
   
-  .theme-transitioning * {
+  .theme-fallback-overlay {
     transition-duration: 0.01ms !important;
   }
 }

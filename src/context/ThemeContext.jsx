@@ -159,20 +159,46 @@ export function ThemeProvider({ children }) {
       setWaveState(prev => ({ ...prev, isAnimating: false }));
       
     } else {
-      // CSS Fallback for Safari/Firefox - instant switch with CSS transitions
-      // The global CSS transitions on all elements will make it smooth
+      // OPTIMIZED FALLBACK for Safari/Firefox (especially Mobile Safari)
+      // Instead of animating ALL elements, we use a simple overlay fade
+      // This is WAY more GPU-friendly on mobile devices
+      
       setWaveState({ isAnimating: true, originX: x, originY: y, previousTheme });
       
-      // Add fallback class for CSS-only animation
-      document.documentElement.classList.add('theme-transitioning');
+      // Create a temporary overlay for smooth visual transition
+      const overlay = document.createElement('div');
+      overlay.className = 'theme-fallback-overlay';
+      overlay.style.cssText = `
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        pointer-events: none;
+        background: ${newIsDark ? '#030303' : '#fafafa'};
+        opacity: 0;
+        transition: opacity 300ms ease-out;
+        will-change: opacity;
+      `;
+      document.body.appendChild(overlay);
       
-      setIsDark(newIsDark);
-      setToggleCounter(prev => prev + 1);
+      // Trigger fade in
+      requestAnimationFrame(() => {
+        overlay.style.opacity = '1';
+      });
       
+      // After fade in, switch theme and fade out
       setTimeout(() => {
-        document.documentElement.classList.remove('theme-transitioning');
-        setWaveState(prev => ({ ...prev, isAnimating: false }));
-      }, WAVE_DURATION);
+        setIsDark(newIsDark);
+        setToggleCounter(prev => prev + 1);
+        
+        // Fade out
+        overlay.style.opacity = '0';
+        
+        // Remove overlay after fade out
+        setTimeout(() => {
+          overlay.remove();
+          setWaveState(prev => ({ ...prev, isAnimating: false }));
+        }, 300);
+      }, 300);
     }
     
   }, [isDark, waveState.isAnimating, supportsViewTransitions]);
