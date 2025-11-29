@@ -875,52 +875,54 @@ export default function LandingPage() {
       {/* ═══════════════════════════════════════════════════════════════
           FOOTER
       ═══════════════════════════════════════════════════════════════ */}
-      <footer className="py-16 px-6 border-t border-white/10 bg-[#030303]">
+      <footer className="py-12 sm:py-16 px-6 border-t border-white/10 bg-[#030303]">
         <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
-            {/* Brand */}
-            <div className="md:col-span-2">
+          {/* Main Footer Grid - 3 columns */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 mb-10">
+            {/* Brand - spans 2 cols on mobile, 1 on desktop */}
+            <div className="col-span-2 md:col-span-1">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-2 rounded-lg border border-white/20 bg-white/5">
-                  <img src={logo} alt="Adaptify" className="h-7 w-auto brightness-0 invert" />
+                  <img src={logo} alt="Adaptify" className="h-6 sm:h-7 w-auto brightness-0 invert" />
                 </div>
-                <span className="text-xl font-bold">Adaptify</span>
+                <span className="text-lg sm:text-xl font-bold">Adaptify</span>
               </div>
-              <p className="text-gray-500 mb-6 max-w-md">
+              <p className="text-gray-500 text-sm mb-5 max-w-xs">
                 {t('footer.tagline')}
               </p>
-              <div className="flex gap-4">
+              <div className="flex gap-3">
                 <a 
                   href="https://linkedin.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
-                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-violet-500/20 hover:border-violet-500/50 transition-colors"
+                  className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-violet-500/20 hover:border-violet-500/50 transition-colors"
                 >
-                  <Linkedin className="w-5 h-5" />
+                  <Linkedin className="w-4 h-4" />
                 </a>
                 <a 
                   href="https://twitter.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   aria-label="Twitter"
-                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-violet-500/20 hover:border-violet-500/50 transition-colors"
+                  className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-violet-500/20 hover:border-violet-500/50 transition-colors"
                 >
-                  <Twitter className="w-5 h-5" />
+                  <Twitter className="w-4 h-4" />
                 </a>
                 <a 
                   href={`mailto:${email}`} 
                   aria-label="E-Mail"
-                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-violet-500/20 hover:border-violet-500/50 transition-colors"
+                  className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-violet-500/20 hover:border-violet-500/50 transition-colors"
                 >
-                  <Mail className="w-5 h-5" />
+                  <Mail className="w-4 h-4" />
                 </a>
               </div>
             </div>
             
+            {/* Leistungen */}
             <div>
               <h4 className="text-xs font-semibold tracking-[0.2em] text-gray-400 uppercase mb-4">{t('footer.services')}</h4>
-              <ul className="space-y-3 text-gray-500">
+              <ul className="space-y-2.5 text-sm text-gray-500">
                 <li><a href="#leistungen" className="hover:text-white transition-colors">{t('footer.servicesItems.web')}</a></li>
                 <li><a href="#leistungen" className="hover:text-white transition-colors">{t('footer.servicesItems.apps')}</a></li>
                 <li><a href="#leistungen" className="hover:text-white transition-colors">{t('footer.servicesItems.automation')}</a></li>
@@ -928,20 +930,22 @@ export default function LandingPage() {
               </ul>
             </div>
             
+            {/* Unternehmen */}
             <div>
               <h4 className="text-xs font-semibold tracking-[0.2em] text-gray-400 uppercase mb-4">{t('footer.company')}</h4>
-              <ul className="space-y-3 text-gray-500">
+              <ul className="space-y-2.5 text-sm text-gray-500">
                 <li><Link to="/ueber-uns" className="hover:text-white transition-colors">{t('nav.about')}</Link></li>
-                <li className="pt-2"><Link to="/impressum" className="hover:text-white transition-colors">{t('footer.legal.imprint')}</Link></li>
+                <li><Link to="/impressum" className="hover:text-white transition-colors">{t('footer.legal.imprint')}</Link></li>
                 <li><Link to="/datenschutz" className="hover:text-white transition-colors">{t('footer.legal.privacy')}</Link></li>
                 <li><Link to="/agb" className="hover:text-white transition-colors">{t('footer.legal.terms')}</Link></li>
               </ul>
             </div>
           </div>
           
-          <div className="pt-8 border-t border-white/5">
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
-              <p className="text-xs sm:text-sm text-gray-600">
+          {/* Copyright Bar - same 3-col grid so Made with starts at same position as UNTERNEHMEN */}
+          <div className="pt-6 border-t border-white/5">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
+              <p className="text-xs text-gray-600 col-span-1 md:col-span-2">
                 {t('footer.copyright')}
               </p>
               <p className="text-xs text-gray-500">
