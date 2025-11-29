@@ -13,7 +13,11 @@ export default function Impressum() {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#030303]/80 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link 
+            to="/" 
+            className="flex items-center gap-3 group"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
             <img src={logo} alt="Adaptify" className="h-10 w-auto" />
             <span className="text-xl font-bold tracking-tight">Adaptify</span>
           </Link>

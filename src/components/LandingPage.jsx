@@ -202,7 +202,10 @@ export default function LandingPage() {
         <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
         <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
           {/* Logo with border and hover glow */}
-          <div className="flex items-center gap-3 group cursor-pointer">
+          <div 
+            className="flex items-center gap-3 group cursor-pointer"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/50 to-violet-400/50 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative z-10 p-2 rounded-lg border border-white/20 bg-white/5 group-hover:border-white/40 group-hover:bg-white/10 transition-all duration-300">
@@ -575,6 +578,9 @@ export default function LandingPage() {
                   <img 
                     src={tool.logo} 
                     alt={tool.name}
+                    loading="lazy"
+                    width="32"
+                    height="32"
                     className="w-8 h-8 object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300"
                   />
                   <span className="text-base text-gray-400 group-hover:text-white transition-colors whitespace-nowrap font-medium">
@@ -597,6 +603,9 @@ export default function LandingPage() {
                   <img 
                     src={tool.logo} 
                     alt={tool.name}
+                    loading="lazy"
+                    width="32"
+                    height="32"
                     className="w-8 h-8 object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300"
                   />
                   <span className="text-base text-gray-400 group-hover:text-white transition-colors whitespace-nowrap font-medium">
@@ -636,48 +645,61 @@ export default function LandingPage() {
                 icon: Globe2, 
                 titleKey: 'services.items.web.title', 
                 descKey: 'services.items.web.desc',
-                color: 'cyan'
+                iconBg: 'bg-cyan-500/10',
+                iconBorder: 'border-cyan-500/20',
+                iconColor: 'text-cyan-400'
               },
               { 
                 icon: Bot, 
                 titleKey: 'services.items.automation.title', 
                 descKey: 'services.items.automation.desc',
-                color: 'violet'
+                iconBg: 'bg-violet-500/10',
+                iconBorder: 'border-violet-500/20',
+                iconColor: 'text-violet-400'
               },
               { 
                 icon: Code2, 
                 titleKey: 'services.items.apps.title', 
                 descKey: 'services.items.apps.desc',
-                color: 'fuchsia'
+                iconBg: 'bg-fuchsia-500/10',
+                iconBorder: 'border-fuchsia-500/20',
+                iconColor: 'text-fuchsia-400'
               },
               { 
                 icon: Palette, 
                 titleKey: 'services.items.design.title', 
                 descKey: 'services.items.design.desc',
-                color: 'pink'
+                iconBg: 'bg-pink-500/10',
+                iconBorder: 'border-pink-500/20',
+                iconColor: 'text-pink-400'
               },
               { 
                 icon: Layers, 
                 titleKey: 'services.items.process.title', 
                 descKey: 'services.items.process.desc',
-                color: 'indigo'
+                iconBg: 'bg-indigo-500/10',
+                iconBorder: 'border-indigo-500/20',
+                iconColor: 'text-indigo-400'
               },
               { 
                 icon: Headphones, 
                 titleKey: 'services.items.support.title', 
                 descKey: 'services.items.support.desc',
-                color: 'emerald'
+                iconBg: 'bg-emerald-500/10',
+                iconBorder: 'border-emerald-500/20',
+                iconColor: 'text-emerald-400'
               }
             ].map((item, i) => (
               <div 
                 key={i} 
-                className="group relative bg-white/5 border border-white/10 rounded-2xl p-8 hover:border-white/20 hover:bg-white/[0.08] transition-all duration-300 hover:-translate-y-1"
+                className="service-card group relative bg-white/5 border border-white/10 rounded-2xl p-8 hover:border-white/20 hover:bg-white/[0.08] transition-all duration-300 hover:-translate-y-1 flex flex-col"
               >
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 bg-${item.color}-500/10 border border-${item.color}-500/20 group-hover:scale-110 transition-transform`}>
-                  <item.icon className={`w-6 h-6 text-${item.color}-400`} />
+                {/* Clean vertical layout - Icon, Title, Description all centered */}
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${item.iconBg} border ${item.iconBorder} group-hover:scale-110 transition-transform duration-300 mb-6`}>
+                  <item.icon className={`w-7 h-7 ${item.iconColor}`} />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{t(item.titleKey)}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{t(item.descKey)}</p>
+                <h3 className="text-xl font-semibold mb-3 leading-tight">{t(item.titleKey)}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed flex-1">{t(item.descKey)}</p>
               </div>
             ))}
           </div>
@@ -918,11 +940,11 @@ export default function LandingPage() {
           </div>
           
           <div className="pt-8 border-t border-white/5">
-            <div className="flex flex-col gap-2 md:grid md:grid-cols-4 md:items-center">
-              <p className="text-xs md:text-sm text-gray-600 md:col-span-2">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+              <p className="text-xs sm:text-sm text-gray-600">
                 {t('footer.copyright')}
               </p>
-              <p className="text-[11px] md:text-xs text-gray-600 md:col-start-4">
+              <p className="text-xs text-gray-500">
                 {t('footer.madeWith')}
               </p>
             </div>

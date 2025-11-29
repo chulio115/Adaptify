@@ -3,19 +3,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
 /**
- * ThemeWave v9 - MOBILE OPTIMIZED
+ * ThemeWave v10 - CLEAN TRANSITION
  * 
- * KEY INSIGHT: No solid overlay! Just the GLOWING RING.
+ * PHILOSOPHY: The View Transitions API does the heavy lifting.
+ * We only provide Easter Eggs - NO distracting rings or overlays.
  * 
- * Mobile optimizations:
- * - Fewer Matrix columns on mobile (25 vs 50)
- * - Smaller lighthouse core
- * - Performance-conscious animations
+ * The dark/light transition is SEAMLESS - one theme "eats" the other
+ * via a clean clip-path circle animation.
  */
 
 export default function ThemeWave() {
-  const { waveState, easterEgg, WAVE_DURATION } = useTheme();
-  const [ringProgress, setRingProgress] = useState(0);
+  const { easterEgg } = useTheme();
   const [isMobile, setIsMobile] = useState(() => (
     typeof window !== 'undefined' ? window.innerWidth < 640 : false
   ));
@@ -28,134 +26,20 @@ export default function ThemeWave() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Animate the ring expanding outward (desktop only)
-  useEffect(() => {
-    if (isMobile) {
-      setRingProgress(0);
-      return;
-    }
-    if (!waveState.isAnimating) {
-      setRingProgress(0);
-      return;
-    }
-    
-    const startTime = performance.now();
-    const animate = () => {
-      const elapsed = performance.now() - startTime;
-      const progress = Math.min(elapsed / WAVE_DURATION, 1);
-      // Smooth easing with slight overshoot
-      const eased = progress < 1 
-        ? 1 - Math.pow(1 - progress, 3)
-        : 1;
-      setRingProgress(eased * 180); // 180% to cover full screen from corner
-      
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      }
-    };
-    requestAnimationFrame(animate);
-  }, [waveState.isAnimating, WAVE_DURATION, isMobile]);
-
-  // Glow colors based on which theme we're going TO
-  const isGoingDark = waveState.previousTheme === 'light';
-  
-  // Cyan/teal for dark mode, warm orange for light mode
-  const colors = isGoingDark ? {
-    outer: 'rgba(6, 182, 212, 0.15)',
-    mid: 'rgba(6, 182, 212, 0.4)',
-    core: 'rgba(34, 211, 238, 0.8)',
-    bright: 'rgba(255, 255, 255, 0.9)',
-  } : {
-    outer: 'rgba(251, 146, 60, 0.15)',
-    mid: 'rgba(251, 146, 60, 0.4)',
-    core: 'rgba(251, 191, 36, 0.8)',
-    bright: 'rgba(255, 255, 255, 0.9)',
-  };
-
   // Current theme (for Matrix visibility tuning)
   const isLightTheme =
     typeof document !== 'undefined' &&
     document.documentElement.classList.contains('light');
 
-  // Fade out near the end – slightly stronger on mobile so the effect reads better
-  const baseRingOpacity = ringProgress > 150 
-    ? Math.max(0, 1 - (ringProgress - 150) / 30)
-    : ringProgress < 5 
-      ? ringProgress / 5 
-      : 1;
-  const ringOpacity = isMobile
-    ? Math.min(1, baseRingOpacity * 1.25)
-    : baseRingOpacity;
-
-  // On mobile we skip all custom visuals (no wave, no Easter Eggs) for performance and simplicity
-  if (isMobile) {
-    return null;
-  }
+  // waveState from context for Easter Egg positioning
+  const { waveState } = useTheme();
 
   return (
     <>
       {/* ════════════════════════════════════════════════════════════════
-          THE GLOWING RING - Pure visual magic, no blocking overlay
+          NO RING - The View Transitions API handles the seamless transition!
+          Dark "eats" light (or vice versa) with a clean clip-path circle.
           ════════════════════════════════════════════════════════════════ */}
-      <AnimatePresence>
-        {waveState.isAnimating && ringProgress > 0 && (
-          <motion.div
-            className="fixed inset-0 z-[9999] pointer-events-none"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
-          >
-            {/* Subtle dimming on mobile so the wave is visible without blocking content */}
-            {isMobile && (
-              <div
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  background: 'radial-gradient(circle at center, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.25) 40%, transparent 80%)',
-                  opacity: ringOpacity * 0.7,
-                }}
-              />
-            )}
-
-            {/* Wide outer glow */}
-            <div
-              style={{
-                position: 'absolute',
-                inset: 0,
-                background: `radial-gradient(
-                  circle at ${waveState.originX}px ${waveState.originY}px,
-                  transparent 0%,
-                  transparent ${Math.max(0, ringProgress - 15)}%,
-                  ${colors.outer} ${Math.max(0, ringProgress - 8)}%,
-                  ${colors.mid} ${Math.max(0, ringProgress - 3)}%,
-                  ${colors.core} ${ringProgress}%,
-                  ${colors.mid} ${ringProgress + 3}%,
-                  ${colors.outer} ${ringProgress + 8}%,
-                  transparent ${ringProgress + 15}%
-                )`,
-                opacity: ringOpacity,
-              }}
-            />
-            
-            {/* Sharp bright core line */}
-            <div
-              style={{
-                position: 'absolute',
-                inset: 0,
-                background: `radial-gradient(
-                  circle at ${waveState.originX}px ${waveState.originY}px,
-                  transparent 0%,
-                  transparent ${Math.max(0, ringProgress - 1)}%,
-                  ${colors.bright} ${ringProgress}%,
-                  transparent ${ringProgress + 1}%
-                )`,
-                opacity: ringOpacity * 0.85,
-              }}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* ════════════════════════════════════════════════════════════════
           EASTER EGGS

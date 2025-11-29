@@ -63,8 +63,8 @@
   --scrollbar-thumb: #333;
   --scrollbar-hover: #555;
   
-  /* THE Transition timing - synced with wave animation */
-  --theme-transition: 800ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* THE Transition timing - fast and smooth */
+  --theme-transition: 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Light Mode - Premium Cyan → Coral Theme */
@@ -125,7 +125,13 @@ html {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   VIEW TRANSITIONS - Works BOTH directions!
+   VIEW TRANSITIONS - THE SIGNATURE "FRISS-EFFEKT"
+   Dark "eats" light (or vice versa) - premium, buttery smooth
+   
+   PERFORMANCE OPTIMIZED:
+   - No filter/drop-shadow (causes re-paints)
+   - GPU-accelerated with will-change
+   - Snappy easing that feels responsive
 ═══════════════════════════════════════════════════════════════ */
 
 /* The OLD view stays static underneath */
@@ -136,18 +142,41 @@ html {
 
 /* The NEW view is revealed by expanding circle */
 ::view-transition-new(root) {
-  animation: reveal-theme 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: reveal-theme 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   z-index: 9999;
+  will-change: clip-path;
 }
 
-/* THE MAGIC - circle expands from click position */
+/* THE MAGIC - circle expands from click position
+   Easing: Fast start (responsive), smooth deceleration (elegant)
+   Duration: 0.8s = sweet spot between snappy and premium */
 @keyframes reveal-theme {
-  from {
+  0% {
     clip-path: circle(0% at var(--wave-x) var(--wave-y));
   }
-  to {
+  100% {
     clip-path: circle(150% at var(--wave-x) var(--wave-y));
   }
+}
+
+/* Smooth edge during transition - no hard lines */
+::view-transition-image-pair(root) {
+  isolation: isolate;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  mix-blend-mode: normal;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CSS FALLBACK for Safari/Firefox (no View Transitions API)
+   Uses smooth color transitions on all elements
+═══════════════════════════════════════════════════════════════ */
+
+.theme-transitioning * {
+  transition-duration: 600ms !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 /* Reduce motion for accessibility */
@@ -155,6 +184,10 @@ html {
   ::view-transition-old(root),
   ::view-transition-new(root) {
     animation-duration: 0.01ms !important;
+  }
+  
+  .theme-transitioning * {
+    transition-duration: 0.01ms !important;
   }
 }
 
@@ -796,4 +829,101 @@ a:focus:not(:focus-visible) {
 
 .light .globe-icon.text-violet-400 {
   color: #7C3AED !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SERVICE CARDS - Premium Layout
+═══════════════════════════════════════════════════════════════ */
+
+.service-card {
+  /* Ensure minimum touch target on mobile */
+  min-height: 140px;
+}
+
+/* Light mode service cards */
+.light .service-card {
+  background: var(--bg-surface) !important;
+  border-color: var(--border-subtle) !important;
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 4px 12px rgba(0, 0, 0, 0.02),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.light .service-card:hover {
+  border-color: var(--border-default) !important;
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    0 8px 24px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE OPTIMIZATIONS - Touch targets, spacing, typography
+═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 640px) {
+  /* Minimum touch target size (44x44px per Apple HIG) */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Better line height for readability */
+  p, .text-sm, .text-base {
+    line-height: 1.6;
+  }
+  
+  /* Reduce section padding on mobile */
+  .py-32 {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+  
+  .py-20 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  
+  /* Increase gap between cards on mobile for easier scanning */
+  .grid.gap-6 {
+    gap: 1rem;
+  }
+  
+  /* Mobile typography scale */
+  .text-3xl {
+    font-size: 1.75rem !important;
+  }
+  
+  .text-4xl {
+    font-size: 2rem !important;
+  }
+  
+  .text-5xl {
+    font-size: 2.25rem !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PERFORMANCE - Reduce paint/composite operations
+═══════════════════════════════════════════════════════════════ */
+
+/* GPU acceleration for animated elements */
+.animate-scroll,
+.animate-scroll-reverse,
+[class*="hover:-translate"],
+[class*="transition"] {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Reduce blur intensity on mobile for performance */
+@media (max-width: 768px) {
+  .blur-3xl {
+    filter: blur(40px) !important;
+  }
+  
+  .backdrop-blur-xl {
+    backdrop-filter: blur(12px) !important;
+  }
 }

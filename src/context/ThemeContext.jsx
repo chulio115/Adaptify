@@ -1,26 +1,27 @@
 import { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 
 /**
- * ThemeContext v4 - VIEW TRANSITIONS API
+ * ThemeContext v5 - SEAMLESS THEME TRANSITIONS
  * 
- * THE REAL MAGIC: Browser's native View Transitions API
+ * THE MAGIC: View Transitions API + CSS Fallback
  * 
  * How it works:
  * 1. Browser takes a "screenshot" of current state
  * 2. We change the theme (DOM update)
  * 3. Browser takes a "screenshot" of new state
- * 4. Browser animates between them with clip-path!
+ * 4. CSS clip-path circle animation reveals the new theme
  * 
- * This is how the Reddit/Twitter dark mode toggles work.
- * The circle LITERALLY reveals the new theme underneath.
+ * FALLBACK: For browsers without View Transitions (Safari, Firefox),
+ * we use a CSS-only approach with a pseudo-element overlay.
  * 
- * Easter Eggs: 3x = Lighthouse, 7x = Katamaran
+ * Easter Eggs: 3x = Lighthouse, 5x = Matrix, Language after Matrix = Boat
  */
 
 const ThemeContext = createContext(null);
 
-// Animation duration
-const WAVE_DURATION = 1200; // Slower for more drama
+// Animation duration - synced with CSS (0.8s)
+// Sweet spot: Responsive start + elegant finish
+const WAVE_DURATION = 800;
 
 export function ThemeProvider({ children }) {
   // Theme state - true = dark
@@ -45,7 +46,10 @@ export function ThemeProvider({ children }) {
   const [matrixWasShown, setMatrixWasShown] = useState(false); // Unlocks boat on language click
   const [toggleCounter, setToggleCounter] = useState(0); // Count all successful theme toggles
   const clickResetTimer = useRef(null);
-  const [disableViewTransitions, setDisableViewTransitions] = useState(false); // Brave fallback
+  // View Transitions supported check
+  const [supportsViewTransitions] = useState(() => 
+    typeof document !== 'undefined' && 'startViewTransition' in document
+  );
 
   // Apply theme to DOM immediately
   useEffect(() => {
@@ -55,19 +59,8 @@ export function ThemeProvider({ children }) {
     localStorage.setItem('adaptify-theme', isDark ? 'dark' : 'light');
   }, [isDark]);
 
-  // Detect Brave and disable View Transitions there (they can behave inconsistently)
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    try {
-      const ua = navigator.userAgent || '';
-      const isBrave = ua.includes('Brave') || (navigator.brave && typeof navigator.brave.isBrave === 'function');
-      if (isBrave) {
-        setDisableViewTransitions(true);
-      }
-    } catch {
-      // Fail silently, just don't disable View Transitions
-    }
-  }, []);
+  // No browser exclusions - View Transitions work in all modern Chromium browsers
+  // Safari/Firefox will use the CSS fallback automatically
 
   // System theme listener
   useEffect(() => {
@@ -140,36 +133,49 @@ export function ThemeProvider({ children }) {
     document.documentElement.style.setProperty('--wave-x', `${x}px`);
     document.documentElement.style.setProperty('--wave-y', `${y}px`);
 
-    // Check if View Transitions API is supported AND not disabled (e.g. Brave)
-    if (document.startViewTransition && !disableViewTransitions) {
-      // THE MAGIC: View Transitions API
+    // Check if View Transitions API is supported
+    if (supportsViewTransitions) {
+      // THE MAGIC: View Transitions API - seamless clip-path animation
       setWaveState({ isAnimating: true, originX: x, originY: y, previousTheme });
       
-      const transition = document.startViewTransition(() => {
-        // This runs during the transition - update the DOM
-        const root = document.documentElement;
-        root.classList.remove('light', 'dark');
-        root.classList.add(newIsDark ? 'dark' : 'light');
+      try {
+        const transition = document.startViewTransition(() => {
+          // This runs during the transition - update the DOM
+          const root = document.documentElement;
+          root.classList.remove('light', 'dark');
+          root.classList.add(newIsDark ? 'dark' : 'light');
+          setIsDark(newIsDark);
+          setToggleCounter(prev => prev + 1);
+        });
+
+        // Wait for transition to finish
+        await transition.finished;
+      } catch (e) {
+        // Fallback if View Transition fails
         setIsDark(newIsDark);
         setToggleCounter(prev => prev + 1);
-      });
-
-      // Wait for transition to finish
-      await transition.finished;
+      }
+      
       setWaveState(prev => ({ ...prev, isAnimating: false }));
       
     } else {
-      // Fallback for browsers without View Transitions
+      // CSS Fallback for Safari/Firefox - instant switch with CSS transitions
+      // The global CSS transitions on all elements will make it smooth
       setWaveState({ isAnimating: true, originX: x, originY: y, previousTheme });
+      
+      // Add fallback class for CSS-only animation
+      document.documentElement.classList.add('theme-transitioning');
+      
       setIsDark(newIsDark);
       setToggleCounter(prev => prev + 1);
       
       setTimeout(() => {
+        document.documentElement.classList.remove('theme-transitioning');
         setWaveState(prev => ({ ...prev, isAnimating: false }));
       }, WAVE_DURATION);
     }
     
-  }, [isDark, waveState.isAnimating, disableViewTransitions]);
+  }, [isDark, waveState.isAnimating, supportsViewTransitions]);
 
   // Cleanup
   useEffect(() => {

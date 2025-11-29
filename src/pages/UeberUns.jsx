@@ -92,7 +92,11 @@ export default function UeberUns() {
       {/* HEADER */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a]/90 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link 
+            to="/" 
+            className="flex items-center gap-3 group"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
             <div className="p-2 rounded-lg border border-white/20 bg-white/5 group-hover:border-white/40 transition-all">
               <img src={logo} alt="Adaptify" className="h-7 w-auto brightness-0 invert" />
             </div>
@@ -281,17 +285,18 @@ export default function UeberUns() {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: Target, titleKey: 'about.mission.values.custom.title', descKey: 'about.mission.values.custom.desc', gradient: 'from-cyan-500 to-cyan-600' },
-              { icon: Shield, titleKey: 'about.mission.values.honest.title', descKey: 'about.mission.values.honest.desc', gradient: 'from-violet-500 to-violet-600' },
-              { icon: Zap, titleKey: 'about.mission.values.fast.title', descKey: 'about.mission.values.fast.desc', gradient: 'from-fuchsia-500 to-fuchsia-600' },
-              { icon: Heart, titleKey: 'about.mission.values.partner.title', descKey: 'about.mission.values.partner.desc', gradient: 'from-emerald-500 to-emerald-600' }
+              { icon: Target, titleKey: 'about.mission.values.custom.title', descKey: 'about.mission.values.custom.desc', gradientClass: 'bg-gradient-to-br from-cyan-500 to-cyan-600' },
+              { icon: Shield, titleKey: 'about.mission.values.honest.title', descKey: 'about.mission.values.honest.desc', gradientClass: 'bg-gradient-to-br from-violet-500 to-violet-600' },
+              { icon: Zap, titleKey: 'about.mission.values.fast.title', descKey: 'about.mission.values.fast.desc', gradientClass: 'bg-gradient-to-br from-fuchsia-500 to-fuchsia-600' },
+              { icon: Heart, titleKey: 'about.mission.values.partner.title', descKey: 'about.mission.values.partner.desc', gradientClass: 'bg-gradient-to-br from-emerald-500 to-emerald-600' }
             ].map((value, i) => (
-              <div key={i} className="group bg-white/5 border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-all duration-300">
-                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${value.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+              <div key={i} className="service-card group bg-white/5 border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-all duration-300 hover:-translate-y-1 flex flex-col">
+                {/* Clean vertical layout */}
+                <div className={`w-14 h-14 rounded-2xl ${value.gradientClass} flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mb-6`}>
                   <value.icon className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{t(value.titleKey)}</h3>
-                <p className="text-gray-400 leading-relaxed">{t(value.descKey)}</p>
+                <h3 className="text-xl font-semibold mb-3 leading-tight">{t(value.titleKey)}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed flex-1">{t(value.descKey)}</p>
               </div>
             ))}
           </div>
