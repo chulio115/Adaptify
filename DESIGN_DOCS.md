@@ -84,11 +84,30 @@ overlay.style.cssText = `
 | `cubic-bezier` | `index.css:145` | `(0.4, 0, 0.2, 1)` | Snappy Easing (Material Design) |
 | `circle(150%)` | `index.css:158` | `150%` | Wie weit der Kreis expandiert |
 
-### Performance-Optimierungen (v11)
-- **Kein `filter: drop-shadow`** - Verursachte Re-Paints/Lag
+### Performance-Optimierungen (v12 - Mobile Focus)
+
+**Theme Transition:**
+- **Keine globalen CSS-Transitions mehr** - War der Hauptgrund für Lag!
 - **`will-change: clip-path`** - GPU-Beschleunigung
-- **0.8s statt 1.5s** - Responsive aber elegant
-- **Material Design Easing** - Fühlt sich snappy an
+- **0.8s** - Sweet spot für snappy + elegant
+- **Material Design Easing** - `cubic-bezier(0.4, 0, 0.2, 1)`
+
+**Safari/Firefox Fallback:**
+- **200ms Overlay-Fade** statt 600ms all-element transitions
+- **`transform: translateZ(0)`** - Forciert GPU-Compositing
+- **`backface-visibility: hidden`** - Weitere GPU-Optimierung
+
+**Matrix Easter Egg (Mobile):**
+- **8 Spalten** statt 20 (60% weniger Elemente)
+- **Kein `backdrop-filter: blur`** auf Mobile
+- **Einfache `text-shadow`** statt mehrfache
+- **Keine Lead-Characters** auf Mobile
+- **`will-change: transform`** auf allen animierten Elementen
+
+**Lighthouse Easter Egg (Mobile):**
+- **Kein `box-shadow`** auf Mobile
+- **Vereinfachte Gradienten**
+- **Kleinere Elemente** (30px statt 40px)
 
 ---
 

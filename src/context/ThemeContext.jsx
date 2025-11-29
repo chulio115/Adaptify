@@ -159,46 +159,53 @@ export function ThemeProvider({ children }) {
       setWaveState(prev => ({ ...prev, isAnimating: false }));
       
     } else {
-      // OPTIMIZED FALLBACK for Safari/Firefox (especially Mobile Safari)
-      // Instead of animating ALL elements, we use a simple overlay fade
-      // This is WAY more GPU-friendly on mobile devices
+      // ULTRA-OPTIMIZED FALLBACK for Safari/Firefox (especially Mobile Safari)
+      // Simple, fast, GPU-accelerated overlay fade
       
       setWaveState({ isAnimating: true, originX: x, originY: y, previousTheme });
       
-      // Create a temporary overlay for smooth visual transition
+      // Create overlay with GPU acceleration
       const overlay = document.createElement('div');
-      overlay.className = 'theme-fallback-overlay';
       overlay.style.cssText = `
         position: fixed;
-        inset: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         z-index: 99999;
         pointer-events: none;
         background: ${newIsDark ? '#030303' : '#fafafa'};
         opacity: 0;
-        transition: opacity 300ms ease-out;
-        will-change: opacity;
+        transition: opacity 200ms ease-out;
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
       `;
       document.body.appendChild(overlay);
       
-      // Trigger fade in
-      requestAnimationFrame(() => {
-        overlay.style.opacity = '1';
-      });
+      // Force browser to acknowledge the element before animating (reflow trick)
+      void overlay.offsetHeight;
       
-      // After fade in, switch theme and fade out
+      // Fade in
+      overlay.style.opacity = '1';
+      
+      // Switch theme at peak opacity, then fade out
       setTimeout(() => {
         setIsDark(newIsDark);
         setToggleCounter(prev => prev + 1);
         
-        // Fade out
-        overlay.style.opacity = '0';
-        
-        // Remove overlay after fade out
-        setTimeout(() => {
-          overlay.remove();
-          setWaveState(prev => ({ ...prev, isAnimating: false }));
-        }, 300);
-      }, 300);
+        // Small delay to let React update, then fade out
+        requestAnimationFrame(() => {
+          overlay.style.opacity = '0';
+          
+          // Cleanup
+          setTimeout(() => {
+            if (overlay.parentNode) overlay.remove();
+            setWaveState(prev => ({ ...prev, isAnimating: false }));
+          }, 200);
+        });
+      }, 200);
     }
     
   }, [isDark, waveState.isAnimating, supportsViewTransitions]);

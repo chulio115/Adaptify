@@ -201,62 +201,33 @@ body {
   padding: 0;
   background: var(--bg-primary);
   color: var(--text-primary);
-  transition: background var(--theme-transition), color var(--theme-transition);
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   GLOBAL THEME TRANSITIONS - All elements animate their colors
-   This is THE KEY to the smooth wave effect!
+   PERFORMANCE OPTIMIZED - NO global transitions!
+   
+   The View Transitions API handles the animation.
+   Global transitions on ALL elements caused massive lag on mobile.
+   Now we only transition specific interactive elements.
 ═══════════════════════════════════════════════════════════════ */
 
-/* Apply transitions to EVERYTHING */
-*, *::before, *::after {
+/* Only transition interactive elements - NOT everything */
+a, button {
   transition: 
-    background-color var(--theme-transition),
-    border-color var(--theme-transition),
-    color var(--theme-transition),
-    fill var(--theme-transition),
-    stroke var(--theme-transition),
-    box-shadow var(--theme-transition),
-    opacity 200ms ease;
+    color 200ms ease,
+    background-color 200ms ease,
+    border-color 200ms ease,
+    transform 200ms ease;
 }
 
-/* Specific high-priority transitions */
-h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea {
+/* Cards get subtle hover transitions */
+.service-card,
+.rounded-2xl.border,
+.rounded-xl.border {
   transition: 
-    color var(--theme-transition),
-    background-color var(--theme-transition),
-    border-color var(--theme-transition),
-    box-shadow var(--theme-transition) !important;
-}
-
-/* Background elements */
-div, section, article, header, footer, nav, main {
-  transition: 
-    background-color var(--theme-transition),
-    background var(--theme-transition),
-    border-color var(--theme-transition),
-    box-shadow var(--theme-transition);
-}
-
-/* SVG elements */
-svg, path, circle, rect, line {
-  transition: 
-    fill var(--theme-transition),
-    stroke var(--theme-transition);
-}
-
-/* Legacy class - still works */
-.theme-transition,
-.theme-transition * {
-  transition: 
-    background var(--theme-transition),
-    background-color var(--theme-transition),
-    border-color var(--theme-transition),
-    color var(--theme-transition),
-    fill var(--theme-transition),
-    stroke var(--theme-transition),
-    box-shadow var(--theme-transition) !important;
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
 }
 
 /* Infinite Scroll Animation - seamless loop */
