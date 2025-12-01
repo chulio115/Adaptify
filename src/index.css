@@ -111,6 +111,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Required for View Transitions API to work on the root element */
+  view-transition-name: root;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -134,29 +136,20 @@ html {
    - Snappy easing that feels responsive
 ═══════════════════════════════════════════════════════════════ */
 
-/* The OLD view stays static underneath */
+/* The OLD view stays static underneath - NO animation */
 ::view-transition-old(root) {
   animation: none;
   z-index: 1;
 }
 
-/* The NEW view is revealed by expanding circle */
+/* The NEW view - animation is applied PROGRAMMATICALLY via JS
+   This is more reliable than CSS-only approach because:
+   1. We can calculate exact click position
+   2. We can calculate exact radius needed to cover screen
+   3. Better browser compatibility */
 ::view-transition-new(root) {
-  animation: reveal-theme 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: none;
   z-index: 9999;
-  will-change: clip-path;
-}
-
-/* THE MAGIC - circle expands from click position
-   Easing: Fast start (responsive), smooth deceleration (elegant)
-   Duration: 0.8s = sweet spot between snappy and premium */
-@keyframes reveal-theme {
-  0% {
-    clip-path: circle(0% at var(--wave-x) var(--wave-y));
-  }
-  100% {
-    clip-path: circle(150% at var(--wave-x) var(--wave-y));
-  }
 }
 
 /* Smooth edge during transition - no hard lines */
@@ -164,6 +157,7 @@ html {
   isolation: isolate;
 }
 
+/* Disable default crossfade, we use clip-path instead */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   mix-blend-mode: normal;
@@ -380,24 +374,6 @@ a:focus:not(:focus-visible) {
    "A better dark mode that happens to be light"
 ═══════════════════════════════════════════════════════════════ */
 
-/* Wave transition animation */
-@keyframes theme-wave {
-  0% {
-    transform: translateX(-100%) skewX(-15deg);
-    opacity: 0;
-  }
-  20% {
-    opacity: 1;
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(200%) skewX(-15deg);
-    opacity: 0;
-  }
-}
-
 /* Subtle invitation pulse for first-time visitors */
 @keyframes invite-pulse {
   0% {
@@ -412,23 +388,6 @@ a:focus:not(:focus-visible) {
     transform: scale(1.8);
     opacity: 0;
   }
-}
-
-.theme-wave-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9997;
-  pointer-events: none;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--gradient-cyan) 30%,
-    var(--gradient-coral) 70%,
-    transparent 100%
-  );
-  animation: theme-wave 600ms ease-out forwards;
-  mix-blend-mode: overlay;
-  opacity: 0.4;
 }
 
 /* Background overrides */

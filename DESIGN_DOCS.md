@@ -15,47 +15,51 @@
 
 **Beschreibung**: Der neue Theme "frisst" das alte - ein expandierender Kreis vom Klickpunkt aus enthüllt das neue Theme nahtlos.
 
-### Technische Umsetzung
+### Technische Umsetzung (v13 - Programmatic Animation)
 
-**1. View Transitions API (Chrome, Edge, Brave)**
+**1. View Transitions API (Chrome, Edge, Brave, Safari 18+)**
 ```css
-/* index.css - Zeilen 138-160 */
+/* index.css - CSS deaktiviert Standard-Animation */
+::view-transition-old(root),
 ::view-transition-new(root) {
-  animation: reveal-theme 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  z-index: 9999;
-}
-
-@keyframes reveal-theme {
-  0% {
-    clip-path: circle(0% at var(--wave-x) var(--wave-y));
-    filter: drop-shadow(0 0 0px transparent);
-  }
-  15% {
-    filter: drop-shadow(0 0 8px var(--accent-cyan));
-  }
-  85% {
-    filter: drop-shadow(0 0 4px var(--accent-cyan));
-  }
-  100% {
-    clip-path: circle(200% at var(--wave-x) var(--wave-y));
-    filter: drop-shadow(0 0 0px transparent);
-  }
+  animation: none;
+  mix-blend-mode: normal;
 }
 ```
 
-**2. JavaScript Controller (ThemeContext.jsx)**
+**2. JavaScript Controller (ThemeContext.jsx) - PROGRAMMATIC ANIMATION**
 ```javascript
-const WAVE_DURATION = 1500; // 1.5s - synced with CSS
+const WAVE_DURATION = 800; // 0.8s
 
-// Click position wird als CSS Custom Property gesetzt:
-document.documentElement.style.setProperty('--wave-x', `${x}px`);
-document.documentElement.style.setProperty('--wave-y', `${y}px`);
-
-// View Transitions API triggern:
+// Start View Transition
 const transition = document.startViewTransition(() => {
   root.classList.remove('light', 'dark');
   root.classList.add(newIsDark ? 'dark' : 'light');
 });
+
+// Wait for pseudo-elements to be ready
+await transition.ready;
+
+// Calculate radius to cover entire screen
+const maxRadius = Math.hypot(
+  Math.max(x, window.innerWidth - x),
+  Math.max(y, window.innerHeight - y)
+);
+
+// Apply clip-path animation PROGRAMMATICALLY
+document.documentElement.animate(
+  {
+    clipPath: [
+      `circle(0px at ${x}px ${y}px)`,
+      `circle(${maxRadius}px at ${x}px ${y}px)`
+    ]
+  },
+  {
+    duration: 800,
+    easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    pseudoElement: '::view-transition-new(root)'
+  }
+);
 ```
 
 **3. Fallback für Safari/Firefox (v11 - Mobile optimiert)**

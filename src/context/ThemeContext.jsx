@@ -46,13 +46,18 @@ export function ThemeProvider({ children }) {
   const [matrixWasShown, setMatrixWasShown] = useState(false); // Unlocks boat on language click
   const [toggleCounter, setToggleCounter] = useState(0); // Count all successful theme toggles
   const clickResetTimer = useRef(null);
-  // View Transitions supported check
-  const [supportsViewTransitions] = useState(() => 
-    typeof document !== 'undefined' && 'startViewTransition' in document
-  );
+  const isTransitioning = useRef(false);
 
-  // Apply theme to DOM immediately
+  // Apply theme to DOM - but NOT during View Transition (it handles DOM itself)
   useEffect(() => {
+    // Skip if we're in the middle of a View Transition
+    // The transition callback already updated the DOM
+    if (isTransitioning.current) {
+      isTransitioning.current = false;
+      localStorage.setItem('adaptify-theme', isDark ? 'dark' : 'light');
+      return;
+    }
+    
     const root = document.documentElement;
     root.classList.remove('light', 'dark');
     root.classList.add(isDark ? 'dark' : 'light');
@@ -133,25 +138,72 @@ export function ThemeProvider({ children }) {
     document.documentElement.style.setProperty('--wave-x', `${x}px`);
     document.documentElement.style.setProperty('--wave-y', `${y}px`);
 
-    // Check if View Transitions API is supported
-    if (supportsViewTransitions) {
+    // Check if View Transitions API is supported at runtime
+    const canUseViewTransitions = typeof document !== 'undefined' && 
+      typeof document.startViewTransition === 'function';
+    
+    // Debug log - remove after testing
+    console.log('🎨 Theme Toggle:', {
+      canUseViewTransitions,
+      hasStartViewTransition: typeof document?.startViewTransition,
+      waveX: x,
+      waveY: y,
+      newTheme: newIsDark ? 'dark' : 'light'
+    });
+    
+    if (canUseViewTransitions) {
       // THE MAGIC: View Transitions API - seamless clip-path animation
       setWaveState({ isAnimating: true, originX: x, originY: y, previousTheme });
       
+      // Mark that we're transitioning so useEffect doesn't interfere
+      isTransitioning.current = true;
+      
       try {
+        // Start the view transition
         const transition = document.startViewTransition(() => {
-          // This runs during the transition - update the DOM
+          // Direct DOM manipulation for immediate visual change
           const root = document.documentElement;
           root.classList.remove('light', 'dark');
           root.classList.add(newIsDark ? 'dark' : 'light');
-          setIsDark(newIsDark);
-          setToggleCounter(prev => prev + 1);
         });
+        
+        // Update React state after transition starts (for consistency)
+        setIsDark(newIsDark);
+        setToggleCounter(prev => prev + 1);
+        
+        // Wait for the pseudo-elements to be ready, then apply programmatic animation
+        await transition.ready;
+        
+        // Calculate the maximum radius needed to cover the entire screen
+        const maxRadius = Math.hypot(
+          Math.max(x, window.innerWidth - x),
+          Math.max(y, window.innerHeight - y)
+        );
+        
+        // Apply the clip-path animation programmatically
+        // This is more reliable than CSS-only approach
+        document.documentElement.animate(
+          {
+            clipPath: [
+              `circle(0px at ${x}px ${y}px)`,
+              `circle(${maxRadius}px at ${x}px ${y}px)`
+            ]
+          },
+          {
+            duration: 800,
+            easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+            pseudoElement: '::view-transition-new(root)'
+          }
+        );
 
         // Wait for transition to finish
         await transition.finished;
       } catch (e) {
         // Fallback if View Transition fails
+        console.warn('View Transition failed:', e);
+        const root = document.documentElement;
+        root.classList.remove('light', 'dark');
+        root.classList.add(newIsDark ? 'dark' : 'light');
         setIsDark(newIsDark);
         setToggleCounter(prev => prev + 1);
       }
@@ -208,7 +260,7 @@ export function ThemeProvider({ children }) {
       }, 200);
     }
     
-  }, [isDark, waveState.isAnimating, supportsViewTransitions]);
+  }, [isDark, waveState.isAnimating]);
 
   // Cleanup
   useEffect(() => {
