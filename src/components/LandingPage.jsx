@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  ArrowRight, 
-  Play,
+  ArrowRight,
   Globe, 
   FileSpreadsheet, 
   Workflow, 
@@ -227,9 +226,6 @@ export default function LandingPage() {
               <a href="#problem" className="text-sm text-gray-300 hover:text-white transition-colors">
                 {t('nav.problem')}
               </a>
-              <a href="#realitaet" className="text-sm text-gray-300 hover:text-white transition-colors">
-                {t('nav.reality')}
-              </a>
               <a href="#leistungen" className="text-sm text-gray-300 hover:text-white transition-colors">
                 {t('nav.services')}
               </a>
@@ -288,13 +284,6 @@ export default function LandingPage() {
               className="text-lg text-white hover:text-cyan-400 transition-colors py-3 px-4 rounded-xl hover:bg-white/5"
             >
               {t('nav.problem')}
-            </a>
-            <a 
-              href="#realitaet" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-lg text-white hover:text-cyan-400 transition-colors py-3 px-4 rounded-xl hover:bg-white/5"
-            >
-              {t('nav.reality')}
             </a>
             <a 
               href="#leistungen" 
@@ -377,13 +366,6 @@ export default function LandingPage() {
               {t('hero.cta')}
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
-            <button 
-              disabled
-              className="group inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-medium border border-white/10 text-gray-500 cursor-not-allowed opacity-60"
-            >
-              <Play className="w-5 h-5 text-gray-500" />
-              Demo (soon)
-            </button>
           </div>
         </div>
         
@@ -449,92 +431,6 @@ export default function LandingPage() {
                 <p className="text-gray-400 leading-relaxed">{t(item.descKey)}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-          REALITY CHECK - Mal ehrlich, so sieht's aus
-          (Reused from Über Uns, directly after Problem)
-      ═══════════════════════════════════════════════════════════════ */}
-      <section
-        id="realitaet"
-        className="py-20 md:py-24 px-6 transition-all duration-1000 delay-300"
-      >
-        <div className="max-w-6xl mx-auto">
-          {/* Heading */}
-          <div className="text-center mb-14 md:mb-16">
-            <span className="text-[11px] uppercase tracking-[0.3em] text-amber-400 mb-3 block">
-              {t('about.reality.badge')}
-            </span>
-            <h2 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4">
-              {t('about.reality.title')}
-            </h2>
-            <p className="text-gray-500 max-w-2xl mx-auto text-sm md:text-base">
-              {t('about.reality.subtitle')}
-            </p>
-          </div>
-
-          {/* Stats row */}
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-5 md:gap-6 mb-10 md:mb-12">
-            {[
-              { value: '63%', labelKey: 'about.reality.stats.noStrategy', source: 'Bitkom 2025' },
-              { value: '78%', labelKey: 'about.reality.stats.dontKnow', source: 'BMWK 2025' },
-              { value: '41%', labelKey: 'about.reality.stats.oldWebsite', source: 'Statista 2025' },
-              { value: '2,6×', labelKey: 'about.reality.stats.fasterGrowth', source: 'Google/Bitkom 2025', highlight: true }
-            ].map((stat, i) => (
-              <div
-                key={i}
-                className={`rounded-2xl p-5 md:p-6 text-center shadow-[0_0_0_1px_rgba(255,255,255,0.04)] ${
-                  stat.highlight
-                    ? 'bg-gradient-to-b from-emerald-500/25 to-transparent border border-emerald-500/40'
-                    : 'bg-gradient-to-b from-white/5 to-transparent border border-white/10'
-                }`}
-              >
-                <div
-                  className={`text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2 ${
-                    stat.highlight ? 'text-emerald-400' : 'text-white'
-                  }`}
-                >
-                  {stat.value}
-                </div>
-                <p className="text-gray-300 text-xs md:text-sm mb-1.5 md:mb-2">
-                  {t(stat.labelKey)}
-                </p>
-                <p className="text-[10px] md:text-xs text-gray-600">
-                  {t('about.reality.source')}: {stat.source}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* Explanation box */}
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 lg:p-9">
-            <h3 className="text-lg md:text-xl font-semibold mb-4 md:mb-6 text-white">
-              {t('about.reality.whyHard.title')}
-            </h3>
-            <div className="grid md:grid-cols-2 gap-5 md:gap-8 text-gray-400 text-sm md:text-base leading-relaxed">
-              <div className="space-y-3 md:space-y-4">
-                <p>
-                  <strong className="text-white">{t('about.reality.whyHard.business.title')}</strong>{' '}
-                  {t('about.reality.whyHard.business.text')}
-                </p>
-                <p>
-                  <strong className="text-white">{t('about.reality.whyHard.agencies.title')}</strong>{' '}
-                  {t('about.reality.whyHard.agencies.text')}
-                </p>
-              </div>
-              <div className="space-y-3 md:space-y-4">
-                <p>
-                  <strong className="text-white">{t('about.reality.whyHard.builders.title')}</strong>{' '}
-                  {t('about.reality.whyHard.builders.text')}
-                </p>
-                <p>
-                  <strong className="text-white">{t('about.reality.whyHard.notFailure.title')}</strong>{' '}
-                  {t('about.reality.whyHard.notFailure.text')}
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -774,7 +670,7 @@ export default function LandingPage() {
               },
               { 
                 icon: Sparkles, 
-                name: 'Codium AI / Windsurf', 
+                name: 'AI-Accelerated Dev', 
                 taglineKey: 'tech.items.ai.tagline',
                 descKey: 'tech.items.ai.desc',
                 gradient: 'from-cyan-400 to-teal-500',

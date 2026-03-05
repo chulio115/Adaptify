@@ -10,104 +10,104 @@
     "back": "Zurück"
   },
   "hero": {
-    "badge": "Digitalisierung aus einer Hand – für ambitionierte Mittelständler",
-    "title": "Euer kompletter",
-    "titleHighlight": "Digitalisierungspartner",
-    "subtitle": "Keine halben Sachen. Wir bauen Webseiten, Apps, Automationen & KI-Workflows – alles aus einer Hand.",
-    "subtitle2": "von der Webseite bis zur KI",
-    "cta": "Kostenloses Erstgespräch",
+    "badge": "Digitalagentur für den Mittelstand",
+    "title": "Wir bauen, was euer Business",
+    "titleHighlight": "digital nach vorne bringt",
+    "subtitle": "Webseiten, Apps, Automatisierung und KI-Workflows – schneller, günstiger und besser als klassische Agenturen.",
+    "subtitle2": "alles aus einer Hand",
+    "cta": "In 30 Min. zeigen, was möglich ist",
     "learnMore": "Mehr erfahren"
   },
   "stats": {
-    "faster": "schnellere Prozesse",
+    "faster": "weniger manuelle Arbeit",
     "experience": "Jahre Erfahrung",
-    "setup": "Wochen Setup",
-    "custom": "maßgeschneidert"
+    "setup": "Wochen bis zum Launch",
+    "custom": "persönlicher Ansprechpartner"
   },
   "problem": {
     "badge": "Das Problem",
     "title": "Kommt euch das bekannt vor?",
-    "subtitle": "Die meisten KMUs verlieren täglich Zeit und Geld – weil niemand alles zusammenbringt.",
+    "subtitle": "Die meisten KMUs verlieren täglich Zeit und Geld – weil niemand Technik, Design und Prozesse zusammenbringt.",
     "cards": {
       "website": {
-        "title": "Veraltete oder keine Webseite?",
-        "desc": "Eure Konkurrenz hat moderne Seiten & Apps. Ihr verliert Kunden, bevor sie euch überhaupt finden."
+        "title": "Eure Website kostet euch Kunden",
+        "desc": "Während die Konkurrenz mit modernen Seiten überzeugt, verliert ihr Interessenten – bevor sie euch überhaupt kennenlernen."
       },
       "manual": {
-        "title": "Manuelle Prozesse überall?",
-        "desc": "Excel-Listen, Copy-Paste, E-Mail-Chaos. Jede Aufgabe dauert 3x so lang wie nötig."
+        "title": "Euer Team verschwendet Stunden pro Woche",
+        "desc": "Excel-Listen, Copy-Paste, E-Mail-Chaos. Jede Routine-Aufgabe frisst Zeit, die ins Kerngeschäft gehört."
       },
       "automation": {
-        "title": "Keine Automatisierung?",
-        "desc": "Während andere KI nutzen, macht ihr alles von Hand. Ineffizienz kostet bares Geld."
+        "title": "Die Konkurrenz automatisiert – ihr nicht",
+        "desc": "Andere Unternehmen nutzen KI und Automatisierung. Wer manuell arbeitet, verliert den Anschluss."
       }
     }
   },
   "tools": {
     "badge": "Unsere Lösung",
-    "title": "Wir lösen das – mit den besten Tools",
-    "subtitle": "Wir setzen die Tools ein, mit denen Tech-Startups und Konzerne arbeiten – für euer KMU."
+    "title": "Technologie, die für euch arbeitet",
+    "subtitle": "Wir nutzen den gleichen Stack wie führende Tech-Unternehmen – konfiguriert für euer Business."
   },
   "services": {
     "badge": "Unsere Leistungen",
-    "title": "Wir digitalisieren euer komplettes Business",
-    "subtitle": "Alles aus einer Hand – von der Webseite über Automatisierung bis zur KI. Kein Flickwerk, sondern ein System.",
+    "title": "Ein Partner für euer gesamtes Digital-Projekt",
+    "subtitle": "Kein Flickwerk aus fünf Freelancern – sondern ein durchdachtes System, das zusammen funktioniert.",
     "items": {
       "web": {
-        "title": "Moderne Webseiten & Shops",
-        "desc": "Webflow, Shopify oder Custom – schnell, schön und konvertierend."
+        "title": "Websites, die verkaufen",
+        "desc": "Performant, mobil-optimiert und konversionsoptimiert. Euer digitales Schaufenster – modern und professionell."
       },
       "automation": {
-        "title": "KI-gestützte Automatisierung",
-        "desc": "Workflows, die von selbst laufen – mehr Zeit fürs Kerngeschäft, weniger Routinearbeit."
+        "title": "Prozesse, die sich selbst erledigen",
+        "desc": "Wiederkehrende Aufgaben automatisiert. Mehr Zeit für euer Kerngeschäft, weniger Routinearbeit."
       },
       "apps": {
-        "title": "Apps & Custom Software",
-        "desc": "Interne Tools, Kundenportale, individuelle Lösungen – professionell entwickelt, schnell geliefert."
+        "title": "Software, die genau passt",
+        "desc": "Interne Tools, Kundenportale und Individuallösungen – gebaut für eure Anforderungen, nicht von der Stange."
       },
       "design": {
-        "title": "Design & Branding",
-        "desc": "Logo, CI, Design-System – alles damit ihr professionell ausseht."
+        "title": "Markenauftritt mit Wiedererkennungswert",
+        "desc": "Logo, Corporate Identity und Design-System – damit euer Unternehmen professionell und einheitlich auftritt."
       },
       "process": {
-        "title": "Prozesse & Kollaboration",
-        "desc": "Jira, Confluence & Co. – strukturierte Abläufe für euer Team."
+        "title": "Strukturierte Zusammenarbeit",
+        "desc": "Klare Abläufe, transparente Kommunikation und digitale Werkzeuge – für euer Team und für die Zusammenarbeit mit uns."
       },
       "support": {
-        "title": "Laufender Support",
-        "desc": "Wir bleiben dran. Updates, Optimierung, Ansprechpartner – immer."
+        "title": "Langfristiger Partner, kein Dienstleister",
+        "desc": "Nach dem Go-Live bleiben wir dran. Updates, Optimierung und ein fester Ansprechpartner – immer."
       }
     }
   },
   "tech": {
     "badge": "Technologie",
-    "title": "Unser moderner Tech-Stack 2025",
-    "subtitle": "Die besten Tools – perfekt kombiniert und KI-beschleunigt. Das macht uns zu eurem technologischen Vorsprung.",
+    "title": "Unser Tech-Stack – euer Vorsprung",
+    "subtitle": "Moderne Werkzeuge, perfekt kombiniert und KI-beschleunigt. So liefern wir schneller und besser.",
     "items": {
       "atlassian": {
-        "tagline": "Prozesse & Kollaboration",
-        "desc": "Jira, Confluence, Bitbucket – wir digitalisieren eure Prozesse damit und arbeiten transparent mit euch zusammen."
+        "tagline": "Projektmanagement & Transparenz",
+        "desc": "Strukturierte Prozesse, Echtzeit-Einblicke und nahtlose Zusammenarbeit – ihr wisst immer, wo euer Projekt steht."
       },
       "ai": {
-        "tagline": "Entwicklung mit KI-Turbo",
-        "desc": "Modernste KI-Tools beschleunigen unsere Entwicklung. Was sonst Monate braucht, liefern wir in Wochen."
+        "tagline": "KI-beschleunigte Entwicklung",
+        "desc": "Modernste KI-Tools beschleunigen unseren Entwicklungsprozess. Was bei klassischen Agenturen Monate dauert, liefern wir in Wochen."
       },
       "automation": {
-        "tagline": "Intelligente Workflows",
-        "desc": "Make, Zapier, n8n + eigene KI-Agents. Alle Prozesse automatisiert – damit ihr euch aufs Wesentliche konzentrieren könnt."
+        "tagline": "Intelligente Automatisierung",
+        "desc": "Maßgeschneiderte Workflows und KI-Agenten, die eure Geschäftsprozesse rund um die Uhr optimieren."
       },
       "web": {
-        "tagline": "Schnelle Umsetzung",
-        "desc": "Webflow, Shopify, React, Next.js – performante Webseiten, Apps und Shops, maßgeschneidert für eure Marke."
+        "tagline": "Performante Web-Technologie",
+        "desc": "Schnelle, sichere und skalierbare Websites und Apps – gebaut mit den Technologien führender Tech-Unternehmen."
       }
     }
   },
   "cta": {
-    "badge": "Jetzt durchstarten",
-    "title": "Bereit für die komplette",
-    "titleHighlight": "Digitalisierung?",
-    "subtitle": "In 30 Minuten zeigen wir euch live, wie euer Business 2025+ aussehen kann – mit Webseite, Automationen und KI.",
-    "button": "Kostenloses Strategiegespräch buchen",
+    "badge": "Nächster Schritt",
+    "title": "Euer nächster Schritt?",
+    "titleHighlight": "Ein Gespräch.",
+    "subtitle": "In 30 Minuten analysieren wir gemeinsam, wo euer größtes Digital-Potenzial liegt – und wie wir es heben.",
+    "button": "Kostenlos beraten lassen",
     "note": "✓ Unverbindlich · ✓ Keine Kosten · ✓ Innerhalb von 24h Termin"
   },
   "contact": {
@@ -138,7 +138,7 @@
     }
   },
   "footer": {
-    "tagline": "Die moderne Digitalisierungsagentur für KMUs. Webseiten, Apps, Automatisierung & KI – alles aus einer Hand.",
+    "tagline": "Digitale Lösungen für den Mittelstand. Schnell. Persönlich. Nachhaltig.",
     "services": "Leistungen",
     "servicesItems": {
       "web": "Webseiten & Shops",
@@ -154,14 +154,14 @@
       "terms": "AGB"
     },
     "copyright": "© 2025 Adaptify. Alle Rechte vorbehalten.",
-    "madeWith": "Made with ❤️ & AI in Germany"
+    "madeWith": "Engineered with AI in Germany"
   },
   "about": {
     "badge": "Unsere Geschichte",
     "hero": {
       "title": "Digitalisierung für den Mittelstand –",
-      "titleHighlight": "von Menschen, die verstehen",
-      "subtitle": "Wir sind selbst im Mittelstand aufgewachsen und wissen, wie es ist, wenn das Tagesgeschäft keine Zeit für Digitalprojekte lässt. Deshalb übernehmen wir das – pragmatisch, bezahlbar und ohne Buzzword-Bingo."
+      "titleHighlight": "pragmatisch, persönlich, wirksam",
+      "subtitle": "Wir sind selbst im Mittelstand aufgewachsen und wissen, wie es ist, wenn das Tagesgeschäft keine Zeit für Digitalprojekte lässt. Deshalb übernehmen wir das – ohne Buzzword-Bingo, ohne überteuerte Angebote."
     },
     "reality": {
       "badge": "Die Realität",
@@ -240,7 +240,7 @@
     "mission": {
       "badge": "Unsere Mission",
       "title": "Deshalb gibt es Adaptify",
-      "subtitle": "Wir machen maßgeschneiderte Digitalisierung für KMUs bezahlbar und menschlich. Keine 08/15-Templates – sondern genau das, was euer Unternehmen braucht.",
+      "subtitle": "Maßgeschneiderte digitale Lösungen für KMUs – bezahlbar und menschlich. Keine 08/15-Templates, sondern genau das, was euer Unternehmen braucht.",
       "values": {
         "custom": {
           "title": "Maßgeschneidert",
@@ -266,7 +266,7 @@
       "subtitle": "Keine anonyme Agentur – echte Menschen mit echten Geschichten.",
       "julius": {
         "role": "Gründer & Entwicklung",
-        "quote": "Ich hab gesehen, wie mein Vater - ein Mann, der einen Katamaran mit eigenen Händen gebaut hat - bei einer Website nicht das geschehen hat, was er sehen wollte. Das darf nicht sein. Genau dafür machen wir das hier.",
+        "quote": "Mein Vater hat einen Katamaran mit eigenen Händen gebaut – aber bei seiner Website war er aufgeschmissen. Das darf nicht sein. Genau dafür gibt es Adaptify.",
         "skills": {
           "react": "React",
           "node": "Node.js",
@@ -296,27 +296,9 @@
           "seo": "SEO-optimiert"
         }
       },
-      "placeholder2": {
-        "title": "[Projekt 2]",
-        "industry": "[Branche]",
-        "result": "[Ergebnis]",
-        "desc": "[Dein nächstes Projekt könnte hier stehen. Wir dokumentieren jedes Projekt als Case Study.]",
-        "metrics": {
-          "m1": "[Metrik 1]",
-          "m2": "[Metrik 2]",
-          "m3": "[Metrik 3]"
-        }
-      },
-      "placeholder3": {
-        "title": "[Projekt 3]",
-        "industry": "[Branche]",
-        "result": "[Ergebnis]",
-        "desc": "[Platz für weitere Erfolgsgeschichten – sobald wir sie gemeinsam geschrieben haben.]",
-        "metrics": {
-          "m1": "[Metrik 1]",
-          "m2": "[Metrik 2]",
-          "m3": "[Metrik 3]"
-        }
+      "yourProject": {
+        "title": "Euer Projekt könnte hier stehen",
+        "desc": "Wir dokumentieren jedes Projekt als Erfolgsgeschichte. Lasst uns gemeinsam eure schreiben."
       }
     },
     "quote": {
@@ -324,9 +306,9 @@
       "author": "– Julius Schulze, Gründer Adaptify"
     },
     "cta": {
-      "title": "Klingt gut? Dann lasst uns reden.",
-      "subtitle": "30 Minuten, unverbindlich, kostenlos. Wir schauen uns gemeinsam an, wo ihr steht – und ob wir euch helfen können. Kein Verkaufsgespräch, versprochen.",
-      "button": "Kostenloses Erstgespräch buchen",
+      "title": "Klingt nach dem, was ihr braucht?",
+      "subtitle": "30 Minuten, unverbindlich, kostenlos. Wir schauen gemeinsam, wo euer größtes Digital-Potenzial liegt. Kein Verkaufsgespräch, versprochen.",
+      "button": "Kostenlos beraten lassen",
       "note": "✓ Unverbindlich · ✓ Keine versteckten Kosten · ✓ Antwort innerhalb 24h"
     },
     "footer": {

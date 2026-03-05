@@ -10,104 +10,104 @@
     "back": "Back"
   },
   "hero": {
-    "badge": "Full-Stack Digital Partner – for ambitious SMBs",
-    "title": "Your complete",
-    "titleHighlight": "Digitalization Partner",
-    "subtitle": "No half measures. We build websites, apps, automations & AI workflows – all under one roof.",
-    "subtitle2": "from website to AI",
-    "cta": "Free Strategy Call",
+    "badge": "Digital Agency for SMBs",
+    "title": "We build what moves",
+    "titleHighlight": "your business forward",
+    "subtitle": "Websites, apps, automation and AI workflows – faster, leaner and better than traditional agencies.",
+    "subtitle2": "all under one roof",
+    "cta": "See what's possible in 30 min",
     "learnMore": "See how"
   },
   "stats": {
-    "faster": "faster processes",
+    "faster": "less manual work",
     "experience": "years experience",
-    "setup": "weeks setup",
-    "custom": "custom-built"
+    "setup": "weeks to launch",
+    "custom": "dedicated contact"
   },
   "problem": {
     "badge": "The Problem",
     "title": "Sound familiar?",
-    "subtitle": "Most SMBs lose time and money every day – because nobody connects the dots.",
+    "subtitle": "Most SMBs lose time and money every day – because nobody connects tech, design and processes.",
     "cards": {
       "website": {
-        "title": "Outdated or no website?",
-        "desc": "Your competition has modern sites & apps. You're losing customers before they even find you."
+        "title": "Your website is costing you customers",
+        "desc": "While competitors win with modern sites, you're losing prospects – before they even get to know you."
       },
       "manual": {
-        "title": "Manual processes everywhere?",
-        "desc": "Excel sheets, copy-paste, email chaos. Every task takes 3x longer than it should."
+        "title": "Your team wastes hours every week",
+        "desc": "Excel sheets, copy-paste, email chaos. Every routine task eats time that belongs in your core business."
       },
       "automation": {
-        "title": "No automation?",
-        "desc": "While others use AI, you're doing everything by hand. Inefficiency costs real money."
+        "title": "Competitors automate – you don't",
+        "desc": "Other businesses use AI and automation. Those who work manually are falling behind."
       }
     }
   },
   "tools": {
     "badge": "Our Approach",
-    "title": "We fix that – with the right tools",
-    "subtitle": "We use the same stack that top startups and enterprises run on – configured for your business."
+    "title": "Technology that works for you",
+    "subtitle": "We use the same stack as leading tech companies – configured for your business."
   },
   "services": {
     "badge": "What We Do",
-    "title": "We digitize your entire operation",
-    "subtitle": "Everything under one roof – websites, automation, AI. No duct tape, one cohesive system.",
+    "title": "One partner for your entire digital project",
+    "subtitle": "No patchwork of five freelancers – one cohesive system that actually works together.",
     "items": {
       "web": {
-        "title": "Websites & Online Shops",
-        "desc": "Webflow, Shopify, or custom-built – fast, sharp, and made to convert."
+        "title": "Websites that convert",
+        "desc": "Performant, mobile-first and conversion-optimized. Your digital storefront – modern and professional."
       },
       "automation": {
-        "title": "AI-Powered Automation",
-        "desc": "Workflows that handle themselves – so you can focus on what actually matters."
+        "title": "Processes that run themselves",
+        "desc": "Recurring tasks automated. More time for your core business, less busywork."
       },
       "apps": {
-        "title": "Apps & Custom Software",
-        "desc": "Internal tools, client portals, bespoke solutions – built right, shipped fast."
+        "title": "Software that fits perfectly",
+        "desc": "Internal tools, client portals and custom solutions – built for your requirements, not off the shelf."
       },
       "design": {
-        "title": "Design & Branding",
-        "desc": "Logo, CI, design system – everything to look professional."
+        "title": "A brand people remember",
+        "desc": "Logo, corporate identity and design system – so your business looks professional and cohesive."
       },
       "process": {
-        "title": "Processes & Collaboration",
-        "desc": "Jira, Confluence & co. – structured workflows for your team."
+        "title": "Structured collaboration",
+        "desc": "Clear workflows, transparent communication and digital tools – for your team and for working with us."
       },
       "support": {
-        "title": "Ongoing Support",
-        "desc": "We stick around. Updates, optimization, always someone to call."
+        "title": "Long-term partner, not a vendor",
+        "desc": "After go-live, we stick around. Updates, optimization and a dedicated contact – always."
       }
     }
   },
   "tech": {
     "badge": "Technology",
-    "title": "Our 2025 Tech Stack",
-    "subtitle": "Best-in-class tools, seamlessly integrated, AI-accelerated. Your unfair advantage.",
+    "title": "Our tech stack – your advantage",
+    "subtitle": "Modern tools, seamlessly integrated, AI-accelerated. This is how we deliver faster and better.",
     "items": {
       "atlassian": {
-        "tagline": "Processes & Collaboration",
-        "desc": "Jira, Confluence, Bitbucket – we digitize your processes and work transparently with you."
+        "tagline": "Project Management & Transparency",
+        "desc": "Structured processes, real-time visibility and seamless collaboration – you always know where your project stands."
       },
       "ai": {
-        "tagline": "AI-Powered Development",
-        "desc": "Cutting-edge AI tools accelerate our development. What takes months elsewhere, we deliver in weeks."
+        "tagline": "AI-Accelerated Development",
+        "desc": "Cutting-edge AI tools accelerate our development process. What takes months at traditional agencies, we deliver in weeks."
       },
       "automation": {
-        "tagline": "Intelligent Workflows",
-        "desc": "Make, Zapier, n8n + custom AI agents. All processes automated – so you can focus on what matters."
+        "tagline": "Intelligent Automation",
+        "desc": "Custom workflows and AI agents that optimize your business processes around the clock."
       },
       "web": {
-        "tagline": "Rapid Delivery",
-        "desc": "Webflow, Shopify, React, Next.js – high-performance websites, apps, and shops, tailored to your brand."
+        "tagline": "Performant Web Technology",
+        "desc": "Fast, secure and scalable websites and apps – built with the technologies leading tech companies use."
       }
     }
   },
   "cta": {
-    "badge": "Let's go",
-    "title": "Ready for complete",
-    "titleHighlight": "Digitalization?",
-    "subtitle": "In 30 minutes, we'll show you live what your business could look like in 2025+ – with website, automations, and AI.",
-    "button": "Book Your Free Strategy Call",
+    "badge": "Next Step",
+    "title": "Your next step?",
+    "titleHighlight": "A conversation.",
+    "subtitle": "In 30 minutes, we'll identify your biggest digital opportunity – and how to capture it.",
+    "button": "Get free advice",
     "note": "✓ No obligation · ✓ Free · ✓ Appointment within 24h"
   },
   "contact": {
@@ -138,7 +138,7 @@
     }
   },
   "footer": {
-    "tagline": "The modern digital agency for SMBs. Websites, apps, automation & AI – all from one source.",
+    "tagline": "Digital solutions for SMBs. Fast. Personal. Sustainable.",
     "services": "Services",
     "servicesItems": {
       "web": "Websites & Shops",
@@ -154,14 +154,14 @@
       "terms": "Terms"
     },
     "copyright": "© 2025 Adaptify. All rights reserved.",
-    "madeWith": "Made with ❤️ & AI in Germany"
+    "madeWith": "Engineered with AI in Germany"
   },
   "about": {
     "badge": "Our Story",
     "hero": {
       "title": "Digital for SMBs –",
-      "titleHighlight": "by people who get it",
-      "subtitle": "We grew up in the SMB world ourselves. We know what it's like when day-to-day business leaves no time for digital projects. That's why we take care of it – pragmatic, affordable, no buzzword bingo."
+      "titleHighlight": "pragmatic, personal, effective",
+      "subtitle": "We grew up in the SMB world ourselves. We know what it's like when day-to-day business leaves no time for digital projects. That's why we take care of it – no buzzword bingo, no overpriced proposals."
     },
     "reality": {
       "badge": "Reality Check",
@@ -240,7 +240,7 @@
     "mission": {
       "badge": "Our Mission",
       "title": "That's why Adaptify exists",
-      "subtitle": "We make custom digital solutions for SMBs affordable and human. No cookie-cutter templates – just exactly what your business needs.",
+      "subtitle": "Custom digital solutions for SMBs – affordable and human. No cookie-cutter templates, just exactly what your business needs.",
       "values": {
         "custom": {
           "title": "Custom-Built",
@@ -266,7 +266,7 @@
       "subtitle": "Not an anonymous agency – real people with real stories.",
       "julius": {
         "role": "Founder & Development",
-        "quote": "I've seen how my father - a man who built a catamaran with his own hands - didn't get what he wanted from a website. That shouldn't happen. That's exactly why we do this.",
+        "quote": "My father built a catamaran with his own hands – but when it came to his website, he was stuck. That shouldn't happen. That's exactly why Adaptify exists.",
         "skills": {
           "react": "React",
           "node": "Node.js",
@@ -296,27 +296,9 @@
           "seo": "SEO-optimized"
         }
       },
-      "placeholder2": {
-        "title": "[Project 2]",
-        "industry": "[Industry]",
-        "result": "[Result]",
-        "desc": "[Your next project could be here. We document every project as a case study.]",
-        "metrics": {
-          "m1": "[Metric 1]",
-          "m2": "[Metric 2]",
-          "m3": "[Metric 3]"
-        }
-      },
-      "placeholder3": {
-        "title": "[Project 3]",
-        "industry": "[Industry]",
-        "result": "[Result]",
-        "desc": "[Space for more success stories - as soon as we've written them together.]",
-        "metrics": {
-          "m1": "[Metric 1]",
-          "m2": "[Metric 2]",
-          "m3": "[Metric 3]"
-        }
+      "yourProject": {
+        "title": "Your project could be here",
+        "desc": "We document every project as a success story. Let's write yours together."
       }
     },
     "quote": {
@@ -324,9 +306,9 @@
       "author": "– Julius Schulze, Founder Adaptify"
     },
     "cta": {
-      "title": "Sounds good? Let's talk.",
-      "subtitle": "30 minutes, no strings attached, free. We'll look at where you are – and if we can help. No sales pitch, promise.",
-      "button": "Book a Free Call",
+      "title": "Sounds like what you need?",
+      "subtitle": "30 minutes, no strings attached, free. We'll identify your biggest digital opportunity together. No sales pitch, promise.",
+      "button": "Get free advice",
       "note": "✓ No obligation · ✓ No hidden costs · ✓ Response within 24h"
     },
     "footer": {
