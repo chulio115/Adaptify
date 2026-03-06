@@ -125,6 +125,7 @@ export default function LandingPage() {
   const painFade = useFadeIn();
   const servicesFade = useFadeIn();
   const techFade = useFadeIn();
+  const projectsFade = useFadeIn();
   const statsFade = useFadeIn();
   const ctaFade = useFadeIn();
 
@@ -446,12 +447,12 @@ export default function LandingPage() {
           </span>
           
           {/* Main Heading */}
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">
             {t('tools.title')}
           </h2>
           
           {/* Subheading */}
-          <p className="text-gray-400 max-w-2xl mx-auto px-6">
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto px-6">
             {t('tools.subtitle')}
           </p>
         </div>
@@ -717,6 +718,105 @@ export default function LandingPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section
+        ref={projectsFade.ref}
+        className={`py-24 px-6 transition-all duration-1000 delay-200 ${
+          projectsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
+      >
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <span className="text-xs uppercase tracking-[0.3em] text-cyan-400 mb-4 block">{t('about.cases.badge')}</span>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">{t('about.cases.title')}</h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">{t('about.cases.subtitle')}</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            {[
+              {
+                badgeKey: 'about.cases.firstProject',
+                logoSrc: '/project-logos/easy-living-favicon.ico',
+                titleKey: 'about.cases.easyLiving.title',
+                industryKey: 'about.cases.easyLiving.industry',
+                resultKey: 'about.cases.easyLiving.result',
+                descKey: 'about.cases.easyLiving.desc',
+                metricsKeys: [
+                  'about.cases.easyLiving.metrics.tours',
+                  'about.cases.easyLiving.metrics.gallery',
+                  'about.cases.easyLiving.metrics.seo'
+                ],
+                borderClass: 'border-cyan-500/30',
+                backgroundClass: 'from-cyan-500/20 to-amber-500/5',
+                logoWrapperClass: 'w-20 h-20 rounded-full bg-[#102126] border-cyan-400/20',
+                logoInnerClass: 'w-16 h-16 rounded-full overflow-hidden ring-1 ring-amber-300/20 bg-amber-400/15 flex items-center justify-center',
+                logoImageClass: 'w-[3.75rem] h-[3.75rem] object-contain'
+              },
+              {
+                badgeKey: 'about.cases.currentProduct',
+                logoSrc: '/project-logos/biss-logo.png',
+                titleKey: 'about.cases.biss.title',
+                industryKey: 'about.cases.biss.industry',
+                resultKey: 'about.cases.biss.result',
+                descKey: 'about.cases.biss.desc',
+                metricsKeys: [
+                  'about.cases.biss.metrics.fangindex',
+                  'about.cases.biss.metrics.offline',
+                  'about.cases.biss.metrics.waters'
+                ],
+                borderClass: 'border-sky-500/30',
+                backgroundClass: 'from-sky-500/20 to-emerald-500/5',
+                logoWrapperClass: 'w-20 h-20 rounded-full bg-[#0f1f24] border-sky-400/20',
+                logoInnerClass: 'w-16 h-16 rounded-full overflow-hidden ring-1 ring-white/10 bg-[#2db7e6]',
+                logoImageClass: 'w-full h-full object-cover scale-[1.18]'
+              }
+            ].map((project, i) => (
+              <div
+                key={i}
+                className={`relative rounded-3xl p-8 border bg-gradient-to-br ${project.backgroundClass} ${project.borderClass}`}
+              >
+                <div className="absolute -top-3 left-6 px-3 py-1 bg-cyan-500 text-xs font-semibold rounded-full">
+                  {t(project.badgeKey)}
+                </div>
+                <div className="flex items-start justify-between gap-6 mb-6">
+                  <div className="min-w-0">
+                    <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{t(project.industryKey)}</p>
+                    <h3 className="text-2xl font-bold mb-2 text-balance">{t(project.titleKey)}</h3>
+                    <p className="text-cyan-400 font-semibold">{t(project.resultKey)}</p>
+                  </div>
+                  <div className={`shrink-0 ${project.logoWrapperClass} border flex items-center justify-center shadow-inner shadow-black/30`}>
+                    <div className={project.logoInnerClass}>
+                      <img src={project.logoSrc} alt={t(project.titleKey)} className={project.logoImageClass} />
+                    </div>
+                  </div>
+                </div>
+                <p className="text-gray-400 text-sm mb-6 leading-relaxed">{t(project.descKey)}</p>
+                <div className="space-y-2">
+                  {project.metricsKeys.map((metric, index) => (
+                    <div key={index} className="flex items-center gap-2 text-sm text-gray-300">
+                      <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+                      {t(metric)}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            <div className="relative rounded-3xl p-8 bg-white/5 border border-dashed border-white/20 flex flex-col items-center justify-center text-center xl:col-span-1 md:col-span-2 xl:col-span-1">
+              <Sparkles className="w-10 h-10 text-violet-400 mb-4" />
+              <h3 className="text-xl font-bold mb-3">{t('about.cases.yourProject.title')}</h3>
+              <p className="text-gray-400 text-sm mb-6 max-w-xs">{t('about.cases.yourProject.desc')}</p>
+              <button
+                onClick={() => setModalOpen(true)}
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-violet-500 hover:from-cyan-400 hover:to-violet-400 px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/25"
+              >
+                {t('cta.button')}
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
       </section>

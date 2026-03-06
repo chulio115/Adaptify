@@ -54,7 +54,6 @@ export default function UeberUns() {
   const storyFade = useFadeIn();
   const missionFade = useFadeIn();
   const teamFade = useFadeIn();
-  const casesFade = useFadeIn();
   const quoteFade = useFadeIn();
   const ctaFade = useFadeIn();
   
@@ -344,53 +343,6 @@ export default function UeberUns() {
                 className="text-cyan-400 text-sm hover:text-cyan-300 transition-colors flex items-center gap-2"
               >
                 → {t('about.team.hiring.button')}
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CASES */}
-      <section 
-        ref={casesFade.ref}
-        className={`py-20 px-6 transition-all duration-1000 delay-200 ${
-          casesFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}
-      >
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="text-xs uppercase tracking-[0.3em] text-cyan-400 mb-4 block">{t('about.cases.badge')}</span>
-            <h2 className="text-2xl md:text-4xl font-bold mb-4">{t('about.cases.title')}</h2>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* Real Case Study - Easy Living */}
-            <div className="relative rounded-2xl p-8 bg-gradient-to-b from-cyan-500/20 to-transparent border-2 border-cyan-500/30">
-              <div className="absolute -top-3 left-6 px-3 py-1 bg-cyan-500 text-xs font-semibold rounded-full">{t('about.cases.firstProject')}</div>
-              <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{t('about.cases.easyLiving.industry')}</p>
-              <h3 className="text-xl font-bold mb-2">{t('about.cases.easyLiving.title')}</h3>
-              <p className="text-cyan-400 font-semibold mb-4">{t('about.cases.easyLiving.result')}</p>
-              <p className="text-gray-400 text-sm mb-6">{t('about.cases.easyLiving.desc')}</p>
-              <div className="space-y-2">
-                {['about.cases.easyLiving.metrics.bookings', 'about.cases.easyLiving.metrics.atlassian', 'about.cases.easyLiving.metrics.seo'].map((m, j) => (
-                  <div key={j} className="flex items-center gap-2 text-sm text-gray-300">
-                    <CheckCircle2 className="w-4 h-4 text-cyan-400" />{t(m)}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* CTA Card - Your project next */}
-            <div className="relative rounded-2xl p-8 bg-white/5 border border-dashed border-white/20 flex flex-col items-center justify-center text-center">
-              <Sparkles className="w-10 h-10 text-violet-400 mb-4" />
-              <h3 className="text-xl font-bold mb-3">{t('about.cases.yourProject.title')}</h3>
-              <p className="text-gray-400 text-sm mb-6 max-w-xs">{t('about.cases.yourProject.desc')}</p>
-              <button 
-                onClick={() => setContactModalOpen(true)}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-violet-500 hover:from-cyan-400 hover:to-violet-400 px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/25"
-              >
-                {t('about.cta.button')}
-                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           </div>

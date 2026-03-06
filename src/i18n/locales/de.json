@@ -284,16 +284,31 @@
     "cases": {
       "badge": "Erfolgsgeschichten",
       "title": "Was wir bisher gebaut haben",
+      "subtitle": "Zwei echte Projekte aus unserem aktuellen Portfolio – mit klarer Positionierung, funktionalem Design und digitalem Mehrwert.",
       "firstProject": "Unser erstes Projekt",
+      "currentProduct": "Aktuelles Produkt",
       "easyLiving": {
+        "brandEyebrow": "Katamaran",
+        "brandShort": "Easy Living",
         "title": "Easy Living Katamaran",
         "industry": "Charter & Tourismus",
-        "result": "Komplett-Digitalisierung",
-        "desc": "Von der 2005er-Website zur modernen Buchungsplattform. Online-Kalender, automatische Mails – alles aus einem Guss.",
+        "result": "Relaunch für Sichtbarkeit & Vertrauen",
+        "desc": "Eine moderne Website für einen handgebauten Katamaran mit klarer Angebotsstruktur, starker Bildsprache und professioneller Präsenz für Charter und Tourismus.",
         "metrics": {
-          "bookings": "Echtzeit-Buchungen",
-          "atlassian": "Atlassian-Integration",
+          "tours": "Angebote & Törns strukturiert",
+          "gallery": "Galerie & Storytelling",
           "seo": "SEO-optimiert"
+        }
+      },
+      "biss": {
+        "title": "BISS App & Landing Page",
+        "industry": "Outdoor & Consumer App",
+        "result": "Positionierung für Produkt-Launch",
+        "desc": "App-Konzept und Landing Page für eine Angel-App aus Norddeutschland – mit klarer Zielgruppenansprache, robuster UI und starker Produktbotschaft.",
+        "metrics": {
+          "fangindex": "KI-Fangindex erklärt",
+          "offline": "Offline-Modus prominent",
+          "waters": "200+ Gewässer im Fokus"
         }
       },
       "yourProject": {

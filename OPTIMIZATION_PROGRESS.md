@@ -8,6 +8,24 @@
 
 ### Was wurde geändert
 
+### Lokaler Zwischenstand: Projekt-Showcase auf Startseite ✅
+
+- **Projektsektion verschoben**: "Was wir bisher gebaut haben" wurde von `Über uns` auf die **Landing Page** verschoben
+- **Neue Position**: Direkt **unter dem Tech-Stack** und **über dem finalen CTA**
+- **Echte Projekte statt Platzhalter**:
+  - **Easy Living Katamaran** mit echtem Logo und belastbarer Projektbeschreibung
+  - **BISS App Landing Page** mit echtem Logo und belastbarer Projektbeschreibung
+- **CTA-Card bleibt erhalten**: "Euer Projekt könnte hier stehen"
+- **Über-uns Seite entschlackt**: Doppelte Projektsektion dort entfernt
+- **Brand Assets lokal übernommen**:
+  - `public/project-logos/easy-living-logo.png`
+  - `public/project-logos/biss-logo.png`
+- **Verifikation**:
+  - Produktions-Build läuft fehlerfrei
+  - Dev-Server lokal gestartet zur visuellen Prüfung
+
+- **Wichtig**: Diese Änderungen sind aktuell **nur lokal zur Verifikation** gedacht und wurden noch **nicht gepusht/deployed**.
+
 #### 1. Hero Section (Landing Page)
 - **Headline**: "Euer kompletter Digitalisierungspartner" → **"Wir bauen, was euer Business digital nach vorne bringt"**
 - **Badge**: "Digitalisierung aus einer Hand – für ambitionierte Mittelständler" → **"Digitalagentur für den Mittelstand"**
@@ -94,10 +112,11 @@
 
 | Asset | Status | Einbau-Ort |
 |-------|--------|------------|
-| Easy Living – Testimonial/Zitat | ⏳ Website wird gebaut | Landing Page Social Proof Sektion |
-| Easy Living – Vorher/Nachher Screenshots | ⏳ Website wird gebaut | Über-uns Cases + Landing Page |
+| Easy Living – Testimonial/Zitat | ⏳ Noch offen | Landing Page Social Proof Sektion |
+| Easy Living – Vorher/Nachher Screenshots | ⏳ Noch offen | Landing Page Projektsektion + Social Proof |
 | Easy Living – Ergebnis-Metriken | ⏳ Daten sammeln | Landing Page Stats oder Social Proof |
-| App-Projekt – Case Study | ⏳ In Entwicklung | Über-uns Cases (zweite Card) |
+| BISS – echte Produkt-Screenshots | ⏳ Noch offen | Landing Page Projektsektion |
+| BISS – Launch-/Waitlist-Metriken | ⏳ Noch offen | Landing Page Projektsektion / Social Proof |
 | Julius – Professionelles Foto | ⏳ Noch nicht vorhanden | Über-uns Team-Sektion |
 
 ---
