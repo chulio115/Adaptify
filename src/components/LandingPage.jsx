@@ -739,6 +739,7 @@ export default function LandingPage() {
             {[
               {
                 badgeKey: 'about.cases.firstProject',
+                url: 'http://64.226.99.73',
                 logoSrc: '/project-logos/easy-living-favicon.ico',
                 titleKey: 'about.cases.easyLiving.title',
                 industryKey: 'about.cases.easyLiving.industry',
@@ -757,6 +758,7 @@ export default function LandingPage() {
               },
               {
                 badgeKey: 'about.cases.currentProduct',
+                url: 'https://biss-app.netlify.app',
                 logoSrc: '/project-logos/biss-logo.png',
                 titleKey: 'about.cases.biss.title',
                 industryKey: 'about.cases.biss.industry',
@@ -772,6 +774,63 @@ export default function LandingPage() {
                 logoWrapperClass: 'w-20 h-20 rounded-full bg-[#0f1f24] border-sky-400/20',
                 logoInnerClass: 'w-16 h-16 rounded-full overflow-hidden ring-1 ring-white/10 bg-[#2db7e6]',
                 logoImageClass: 'w-full h-full object-cover scale-[1.18]'
+              },
+              {
+                badgeKey: 'about.cases.saasProduct',
+                url: 'https://spotmap115.netlify.app',
+                logoSrc: '/project-logos/spotmap-logo.svg',
+                titleKey: 'about.cases.spotmap.title',
+                industryKey: 'about.cases.spotmap.industry',
+                resultKey: 'about.cases.spotmap.result',
+                descKey: 'about.cases.spotmap.desc',
+                metricsKeys: [
+                  'about.cases.spotmap.metrics.categories',
+                  'about.cases.spotmap.metrics.darkmode',
+                  'about.cases.spotmap.metrics.auth'
+                ],
+                borderClass: 'border-violet-500/30',
+                backgroundClass: 'from-violet-500/20 to-pink-500/5',
+                logoWrapperClass: 'w-20 h-20 rounded-full bg-[#1a1026] border-violet-400/20',
+                logoInnerClass: 'w-16 h-16 rounded-full overflow-hidden ring-1 ring-violet-300/20 bg-violet-400/15 flex items-center justify-center',
+                logoImageClass: 'w-10 h-10 object-contain'
+              },
+              {
+                badgeKey: 'about.cases.saasProduct',
+                url: 'https://chuliobanking.netlify.app',
+                logoSrc: '/project-logos/haushalt-favicon.svg',
+                titleKey: 'about.cases.haushalt.title',
+                industryKey: 'about.cases.haushalt.industry',
+                resultKey: 'about.cases.haushalt.result',
+                descKey: 'about.cases.haushalt.desc',
+                metricsKeys: [
+                  'about.cases.haushalt.metrics.charts',
+                  'about.cases.haushalt.metrics.database',
+                  'about.cases.haushalt.metrics.pwa'
+                ],
+                borderClass: 'border-emerald-500/30',
+                backgroundClass: 'from-emerald-500/20 to-teal-500/5',
+                logoWrapperClass: 'w-20 h-20 rounded-full bg-[#0d1f18] border-emerald-400/20',
+                logoInnerClass: 'w-16 h-16 rounded-full overflow-hidden ring-1 ring-emerald-300/20 bg-emerald-400/15 flex items-center justify-center',
+                logoImageClass: 'w-10 h-10 object-contain'
+              },
+              {
+                badgeKey: 'about.cases.privateProject',
+                url: 'https://financemarket.netlify.app/app',
+                logoSrc: '/project-logos/congress-tracker-logo.svg',
+                titleKey: 'about.cases.congress.title',
+                industryKey: 'about.cases.congress.industry',
+                resultKey: 'about.cases.congress.result',
+                descKey: 'about.cases.congress.desc',
+                metricsKeys: [
+                  'about.cases.congress.metrics.nextjs',
+                  'about.cases.congress.metrics.prisma',
+                  'about.cases.congress.metrics.charts'
+                ],
+                borderClass: 'border-orange-500/30',
+                backgroundClass: 'from-orange-500/20 to-amber-500/5',
+                logoWrapperClass: 'w-20 h-20 rounded-full bg-[#1a150d] border-orange-400/20',
+                logoInnerClass: 'w-16 h-16 rounded-full overflow-hidden ring-1 ring-orange-300/20 bg-orange-400/15 flex items-center justify-center',
+                logoImageClass: 'w-10 h-10 object-contain'
               }
             ].map((project, i) => (
               <div
@@ -787,11 +846,16 @@ export default function LandingPage() {
                     <h3 className="text-2xl font-bold mb-2 text-balance">{t(project.titleKey)}</h3>
                     <p className="text-cyan-400 font-semibold">{t(project.resultKey)}</p>
                   </div>
-                  <div className={`shrink-0 ${project.logoWrapperClass} border flex items-center justify-center shadow-inner shadow-black/30`}>
+                  <a 
+                    href={project.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={`shrink-0 ${project.logoWrapperClass} border flex items-center justify-center shadow-inner shadow-black/30 hover:scale-105 transition-transform duration-200`}
+                  >
                     <div className={project.logoInnerClass}>
                       <img src={project.logoSrc} alt={t(project.titleKey)} className={project.logoImageClass} />
                     </div>
-                  </div>
+                  </a>
                 </div>
                 <p className="text-gray-400 text-sm mb-6 leading-relaxed">{t(project.descKey)}</p>
                 <div className="space-y-2">

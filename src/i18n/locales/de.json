@@ -284,9 +284,11 @@
     "cases": {
       "badge": "Erfolgsgeschichten",
       "title": "Was wir bisher gebaut haben",
-      "subtitle": "Zwei echte Projekte aus unserem aktuellen Portfolio – mit klarer Positionierung, funktionalem Design und digitalem Mehrwert.",
+      "subtitle": "Fünf echte Projekte aus unserem aktuellen Portfolio – mit klarer Positionierung, funktionalem Design und digitalem Mehrwert.",
       "firstProject": "Unser erstes Projekt",
       "currentProduct": "Aktuelles Produkt",
+      "privateProject": "Privates Projekt",
+      "saasProduct": "SaaS Produkt",
       "easyLiving": {
         "brandEyebrow": "Katamaran",
         "brandShort": "Easy Living",
@@ -309,6 +311,39 @@
           "fangindex": "KI-Fangindex erklärt",
           "offline": "Offline-Modus prominent",
           "waters": "200+ Gewässer im Fokus"
+        }
+      },
+      "spotmap": {
+        "title": "SpotMap",
+        "industry": "PWA & Social Mapping",
+        "result": "Private Spots mit Freunden teilen",
+        "desc": "Progressive Web App für das Teilen geheimer Spots mit Freunden – mit interaktiver Karte, Kategorien und Magic Link Auth.",
+        "metrics": {
+          "categories": "11 Kategorien mit Emoji-Markern",
+          "darkmode": "Dark Mode Design",
+          "auth": "Magic Link Authentifizierung"
+        }
+      },
+      "haushalt": {
+        "title": "Haushaltsapp",
+        "industry": "Personal Finance",
+        "result": "Finanzen übersichtlich managen",
+        "desc": "Persönliche Finanz-App als PWA mit Neon PostgreSQL – Monatsübersichten, Donut-Charts und Multi-Device Synchronisation.",
+        "metrics": {
+          "charts": "Donut-Charts für Ein-/Ausgaben",
+          "database": "Neon PostgreSQL Backend",
+          "pwa": "PWA mit Offline-Support"
+        }
+      },
+      "congress": {
+        "title": "Market Movers & Congress Tracker",
+        "industry": "Data & Analytics",
+        "result": "Congress-Tracking & Marktanalyse",
+        "desc": "Next.js App mit Prisma und Supabase für das Tracking von Congressional Votes und Marktanalyse mit Charts.",
+        "metrics": {
+          "nextjs": "Next.js 16 mit App Router",
+          "prisma": "Prisma ORM mit PostgreSQL",
+          "charts": "Recharts für Datenvisualisierung"
         }
       },
       "yourProject": {

@@ -284,9 +284,11 @@
     "cases": {
       "badge": "Success Stories",
       "title": "What we've built so far",
-      "subtitle": "Two real projects from our current portfolio – with clear positioning, functional design and real digital value.",
+      "subtitle": "Five real projects from our current portfolio – with clear positioning, functional design and real digital value.",
       "firstProject": "Our First Project",
       "currentProduct": "Current Product",
+      "privateProject": "Private Project",
+      "saasProduct": "SaaS Product",
       "easyLiving": {
         "brandEyebrow": "Catamaran",
         "brandShort": "Easy Living",
@@ -309,6 +311,39 @@
           "fangindex": "AI catch index explained",
           "offline": "Offline mode highlighted",
           "waters": "200+ waters in focus"
+        }
+      },
+      "spotmap": {
+        "title": "SpotMap",
+        "industry": "PWA & Social Mapping",
+        "result": "Share private spots with friends",
+        "desc": "Progressive Web App for sharing secret spots with friends – with interactive map, categories and Magic Link auth.",
+        "metrics": {
+          "categories": "11 categories with emoji markers",
+          "darkmode": "Dark Mode design",
+          "auth": "Magic Link authentication"
+        }
+      },
+      "haushalt": {
+        "title": "Household Budget App",
+        "industry": "Personal Finance",
+        "result": "Manage finances clearly",
+        "desc": "Personal finance app as PWA with Neon PostgreSQL – monthly overviews, donut charts and multi-device sync.",
+        "metrics": {
+          "charts": "Donut charts for income/expenses",
+          "database": "Neon PostgreSQL backend",
+          "pwa": "PWA with offline support"
+        }
+      },
+      "congress": {
+        "title": "Market Movers & Congress Tracker",
+        "industry": "Data & Analytics",
+        "result": "Congress tracking & market analysis",
+        "desc": "Next.js app with Prisma and Supabase for tracking Congressional Votes and market analysis with charts.",
+        "metrics": {
+          "nextjs": "Next.js 16 with App Router",
+          "prisma": "Prisma ORM with PostgreSQL",
+          "charts": "Recharts for data visualization"
         }
       },
       "yourProject": {
