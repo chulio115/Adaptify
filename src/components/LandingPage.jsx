@@ -804,8 +804,8 @@ export default function LandingPage() {
                 descKey: 'about.cases.haushalt.desc',
                 metricsKeys: [
                   'about.cases.haushalt.metrics.charts',
-                  'about.cases.haushalt.metrics.database',
-                  'about.cases.haushalt.metrics.pwa'
+                  'about.cases.haushalt.metrics.fuel',
+                  'about.cases.haushalt.metrics.photo'
                 ],
                 borderClass: 'border-emerald-500/30',
                 backgroundClass: 'from-emerald-500/20 to-teal-500/5',

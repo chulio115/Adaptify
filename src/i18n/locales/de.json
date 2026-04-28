@@ -331,8 +331,8 @@
         "desc": "Persönliche Finanz-App als PWA mit Neon PostgreSQL – Monatsübersichten, Donut-Charts und Multi-Device Synchronisation.",
         "metrics": {
           "charts": "Donut-Charts für Ein-/Ausgaben",
-          "database": "Neon PostgreSQL Backend",
-          "pwa": "PWA mit Offline-Support"
+          "fuel": "Tankpreis-Tracker mit OCR",
+          "photo": "Photo Upload für Quittungen"
         }
       },
       "congress": {
