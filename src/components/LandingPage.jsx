@@ -778,7 +778,7 @@ export default function LandingPage() {
               {
                 badgeKey: 'about.cases.saasProduct',
                 url: 'https://spotmap115.netlify.app',
-                logoSrc: '/project-logos/spotmap-logo.svg',
+                logoSrc: '/project-logos/spotmap_app_icon.svg',
                 titleKey: 'about.cases.spotmap.title',
                 industryKey: 'about.cases.spotmap.industry',
                 resultKey: 'about.cases.spotmap.result',
@@ -797,7 +797,7 @@ export default function LandingPage() {
               {
                 badgeKey: 'about.cases.saasProduct',
                 url: 'https://chuliobanking.netlify.app',
-                logoSrc: '/project-logos/haushalt-favicon.svg',
+                logoSrc: '/project-logos/haushalt_app_icon_v3.svg',
                 titleKey: 'about.cases.haushalt.title',
                 industryKey: 'about.cases.haushalt.industry',
                 resultKey: 'about.cases.haushalt.result',
@@ -816,7 +816,7 @@ export default function LandingPage() {
               {
                 badgeKey: 'about.cases.privateProject',
                 url: 'https://financemarket.netlify.app/app',
-                logoSrc: '/project-logos/congress-tracker-logo.svg',
+                logoSrc: '/project-logos/congress_tracker_app_icon.svg',
                 titleKey: 'about.cases.congress.title',
                 industryKey: 'about.cases.congress.industry',
                 resultKey: 'about.cases.congress.result',
