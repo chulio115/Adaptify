@@ -19,8 +19,7 @@ import {
   Code2,
   Layers,
   Cpu,
-  Globe2,
-  Calendar
+  Globe2
 } from 'lucide-react';
 import logo from '../assets/logo.png';
 import ThemeToggle from './ThemeToggle';
@@ -28,26 +27,29 @@ import LanguageToggle from './LanguageToggle';
 import { useTranslation } from 'react-i18next';
 
 // Counter Animation Hook
+// Count is initialized with the end value so the correct number is always shown
+// even before the IntersectionObserver triggers (prevents "0%" flash).
 function useCountUp(end, duration = 2000, start = 0) {
-  const [count, setCount] = useState(start);
-  const [isVisible, setIsVisible] = useState(false);
+  const [count, setCount] = useState(end);
+  const [hasAnimated, setHasAnimated] = useState(false);
   const ref = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !isVisible) {
-          setIsVisible(true);
+        if (entry.isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
         }
       },
       { threshold: 0.3 }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
-  }, [isVisible]);
+  }, [hasAnimated]);
 
   useEffect(() => {
-    if (!isVisible) return;
+    if (!hasAnimated) return;
+    setCount(start);
     let startTime = null;
     const animate = (timestamp) => {
       if (!startTime) startTime = timestamp;
@@ -56,7 +58,7 @@ function useCountUp(end, duration = 2000, start = 0) {
       if (progress < 1) requestAnimationFrame(animate);
     };
     requestAnimationFrame(animate);
-  }, [isVisible, end, duration, start]);
+  }, [hasAnimated, end, duration, start]);
 
   return { count, ref };
 }
@@ -129,10 +131,8 @@ export default function LandingPage() {
   const statsFade = useFadeIn();
   const ctaFade = useFadeIn();
 
-  // Counter hooks for stats
+  // Counter hook for animated stat (manual work reduction)
   const stat1 = useCountUp(40);
-  const stat2 = useCountUp(50);
-  const stat3 = useCountUp(4);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -616,8 +616,8 @@ export default function LandingPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
               { ref: stat1.ref, value: stat1.count, suffix: '%', labelKey: 'stats.faster', icon: Zap },
-              { ref: stat2.ref, value: 5, suffix: '+', labelKey: 'stats.experience', icon: Calendar },
-              { ref: stat3.ref, value: stat3.count, prefix: '2-', labelKey: 'stats.setup', icon: Clock },
+              { ref: null, value: 5, suffix: '+', labelKey: 'stats.projects', icon: Sparkles },
+              { ref: null, value: '2-4', labelKey: 'stats.setup', icon: Clock },
               { ref: null, value: 100, suffix: '%', labelKey: 'stats.custom', icon: CheckCircle2 }
             ].map((stat, i) => (
               <div 
@@ -738,7 +738,8 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
             {[
               {
-                badgeKey: 'about.cases.firstProject',
+                badgeKey: 'about.cases.showcase',
+                customerBadgeKey: 'about.cases.customerProject',
                 url: 'http://64.226.99.73',
                 logoSrc: '/project-logos/easy-living-favicon.ico',
                 titleKey: 'about.cases.easyLiving.title',
@@ -757,7 +758,7 @@ export default function LandingPage() {
                 logoImageClass: 'w-[3.75rem] h-[3.75rem] object-contain'
               },
               {
-                badgeKey: 'about.cases.currentProduct',
+                badgeKey: 'about.cases.showcase',
                 url: 'https://biss-app.netlify.app',
                 logoSrc: '/project-logos/biss-logo.png',
                 titleKey: 'about.cases.biss.title',
@@ -776,7 +777,7 @@ export default function LandingPage() {
                 logoImageClass: 'w-full h-full object-cover scale-[1.18]'
               },
               {
-                badgeKey: 'about.cases.saasProduct',
+                badgeKey: 'about.cases.showcase',
                 url: 'https://spotmap115.netlify.app',
                 logoSrc: '/project-logos/spotmap_app_icon.svg',
                 titleKey: 'about.cases.spotmap.title',
@@ -795,7 +796,7 @@ export default function LandingPage() {
                 logoImageClass: 'w-10 h-10 object-contain'
               },
               {
-                badgeKey: 'about.cases.saasProduct',
+                badgeKey: 'about.cases.showcase',
                 url: 'https://chuliobanking.netlify.app',
                 logoSrc: '/project-logos/haushalt_app_icon_v3.svg',
                 titleKey: 'about.cases.haushalt.title',
@@ -814,7 +815,7 @@ export default function LandingPage() {
                 logoImageClass: 'w-10 h-10 object-contain'
               },
               {
-                badgeKey: 'about.cases.privateProject',
+                badgeKey: 'about.cases.showcase',
                 url: 'https://financemarket.netlify.app/app',
                 logoSrc: '/project-logos/congress_tracker_app_icon.svg',
                 titleKey: 'about.cases.congress.title',
@@ -837,8 +838,15 @@ export default function LandingPage() {
                 key={i}
                 className={`relative rounded-3xl p-8 border bg-gradient-to-br ${project.backgroundClass} ${project.borderClass}`}
               >
-                <div className="absolute -top-3 left-6 px-3 py-1 bg-cyan-500 text-xs font-semibold rounded-full">
-                  {t(project.badgeKey)}
+                <div className="absolute -top-3 left-6 flex gap-2">
+                  <div className="px-3 py-1 bg-cyan-500 text-xs font-semibold rounded-full">
+                    {t(project.badgeKey)}
+                  </div>
+                  {project.customerBadgeKey && (
+                    <div className="px-3 py-1 bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-semibold rounded-full">
+                      {t(project.customerBadgeKey)}
+                    </div>
+                  )}
                 </div>
                 <div className="flex items-start justify-between gap-6 mb-6">
                   <div className="min-w-0">

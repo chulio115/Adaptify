@@ -20,7 +20,7 @@
   },
   "stats": {
     "faster": "less manual work",
-    "experience": "years experience",
+    "projects": "live projects",
     "setup": "weeks to launch",
     "custom": "dedicated contact"
   },
@@ -282,13 +282,11 @@
       }
     },
     "cases": {
-      "badge": "Success Stories",
+      "badge": "Our Portfolio",
       "title": "What we've built so far",
-      "subtitle": "Five real projects from our current portfolio – with clear positioning, functional design and real digital value.",
-      "firstProject": "Our First Project",
-      "currentProduct": "Current Product",
-      "privateProject": "Private Project",
-      "saasProduct": "SaaS Product",
+      "subtitle": "Five projects from our portfolio – client work and in-house products you can use to see how we build.",
+      "showcase": "Showcase",
+      "customerProject": "Client Project",
       "easyLiving": {
         "brandEyebrow": "Catamaran",
         "brandShort": "Easy Living",
