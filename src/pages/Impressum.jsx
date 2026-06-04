@@ -43,8 +43,8 @@ export default function Impressum() {
               <p>
                 <strong className="text-white">Adaptify Labs</strong><br />
                 Julius Schulze<br />
-                Poststraße 7<br />
-                21227 Bendestorf<br />
+                Hamburger Str. 24a<br />
+                21423 Winsen (Luhe)<br />
                 Deutschland
               </p>
             </section>
@@ -82,8 +82,8 @@ export default function Impressum() {
               <h2 className="text-xl font-semibold text-white mb-4">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
               <p>
                 Julius Schulze<br />
-                Poststraße 7<br />
-                21227 Bendestorf
+                Hamburger Str. 24a<br />
+                21423 Winsen (Luhe)
               </p>
             </section>
 
